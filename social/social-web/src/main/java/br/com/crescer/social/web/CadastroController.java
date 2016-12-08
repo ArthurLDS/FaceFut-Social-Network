@@ -8,6 +8,8 @@ package br.com.crescer.social.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.crescer.social.entity.Usuario;
+import br.com.crescer.social.service.Service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class CadastroController {
+    
+    @Autowired
+    UsuarioService service;
     
     @RequestMapping(value="/cadastro")
     String cadastro(Model model){
@@ -28,6 +33,8 @@ public class CadastroController {
     
      @RequestMapping(value="/cadastro", method= RequestMethod.POST)
      public String save(@ModelAttribute Usuario usuario){
+         
+         service.save(usuario);
          return "cadastro";
      }
 }
