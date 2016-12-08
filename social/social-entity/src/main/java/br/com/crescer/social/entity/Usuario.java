@@ -24,7 +24,6 @@ import javax.persistence.Table;
 @Table(name = "USUARIO")
 public class Usuario implements Serializable {
     
-    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_USUARIO")
     @SequenceGenerator(name = "SEQ_USUARIO", sequenceName = "SEQ_USUARIO", allocationSize = 1)
@@ -48,6 +47,49 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "TIME")
     private String time;
+
+    
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+    
+    
     
     
 }
