@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous"/>
+    </head>
+    <body>
+
+        <div class="container" >
+            
+            
+            <form th:action="@{/add}" th:object="${user}" th:method="POST" class="form"> 
+
+                
+                <div>
+                    
+                    <label class="control-label" th:for="${}" th:text="#{form.name}"></label>
+                    
+                    
+                </div>
+                
+
+                <div class="form-group" th:class="${#fields.hasErrors('name')}? has-warning">
+                    <label class="control-label" for="name" th:text="#{form.name}"></label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}"/>
+                    <span th:if="${#fields.hasErrors('name')}" class="help-block" th:errors="*{name}"></span>
+                </div>
+
+
+            </form>  
+
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+    </body>
+</html>
