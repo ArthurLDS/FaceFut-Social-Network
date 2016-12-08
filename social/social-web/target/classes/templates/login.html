@@ -1,37 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="http://bootswatch.com/cosmo/bootstrap.min.css" media="screen" title="no title"/>
+        <link rel="stylesheet" href="@{/static/css/estilo.css}" media="screen" title="no title"/>
     </head>
     <body>
 
-        <div class="container" >
-            
-            
-            <form th:action="@{/add}" th:object="${user}" th:method="POST" class="form"> 
+        <section class="col-md-6 col-md-offset-3 facefut-logo-block">
+            <h1 class="facefut-logo">FaceFut.com</h1>
+        </section>
 
-                
-                <div>
-                    
-                    <label class="control-label" th:for="${}" th:text="#{form.name}"></label>
-                    
-                    
-                </div>
-                
+        <section class="col-md-6 col-md-offset-3 login-block">
+            <article class="panel panel-default login-panel">
 
-                <div class="form-group" th:class="${#fields.hasErrors('name')}? has-warning">
-                    <label class="control-label" for="name" th:text="#{form.name}"></label>
-                    <input type="text" class="form-control" id="name" th:field="*{name}"/>
-                    <span th:if="${#fields.hasErrors('name')}" class="help-block" th:errors="*{name}"></span>
-                </div>
+                <article class="login-panel-head panel-heading" style="background-color: rgba(255, 255, 255, 0.4);">
+                    <h3>Vamos lá!</h3>
+                </article>
 
+                <article class="panel-body login-panel-body">
 
-            </form>  
+                    <form th:action="@{/login}" method="POST">    
+                        
+                        <article class="form-group">
+                            <input class="form-control" type="text" name="username"/>
+                        </article>
 
-        </div>
+                        <article class="form-group">
+                            <input class="form-control" type="password" name="password"/>
+                        </article>
+                        <article class="form-group">
+                            <button type="submit" name="button" class="btn btn-success">Entrar</button>
+                        </article>
+
+                    </form>
+                </article>
+            </article>
+        </section>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>

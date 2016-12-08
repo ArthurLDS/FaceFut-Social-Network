@@ -4,7 +4,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 08/12/2016, 12:50:09
+    Created on : 08/12/2016, 13:45:28
     Author     : Arthur
 */
 body{
@@ -20,6 +20,12 @@ body{
   font-weight: bold;
   color: #444;
 }
+/* Cadastro */
+.cadastro-panel{
+  background-color: rgba(235,235,235, 0.7);
+  margin-top: 60px; 
+}
+
 /* Logo */
 .facefut-logo{
   text-align: center;
@@ -29,4 +35,6 @@ body{
 .facefut-logo-block{
   margin-top: 100px;
 }
+
+
 

@@ -8,26 +8,28 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class User {
     
     @NotEmpty()
-    private String firstName;
+    private String username;
     
     @NotEmpty()
-    private String lastName;
+    private String senha;
 
-    public String getFirstName() {
-        return firstName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public String getSenha() {
+        return senha;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
+
+    
 
     
 }
