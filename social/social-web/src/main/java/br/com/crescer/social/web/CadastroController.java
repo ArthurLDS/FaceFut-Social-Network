@@ -7,7 +7,7 @@ package br.com.crescer.social.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import br.com.crescer.social.entity.Usuario;
 /**
  *
  * @author Arthur
