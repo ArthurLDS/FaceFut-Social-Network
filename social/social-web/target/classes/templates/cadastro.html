@@ -5,13 +5,10 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <head>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-        <link rel="stylesheet" href="http://bootswatch.com/cosmo/bootstrap.min.css" media="screen" title="no title"/>
-        <link rel="stylesheet" href="@{/static/css/estilo.css}" media="screen" title="no title"/>
+    <head th:replace="fragments :: head('FaceFut - Cadastro')">
+
     </head>
+
     <body>
         <section class="col-md-6 col-md-offset-3 login-block">
             <article class="panel panel-default cadastro-panel">
@@ -23,18 +20,21 @@ and open the template in the editor.
                 <article class="panel-body login-panel-body">
 
                     <form action="#" th:action="@{/cadastro}" th:object="${usuario}" method="POST">
-                        
-                        <article class="form-group">
-                            <input class="form-control" type="text" th:field="*{nome}" placeholder="Nome completo"/>
+
+                        <article th:classappend="${#fields.hasErrors('nome')} ? has-error" class="form-group" >
+
+                            <input class="form-control" type="text" th:field="*{nome}" placeholder="Nome completo" required="required"/>
+                            <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="help-block"></span>
+
                         </article>
 
                         <article class="form-group">
-                            <input class="form-control" type="text" th:field="*{email}" placeholder="Email"/>
+                            <input class="form-control" type="email" th:field="*{email}" placeholder="Email" required="required"/>
                         </article>
 
                         <article class="form-group">
 
-                            <select class="form-control" th:field="*{time}">
+                            <select class="form-control" th:field="*{time}" required="required">
                                 <option value="1">Internacional</option>
                                 <option value="2">Grêmio</option>
                                 <option value="3">Brasil de Pelotas</option>
@@ -43,14 +43,19 @@ and open the template in the editor.
                         </article>
 
                         <article class="form-group">
-                            <input class="form-control" type="text" th:field="*{senha}" placeholder="Senha"/>
+                            <input class="form-control" type="password" th:field="*{senha}" placeholder="Senha" required="required"/>
                         </article>
 
                         <article class="form-group">
-                            <button type="submit" name="button" class="btn btn-success">Entrar</button>
+                            <button type="submit" name="button" class="btn btn-primary">Entrar</button>
                         </article>
+
+                        <div class="alert alert-success" th:if="${msg}">
+                            <strong>OK!</strong> <span th:text="${msg}"></span>
+                        </div>
+                        
                     </form>
-                    
+
                 </article>
             </article>
         </section>

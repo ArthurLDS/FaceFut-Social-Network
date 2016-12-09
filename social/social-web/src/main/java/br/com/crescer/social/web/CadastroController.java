@@ -11,8 +11,10 @@ import br.com.crescer.social.entity.Usuario;
 import br.com.crescer.social.service.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 /**
  *
  * @author Arthur
@@ -31,10 +33,16 @@ public class CadastroController {
         return "cadastro";
     }
     
+    
      @RequestMapping(value="/cadastro", method= RequestMethod.POST)
-     public String save(@ModelAttribute Usuario usuario){
+     public String save(@ModelAttribute Usuario usuario, BindingResult bindingResult, RedirectAttributes redirectAttributes){
          
-         service.save(usuario);
-         return "cadastro";
+         if (!bindingResult.hasErrors()){
+            service.save(usuario);
+            String nome = usuario.getNome().split(" ")[0];
+            redirectAttributes.addFlashAttribute("msg",  nome + " foi salvo(a) com sucesso!");
+            return "redirect:cadastro";
+        }
+        return "cadastro";
      }
 }

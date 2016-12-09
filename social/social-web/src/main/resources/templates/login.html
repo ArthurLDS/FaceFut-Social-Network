@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-        <link rel="stylesheet" href="http://bootswatch.com/cosmo/bootstrap.min.css" media="screen" title="no title"/>
-        <link rel="stylesheet" href="@{/static/css/estilo.css}" media="screen" title="no title"/>
+
+    <head th:replace="fragments :: head('FaceFut - Login')">
+
     </head>
+
     <body>
 
         <section class="col-md-6 col-md-offset-3 facefut-logo-block">
@@ -21,15 +19,19 @@
                 </article>
 
                 <article class="panel-body login-panel-body">
-
+                    
+                    <div class="alert alert-danger" th:if="${param.error}">
+                        Opa amigão, usuário ou senha incorreto!
+                        <strong th:text="${param.error[0]}"></strong>
+                    </div>
                     <form th:action="@{/login}" method="POST">    
-                        
+
                         <article class="form-group">
-                            <input class="form-control" type="text" name="username"/>
+                            <input class="form-control" type="email" name="username" placeholder="Email" required="required"/>
                         </article>
 
                         <article class="form-group">
-                            <input class="form-control" type="password" name="password"/>
+                            <input class="form-control" type="password" name="password" placeholder="Senha" required="required"/>
                         </article>
                         <article class="form-group">
                             <button type="submit" name="button" class="btn btn-success">Entrar</button>
