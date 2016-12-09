@@ -10,10 +10,54 @@ and open the template in the editor.
     </head>
     <body>
         <nav th:replace="fragments :: navbar">
-            
+
         </nav>
-        <div class="container">
-            <h1>A home é aqui</h1>
-        </div>
+        <section class="container-fluid">
+            <section class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Solicitações de amizade</div>
+                    <div class="panel-body">
+                          <img class="img-responsive" src="https://upload.wikimedia.org/wikipedia/commons/d/de/Facebook_head.png"
+                          style="width: 100px; height: 100px;" alt="" />
+                            <h3>João da Silva</h3>
+                            <button type="button" class="btn btn-success" name="button">Aceitar</button>
+                            <button type="button" class="btn btn-danger" name="button">Reprovar</button>
+                    </div>
+                </div>
+            </section>
+            <section class="col-md-5">
+                <article class="panel panel-default">
+                    <section class="panel-body">
+
+                        <article class="form-group">
+                          <textarea class="form-control" name="name" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
+                        </article>
+
+                          <button class="btn btn-success pull-right" type="button" name="button">Publicar</button>
+
+
+                    </section>
+                </article>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Posts</div>
+                    <div class="panel-body">
+                        Panel content
+                    </div>
+                </div>
+
+            </section>
+            <section class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Pesquisar amigos</div>
+                    <div class="panel-body">
+                        <article class="form-group">
+                            <input type="text" class="form-control" name="name" value="" placeholder="Pesquise aqui"/>
+                        </article>
+                        <button class="btn btn-primary pull-right" type="button" name="button">Pesquisar</button>
+                    </div>
+                </div>
+            </section>
+        </section>
     </body>
 </html>

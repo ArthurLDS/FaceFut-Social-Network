@@ -1,4 +1,4 @@
-package br.com.crescer.social.web;
+    package br.com.crescer.social.web;
 
 import br.com.crescer.social.entity.Usuario;
 import javax.servlet.http.HttpSession;
@@ -32,11 +32,5 @@ public class AcessController {
     String add(Model m) {
         return "home";
     }
-    
-    @RequestMapping(value="/home")
-    String home() {
-        return "home";
-    } 
-    
     
 }

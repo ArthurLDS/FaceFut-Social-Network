@@ -50,6 +50,8 @@ public class Usuario implements Serializable {
     @OneToMany(cascade = ALL)
     private List<Time> times;
 
+    @OneToMany(cascade = ALL)
+    private List<Post> posts;
     
     public Long getId() {
         return id;

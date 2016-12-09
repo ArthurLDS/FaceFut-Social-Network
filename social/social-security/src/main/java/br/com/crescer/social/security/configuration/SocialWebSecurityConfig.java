@@ -19,7 +19,9 @@ public class SocialWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests().antMatchers("/add").permitAll().anyRequest().authenticated()
+        httpSecurity.authorizeRequests()
+                .antMatchers("/add**", "/cadastro").permitAll()
+                .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").defaultSuccessUrl("/home", true).failureUrl("/login?error").permitAll()
                 .and().logout().logoutUrl("/logout").deleteCookies("JSESSIONID").permitAll()
                 .and().csrf().disable();
