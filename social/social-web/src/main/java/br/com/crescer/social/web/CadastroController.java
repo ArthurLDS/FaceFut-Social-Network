@@ -5,9 +5,11 @@
  */
 package br.com.crescer.social.web;
 
+import br.com.crescer.social.entity.Time;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.crescer.social.entity.Usuario;
+import br.com.crescer.social.service.Service.TimeService;
 import br.com.crescer.social.service.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -25,10 +27,16 @@ public class CadastroController {
     @Autowired
     UsuarioService service;
     
+    @Autowired
+    TimeService timeService =  new TimeService();
+    
     @RequestMapping(value="/cadastro")
     String cadastro(Model model){
+        
         Usuario usuario = new Usuario();
         model.addAttribute("usuario", usuario);
+        Iterable<Time> times = timeService.findAll();
+        model.addAttribute("times", times);
         
         return "cadastro";
     }
