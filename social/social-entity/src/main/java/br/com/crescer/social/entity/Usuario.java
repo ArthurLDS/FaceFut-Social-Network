@@ -7,12 +7,15 @@ package br.com.crescer.social.entity;
 
 import com.sun.glass.ui.Size;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -44,9 +47,8 @@ public class Usuario implements Serializable {
     @Column(name = "SENHA")
     private String senha;
     
-    @Basic(optional = false)
-    @Column(name = "TIME")
-    private String time;
+    @OneToMany(cascade = ALL)
+    private List<Time> times;
 
     
     public Long getId() {
@@ -65,8 +67,12 @@ public class Usuario implements Serializable {
         return senha;
     }
 
-    public String getTime() {
-        return time;
+    public List<Time> getTimes() {
+        return times;
+    }
+
+    public void setTimes(List<Time> times) {
+        this.times = times;
     }
 
     public void setId(Long id) {
@@ -84,12 +90,5 @@ public class Usuario implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-    
-    
-    
     
 }
