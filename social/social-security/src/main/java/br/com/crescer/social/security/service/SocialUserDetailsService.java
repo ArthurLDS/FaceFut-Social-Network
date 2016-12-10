@@ -32,7 +32,7 @@ public class SocialUserDetailsService implements UserDetailsService {
         if (username.isEmpty()) {
             throw new UsernameNotFoundException(String.format("User with username=%s was not found", username));
         }
-        return new User(username, new BCryptPasswordEncoder().encode(senha), SocialRoles.valuesToList());
+        return new User(username, senha, SocialRoles.valuesToList());
     }
 
 }
