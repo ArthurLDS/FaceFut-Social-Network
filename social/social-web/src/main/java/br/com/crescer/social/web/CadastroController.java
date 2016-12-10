@@ -9,6 +9,7 @@ import br.com.crescer.social.entity.Time;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.crescer.social.entity.Usuario;
+import br.com.crescer.social.service.Service.AmigoService;
 import br.com.crescer.social.service.Service.TimeService;
 import br.com.crescer.social.service.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,12 @@ public class CadastroController {
     UsuarioService service;
     
     @Autowired
+    AmigoService amigoService = new AmigoService();
+    
+    @Autowired
     TimeService timeService =  new TimeService();
+    
+    
     
     @RequestMapping(value="/cadastro")
     String cadastro(Model model){
@@ -47,10 +53,13 @@ public class CadastroController {
      public String save(@ModelAttribute Usuario usuario, BindingResult bindingResult, RedirectAttributes redirectAttributes){
          
          if (!bindingResult.hasErrors()){
+            
              
             usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
-            
             service.save(usuario);
+            //Este método save fará um Parse de Usuario para Amigo.
+            amigoService.save(usuario); 
+            
             String nome = usuario.getNome().split(" ")[0];
             redirectAttributes.addFlashAttribute("msg",  nome + " foi salvo(a) com sucesso!");
             return "redirect:cadastro";

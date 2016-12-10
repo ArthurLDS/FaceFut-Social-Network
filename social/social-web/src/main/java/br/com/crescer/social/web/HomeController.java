@@ -5,8 +5,10 @@
  */
 package br.com.crescer.social.web;
 
+import br.com.crescer.social.entity.Amigo;
 import br.com.crescer.social.entity.Post;
 import br.com.crescer.social.entity.Usuario;
+import br.com.crescer.social.service.Service.AmigoService;
 import org.springframework.security.core.userdetails.User;
 import br.com.crescer.social.service.Service.PostService;
 import br.com.crescer.social.service.Service.UsuarioService;
@@ -33,6 +35,9 @@ public class HomeController {
 
     @Autowired
     UsuarioService usuarioService;
+    
+    @Autowired
+    AmigoService amigoService;
 
     @RequestMapping(value = "/home")
     String home(Model model) {
@@ -40,10 +45,13 @@ public class HomeController {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Usuario usuario = usuarioService.findByEmail(user.getUsername());
-
+        
+        Iterable<Amigo> amigos = amigoService.listAll();
+        model.addAttribute("amigos", amigos);
         model.addAttribute("usuario", usuario);
         model.addAttribute("post", post);
         Iterable<Post> posts = service.findAll();
+        
         model.addAttribute("posts", posts);
 
         return "home";

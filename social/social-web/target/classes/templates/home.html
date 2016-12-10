@@ -12,6 +12,8 @@ and open the template in the editor.
         <nav th:replace="fragments :: navbar">
 
         </nav>
+        <div class="divisor"></div>
+
         <section class="container-fluid">
             <section class="col-md-3">
                 <div class="panel panel-default">
@@ -28,14 +30,14 @@ and open the template in the editor.
             <section class="col-md-5">
                 <article class="panel panel-default">
                     <section class="panel-body">
-                        
+
                         <form th:action="@{/postar}" th:object="${post}" method="POST">
                             <!--<input type="hidden" th:field="*{autor}" th:value="${usuario.email}"/>-->
                             <article class="form-group">
                                 <textarea th:field="*{texto}" class="form-control" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
                             </article>
                             <button class="btn btn-success pull-right" type="sumit" name="button">Publicar</button>
-                            
+
                         </form>
 
                     </section>
@@ -43,9 +45,9 @@ and open the template in the editor.
 
                 <div class="panel panel-default">
                     <div class="panel-heading">Posts</div>
-                    
+
                     <div th:each="post :${posts}" class="panel-body" style="padding-right: 0px;">
-                        
+
                         <article class="col-md-2" style="padding-right: 0px;">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Facebook_head.png" style="width: 40px; height: 40px;"/>
                         </article>
@@ -54,12 +56,12 @@ and open the template in the editor.
                             <p class="post-data" th:text="${#dates.format(post.data, 'dd/MM/yyyy hh:mm')}">Data</p>
                             <p th:text="${post.texto}">Texto</p>
                         </article>
-                        
+
                     </div>
                 </div>
 
             </section>
-            <section class="col-md-4">
+            <aside class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">Pesquisar amigos</div>
                     <div class="panel-body">
@@ -67,9 +69,28 @@ and open the template in the editor.
                             <input type="text" class="form-control" name="name" value="" placeholder="Pesquise aqui"/>
                         </article>
                         <button class="btn btn-primary pull-right" type="button" name="button">Pesquisar</button>
+
+                        <div th:each="amigo :${amigos}" class="panel-body col-md-12" style="padding-right: 0px;">
+
+                            <article class="col-md-2" style="padding: 0px;">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Facebook_head.png" style="width: 40px; height: 40px;"/>
+                            </article>
+                            <article class="col-md-10" style="padding-left: 0px;">
+                                <div>
+                                    Nome: <strong><spam style="margin: 0px;" th:text="${amigo.nome}">Autor</spam></strong>
+                                </div>
+                                <div>
+                                    Email: <strong><spam style="margin: 0px;" th:text="${amigo.email}">Email</spam></strong>
+                                </div>
+                                <div>
+                                    Time: <strong><spam th:text="${amigo.time.nome}">Time</spam></strong>
+                                </div>
+                            </article>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </aside>
+
         </section>
     </body>
 </html>
