@@ -30,7 +30,7 @@ and open the template in the editor.
                     <section class="panel-body">
                         
                         <form th:action="@{/postar}" th:object="${post}" method="POST">
-                            <input type="hidden" th:field="*{autor}" th:value="${usuario.email}"/>
+                            <!--<input type="hidden" th:field="*{autor}" th:value="${usuario.email}"/>-->
                             <article class="form-group">
                                 <textarea th:field="*{texto}" class="form-control" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
                             </article>
@@ -43,8 +43,17 @@ and open the template in the editor.
 
                 <div class="panel panel-default">
                     <div class="panel-heading">Posts</div>
-                    <div class="panel-body">
-                        Panel content
+                    
+                    <div th:each="post :${posts}" class="panel-body" style="padding-right: 0px;">
+                        
+                        <article class="col-md-2" style="padding-right: 0px;">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Facebook_head.png" style="width: 40px; height: 40px;"/>
+                        </article>
+                        <article class="col-md-10" style="padding-left: 0px;">
+                            <strong><p th:text="${post.autor}">Autor</p></strong>
+                            <p th:text="${post.texto}">Texto</p>
+                        </article>
+                        
                     </div>
                 </div>
 

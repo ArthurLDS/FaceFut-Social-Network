@@ -27,17 +27,17 @@ public class HomeController {
 
     @Autowired
     PostService service;
-    
+
     @Autowired
     UsuarioService usuarioService;
 
     @RequestMapping(value = "/home")
     String home(Model model) {
         Post post = new Post();
-        
-        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Usuario usuario = usuarioService.findByEmail(user.getUsername());
-        
+
         model.addAttribute("usuario", usuario);
         model.addAttribute("post", post);
         Iterable<Post> posts = service.findAll();
@@ -48,8 +48,9 @@ public class HomeController {
 
     @RequestMapping(value = "/postar", method = RequestMethod.POST)
     public String save(@ModelAttribute Post post) {
-
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setAutor(user.getUsername());
         service.save(post);
-        return "home";
+        return "redirect:home";
     }
 }

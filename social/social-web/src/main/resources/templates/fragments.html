@@ -80,16 +80,13 @@ and open the template in the editor.
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-user-circle" style="font-size:18px"></i>
-                                        Opções 
+                                        <span sec:authentication="name"></span>
                                         <span class="caret"></span>
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
+                                    <select class="dropdown-menu">
+                                        <option><a href="#">Another action</a></option>
+                                        <option><a href="#">Action</a></option>
+                                    </select>
                                 </li>
                             </ul>
                         </div><!-- /.navbar-collapse -->

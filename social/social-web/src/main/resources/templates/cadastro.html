@@ -34,7 +34,7 @@ and open the template in the editor.
 
                         <article class="form-group">
 
-                            <select class="form-control" th:field="*{times}" required="required">
+                            <select class="form-control" th:field="*{time}" required="required">
                                 
                                 <option th:each="time :${times}" th:value="${time.id}" th:text="${time.nome}">
                                 </option>
