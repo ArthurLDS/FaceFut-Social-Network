@@ -6,6 +6,7 @@
 package br.com.crescer.social.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,7 +39,19 @@ public class Post implements Serializable{
     @Column(name = "TEXTO")
     private String texto;
     
+    @Basic(optional = false)
+    @Column(name = "DATA_POST")
+    private Date data;
 
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    
     public Long getId() {
         return id;
     }

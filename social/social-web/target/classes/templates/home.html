@@ -50,7 +50,8 @@ and open the template in the editor.
                             <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Facebook_head.png" style="width: 40px; height: 40px;"/>
                         </article>
                         <article class="col-md-10" style="padding-left: 0px;">
-                            <strong><p th:text="${post.autor}">Autor</p></strong>
+                            <strong><p style="margin: 0px;" th:text="${post.autor}">Autor</p></strong>
+                            <p class="post-data" th:text="${#dates.format(post.data, 'dd/MM/yyyy hh:mm')}">Data</p>
                             <p th:text="${post.texto}">Texto</p>
                         </article>
                         
