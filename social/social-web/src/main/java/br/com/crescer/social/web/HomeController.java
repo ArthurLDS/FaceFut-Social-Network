@@ -18,13 +18,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -45,7 +50,7 @@ public class HomeController {
     @Autowired
     TimeService timeService;
 
-    @RequestMapping(value = "/home")
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
     String home(Model model) {
         
         Post post = new Post();
@@ -53,9 +58,8 @@ public class HomeController {
                 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Usuario usuario = usuarioService.findByEmail(user.getUsername());
-        
-        Iterable<Amigo> amigos = amigoService.listAll();
-        model.addAttribute("amigos", amigos);
+       
+        model.addAttribute("amigos", amigoService.listAll());
         model.addAttribute("amigo", amigo);
         model.addAttribute("usuario", usuario);
         model.addAttribute("post", post);
@@ -80,11 +84,26 @@ public class HomeController {
     }
     
     @RequestMapping(value = "/pesquisar", method = RequestMethod.POST)
-    public String pesquisar(Model model, @ModelAttribute Amigo amigo){
-        String nome = amigo.getNome();
-        Iterable<Amigo> amigosFiltrados = amigoService.findByNome(nome);
-        model.addAttribute("amigosFiltrados", amigosFiltrados);
-        return "redirect:home";
+    public ModelAndView pesquisar(Model model, @ModelAttribute Amigo amigao){
+        
+        // Arrumar gambi!!
+        Post post = new Post();
+        Amigo amigo = new Amigo();
+                
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Usuario usuario = usuarioService.findByEmail(user.getUsername());
+       
+        model.addAttribute("amigos", amigoService.listAll());
+        model.addAttribute("amigo", amigo);
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("post", post);
+        List<Post> posts = service.findAllByOrderByIdDesc();
+        model.addAttribute("posts", posts);
+        
+        String nome = amigao.getNome();
+        Iterable<Amigo> amigos = amigoService.findByNome(nome);
+        //model.addAttribute("amigos", amigos);
+        return new ModelAndView("/home", "amigos", amigos);
     }
     
 }

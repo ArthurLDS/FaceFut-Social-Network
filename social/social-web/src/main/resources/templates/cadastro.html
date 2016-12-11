@@ -48,11 +48,12 @@ and open the template in the editor.
                         </article>
 
                         <article class="form-group">
-                            <button type="submit" name="button" class="btn btn-primary">Entrar</button>
+                            <button type="submit" name="button" class="btn btn-primary">Cadastrar</button>
                         </article>
 
                         <div class="alert alert-success" th:if="${msg}">
                             <strong>Ok!</strong> <span th:text="${msg}"></span>
+                            <a th:href="@{/login}"> Fazer login</a>
                         </div>
                         
                     </form>
