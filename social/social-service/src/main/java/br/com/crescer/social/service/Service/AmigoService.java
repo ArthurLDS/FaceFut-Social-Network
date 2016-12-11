@@ -33,6 +33,10 @@ public class AmigoService {
         return repository.findByNome(nome);
     }
     
+    public Iterable<Amigo> findByNomeIgnoreCaseContaining(String nome){
+        return repository.findByNomeIgnoreCaseContaining(nome);
+    }
+    
     public void save(Amigo amigo){
         repository.save(amigo);
     }
