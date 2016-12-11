@@ -25,6 +25,10 @@ public class AmigoService {
         return repository.findAll();
     }
     
+    public Amigo findById(Long id){
+        return repository.findById(id);
+    }
+    
     public Iterable<Amigo> findByEmail(String email){
         return repository.findByEmail(email);
     }

@@ -101,10 +101,10 @@ and open the template in the editor.
                                     <div>
                                         Time: <strong><spam th:text="${amigo.time.nome}">Time</spam></strong>
                                     </div>
-                                    <button class="btn btn-success btn-adicionar">
+                                    <a th:href="@{${'/home'}(id=${amigo.id})}" class="btn btn-success btn-adicionar">
                                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         Adicionar amigo
-                                    </button>
+                                    </a>
                                 </article>
                             </div>
                         </article>
