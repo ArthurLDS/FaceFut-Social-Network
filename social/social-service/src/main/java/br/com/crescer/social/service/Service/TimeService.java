@@ -23,4 +23,8 @@ public class TimeService {
     public Iterable<Time> findAll(){
         return repository.findAll();
     }
+    
+    public void save(Time time){
+        repository.save(time);
+    }
 }

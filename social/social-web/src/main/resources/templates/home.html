@@ -34,7 +34,7 @@ and open the template in the editor.
                         <form th:action="@{/postar}" th:object="${post}" method="POST">
                             <!--<input type="hidden" th:field="*{autor}" th:value="${usuario.email}"/>-->
                             <article class="form-group">
-                                <textarea th:field="*{texto}" class="form-control" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
+                                <textarea th:field="*{texto}" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
                             </article>
                             <button class="btn btn-success pull-right" type="sumit" name="button">Publicar</button>
 
@@ -65,12 +65,16 @@ and open the template in the editor.
                 <div class="panel panel-default">
                     <div class="panel-heading">Pesquisar amigos</div>
                     <div class="panel-body">
-                        <article class="form-group">
-                            <input type="text" class="form-control" name="name" value="" placeholder="Pesquise aqui"/>
-                        </article>
-                        <button class="btn btn-primary pull-right" type="button" name="button">Pesquisar</button>
-
-                        <div th:each="amigo :${amigos}" class="panel-body col-md-12" style="padding-right: 0px;">
+                        
+                        <!---->
+                        <form  th:action="@{/pesquisar}" th:object="${amigo}" method="POST">
+                            <article class="form-group">         <!---->
+                                <input type="text" class="form-control" th:field="*{nome}" placeholder="Pesquise aqui"/>
+                            </article>
+                            <button class="btn btn-primary pull-right" type="submit" name="button">Pesquisar</button>
+                        </form>
+                        
+                        <div th:each="amigo :${amigosFiltrados}" class="panel-body col-md-12" style="padding-right: 0px;">
 
                             <article class="col-md-2" style="padding: 0px;">
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Facebook_head.png" style="width: 40px; height: 40px;"/>

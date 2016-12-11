@@ -7,6 +7,7 @@ package br.com.crescer.social.service.Service;
 
 import br.com.crescer.social.entity.Post;
 import br.com.crescer.social.service.Repository.PostRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +27,9 @@ public class PostService {
     
     public void save(Post post){
         repository.save(post);
+    }
+    
+    public List<Post> findAllByOrderByIdDesc() {
+        return repository.findAllByOrderByIdDesc();
     }
 }

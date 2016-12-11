@@ -14,7 +14,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface AmigoRepository extends PagingAndSortingRepository<Amigo, Long>{
     
-    Iterable<Amigo> findByEmail(String email);
+    public Iterable<Amigo> findByEmail(String email);
     
-    Iterable<Amigo> findByNome(String nome);
+    public Iterable<Amigo> findByNome(String nome);
 }
