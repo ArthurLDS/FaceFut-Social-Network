@@ -40,6 +40,7 @@ public class AcessController {
         return "home";
     }
     
+    //Método temporario, usar apenas no desenvilvimento
     private void adcRegistros(){
         Time time = new Time();
         time.setNome("Internacional");

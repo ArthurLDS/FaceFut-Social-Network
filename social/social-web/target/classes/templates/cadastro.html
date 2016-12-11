@@ -46,16 +46,15 @@ and open the template in the editor.
                         <article class="form-group">
                             <input class="form-control" type="password" th:field="*{senha}" placeholder="Senha" required="required"/>
                         </article>
-
-                        <article class="form-group">
-                            <button type="submit" name="button" class="btn btn-primary">Cadastrar</button>
-                        </article>
-
+                        
                         <div class="alert alert-success" th:if="${msg}">
                             <strong>Ok!</strong> <span th:text="${msg}"></span>
                             <a th:href="@{/login}"> Fazer login</a>
                         </div>
                         
+                        <article class="form-group">
+                            <button type="submit" name="button" class="btn btn-primary">Cadastrar</button>
+                        </article>
                     </form>
 
                 </article>

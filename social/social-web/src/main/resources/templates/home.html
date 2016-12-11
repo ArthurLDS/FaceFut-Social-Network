@@ -34,7 +34,7 @@ and open the template in the editor.
                         <form th:action="@{/postar}" th:object="${post}" method="POST">
                             <!--<input type="hidden" th:field="*{autor}" th:value="${usuario.email}"/>-->
                             <article class="form-group">
-                                <textarea th:field="*{texto}" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
+                                <textarea required="required" th:field="*{texto}" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
                             </article>
                             <button class="btn btn-success pull-right" type="sumit" name="button">Publicar</button>
 
@@ -69,12 +69,23 @@ and open the template in the editor.
                         <!---->
                         <form  th:action="@{/pesquisar}" th:object="${amigo}" method="POST">
                             <article class="form-group">         <!---->
-                                <input type="text" class="form-control" th:field="*{nome}" placeholder="Pesquise aqui"/>
+                                <input required="required" type="text" class="form-control" th:field="*{nome}" placeholder="Pesquise aqui"/>
                             </article>
                             <button class="btn btn-primary pull-right" type="submit" name="button">Pesquisar</button>
                             
+                            <a class="btn btn-info btn-amigo-refresh pull-right" th:href="@{/listAll}" name="button">
+                                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                            </a>
+                            
+                            <div class="alert alert-info amigo-busca amigo-alert-basic" th:if="${msg}">
+                                <strong><span th:text="${msg}"></span> resultado(s) encontrados</strong>
+                            </div>
+                            <div class="alert alert-warning amigo-busca" th:if="${acheiNada}">
+                                <strong><span th:text="${acheiNada}"></span> resultado(s) encontrados</strong>
+                            </div>
+                            
                         </form>
-
+                        <article th:if="${amigos}">
                             <div th:each="amigo :${amigos}" class="panel-body col-md-12" style="padding-right: 0px;">
 
                                 <article class="col-md-2" style="padding: 0px;">
@@ -90,8 +101,13 @@ and open the template in the editor.
                                     <div>
                                         Time: <strong><spam th:text="${amigo.time.nome}">Time</spam></strong>
                                     </div>
+                                    <button class="btn btn-success btn-adicionar">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        Adicionar amigo
+                                    </button>
                                 </article>
                             </div>
+                        </article>
                     </div>
                 </div>
             </aside>

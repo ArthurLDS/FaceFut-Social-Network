@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-/**
+/** 
  *
  * @author arthur.souza
  */
@@ -59,7 +59,7 @@ public class HomeController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Usuario usuario = usuarioService.findByEmail(user.getUsername());
        
-        model.addAttribute("amigos", amigoService.listAll());
+        //model.addAttribute("amigos", amigoService.listAll());
         model.addAttribute("amigo", amigo);
         model.addAttribute("usuario", usuario);
         model.addAttribute("post", post);
@@ -84,26 +84,29 @@ public class HomeController {
     }
     
     @RequestMapping(value = "/pesquisar", method = RequestMethod.POST)
-    public ModelAndView pesquisar(Model model, @ModelAttribute Amigo amigao){
-        
-        // Arrumar gambi!!
-        Post post = new Post();
-        Amigo amigo = new Amigo();
-                
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Usuario usuario = usuarioService.findByEmail(user.getUsername());
-       
-        model.addAttribute("amigos", amigoService.listAll());
-        model.addAttribute("amigo", amigo);
-        model.addAttribute("usuario", usuario);
-        model.addAttribute("post", post);
-        List<Post> posts = service.findAllByOrderByIdDesc();
-        model.addAttribute("posts", posts);
+    public String pesquisar(Model model, @ModelAttribute Amigo amigao, RedirectAttributes redirectAttributes){
         
         String nome = amigao.getNome();
         Iterable<Amigo> amigos = amigoService.findByNome(nome);
-        //model.addAttribute("amigos", amigos);
-        return new ModelAndView("/home", "amigos", amigos);
+        
+        // Mandando numero de dados encontrados para a tela.
+        List<Amigo> lista = (List)amigos;
+        
+        int quantidade = lista.size();
+        if(quantidade!=0){
+            redirectAttributes.addFlashAttribute("msg", quantidade);
+        }
+        else
+            redirectAttributes.addFlashAttribute("acheiNada", "0");
+        
+        redirectAttributes.addFlashAttribute("amigos", amigos);
+        return "redirect:home";
     }
-    
+    @RequestMapping(value = "/listAll", method = RequestMethod.GET)
+    public String listAll(RedirectAttributes redirectAttributes){
+        
+        Iterable<Amigo> amigos = amigoService.listAll();
+        redirectAttributes.addFlashAttribute("amigos", amigos);
+        return "redirect:home";
+    }
 }
