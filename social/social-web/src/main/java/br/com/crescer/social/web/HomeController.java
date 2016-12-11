@@ -54,7 +54,12 @@ public class HomeController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     String home(Model model, @RequestParam(required = false) Long id) {
-
+        
+        //Busca os convites que enviaram para ele
+        User userAtual = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Iterable<Convite> convites = conviteService.findByDestinatario(userAtual.getUsername());
+        
+        //Envia convites.
         if (id != null) {
             Amigo amigoParaAdc = amigoService.findById(id);
             User userRemetente = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -65,6 +70,10 @@ public class HomeController {
             convite.setData(new Date());
 
             conviteService.save(convite);
+            
+            //Usuario userDestino = usuarioService.findByEmail(amigoParaAdc.getEmail());
+            
+            //userDestino.setConvites();
         }
 
         Post post = new Post();
@@ -74,10 +83,11 @@ public class HomeController {
         Usuario usuario = usuarioService.findByEmail(user.getUsername());
 
         //model.addAttribute("amigos", amigoService.listAll());
+        model.addAttribute("convites", convites);
         model.addAttribute("amigo", amigo);
         model.addAttribute("usuario", usuario);
         model.addAttribute("post", post);
-
+        
         List<Post> posts = service.findAllByOrderByIdDesc();
 
         model.addAttribute("posts", posts);
@@ -125,7 +135,7 @@ public class HomeController {
         return "redirect:home";
     }
 
-    @RequestMapping(value = "/adicionar/{email}", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/adicionar/{email}", method = RequestMethod.GET)
     public String adicionarAmigo(@PathVariable String email) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Convite convite = new Convite();
@@ -136,5 +146,5 @@ public class HomeController {
 
         conviteService.save(convite);
         return "home";
-    }
+    }*/
 }

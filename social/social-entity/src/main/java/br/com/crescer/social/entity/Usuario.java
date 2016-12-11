@@ -54,6 +54,19 @@ public class Usuario implements Serializable {
     @OneToMany(cascade = ALL)
     private List<Post> posts;
     
+    @OneToMany(cascade = ALL)
+    private List<Convite> convites;
+
+    
+    
+    public void setConvites(List<Convite> convites) {
+        this.convites = convites;
+    }
+
+    public List<Convite> getConvites() {
+        return convites;
+    }
+    
     public Long getId() {
         return id;
     }
