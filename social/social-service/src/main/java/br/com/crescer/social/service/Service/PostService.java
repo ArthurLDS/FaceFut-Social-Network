@@ -5,8 +5,11 @@
  */
 package br.com.crescer.social.service.Service;
 
+import br.com.crescer.social.entity.Amigo;
 import br.com.crescer.social.entity.Post;
+import br.com.crescer.social.entity.Usuario;
 import br.com.crescer.social.service.Repository.PostRepository;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,4 +35,6 @@ public class PostService {
     public List<Post> findAllByOrderByIdDesc() {
         return repository.findAllByOrderByIdDesc();
     }
+    
+    
 }
