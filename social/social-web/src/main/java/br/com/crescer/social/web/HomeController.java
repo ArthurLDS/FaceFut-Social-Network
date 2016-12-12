@@ -102,6 +102,7 @@ public class HomeController {
         Usuario usuario = usuarioService.findByEmail(userAtual.getUsername());
 
         //model.addAttribute("amigos", amigoService.listAll());
+        model.addAttribute("numAmigos", usuario.getAmigos().size());
         model.addAttribute("convites", convites);
         model.addAttribute("amigo", amigo);
         model.addAttribute("usuario", usuario);
