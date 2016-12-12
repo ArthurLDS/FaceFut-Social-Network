@@ -17,7 +17,7 @@ and open the template in the editor.
         <section class="container-fluid">
             <section class="col-md-3">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Solicitações de amizade</div>
+                    <div class="panel-heading">Convites de amizade</div>
                     <div class="panel-body">
                        
                         <article>
@@ -33,8 +33,14 @@ and open the template in the editor.
                                     <div>
                                         Data: <strong><spam th:text="${#dates.format(convite.data, 'dd/MM/yyyy hh:mm')}">Data</spam></strong>
                                     </div>
-                                    <button type="button" class="btn btn-success" name="button">Aceitar</button>
-                                    <button type="button" class="btn btn-danger" name="button">Reprovar</button>
+                                    <a th:href="@{${'/home'}(idaprova=${convite.id})}" class="btn btn-success btn-solicitacao">
+                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                        Aceitar
+                                    </a>
+                                    <button type="button" class="btn btn-danger btn-solicitacao" name="button">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        Reprovar
+                                    </button>
                                 </article>
                             </div>
                         </article>
@@ -99,8 +105,8 @@ and open the template in the editor.
                             <div class="alert alert-warning amigo-busca" th:if="${acheiNada}">
                                 <strong><span th:text="${acheiNada}"></span> resultado(s) encontrados</strong>
                             </div>
-
                         </form>
+                        
                         <article th:if="${amigos}">
                             <div th:each="amigo :${amigos}" class="panel-body col-md-12" style="padding-right: 0px;">
 
