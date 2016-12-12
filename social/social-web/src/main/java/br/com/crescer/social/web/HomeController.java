@@ -57,8 +57,10 @@ public class HomeController {
         User userAtual = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (idaprova != null) {
+            
             //Aceitando e adicionando amigo no Usuario atual
             Convite conviteAprovado = conviteService.findById(idaprova);
+            
             Amigo amigoRemetente = amigoService.findFirstByEmail(conviteAprovado.getRemetente());
             Usuario usuarioEntity = usuarioService.findByEmail(userAtual.getUsername());
             List<Amigo> amigosDoUsuario = usuarioEntity.getAmigos();
@@ -66,7 +68,18 @@ public class HomeController {
             usuarioEntity.setAmigos(amigosDoUsuario);
             
             usuarioService.save(usuarioEntity);
-            //Adicionando amigo no Cara que enviou o convite.. TO-DO
+            
+            //Adicionando amigo no Cara que enviou o convite..
+            Amigo amigoDestinatario = amigoService.findFirstByEmail(conviteAprovado.getDestinatario());
+            Usuario usuarioRemetente = usuarioService.findByEmail(conviteAprovado.getRemetente());
+            List<Amigo> amigosDoRemetente = usuarioRemetente.getAmigos();
+            amigosDoRemetente.add(amigoDestinatario);
+            usuarioRemetente.setAmigos(amigosDoRemetente);
+            
+            usuarioService.save(usuarioRemetente);
+            
+            //Agora excluimos o convite
+            conviteService.deleteConvite(conviteAprovado);
         }
         
         //Busca os convites que enviaram para ele
