@@ -18,4 +18,6 @@ public interface ConviteRepository extends PagingAndSortingRepository<Convite, L
     
     public Iterable<Convite> findByRemetente(String remetente);
     
+    public Convite findById(Long id);
+    
 }

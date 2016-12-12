@@ -36,6 +36,10 @@ public class ConviteService {
         return repository.findByRemetente(remetente);
     }
     
+    public Convite findById(Long id){
+        return repository.findById(id);
+    }
+    
     public void deleteConvite(Convite convite){
         repository.delete(convite);
     }

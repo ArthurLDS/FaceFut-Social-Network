@@ -50,7 +50,10 @@ public class Usuario implements Serializable {
     
     @ManyToOne
     private Time time;
-
+    
+    @OneToMany(cascade = ALL)
+    private List<Amigo> amigos;
+    
     @OneToMany(cascade = ALL)
     private List<Post> posts;
     
@@ -58,6 +61,13 @@ public class Usuario implements Serializable {
     private List<Convite> convites;
 
     
+    public List<Amigo> getAmigos() {
+        return amigos;
+    }
+
+    public void setAmigos(List<Amigo> amigos) {
+        this.amigos = amigos;
+    }
     
     public void setConvites(List<Convite> convites) {
         this.convites = convites;

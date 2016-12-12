@@ -53,43 +53,48 @@ public class HomeController {
     ConviteService conviteService;
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    String home(Model model, @RequestParam(required = false) Long id) {
+    String home(Model model, @RequestParam(required = false) Long id, @RequestParam(required = false) Long idaprova) {
+        User userAtual = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (idaprova != null) {
+            //Aceitando e adicionando amigo no Usuario atual
+            Convite conviteAprovado = conviteService.findById(idaprova);
+            Amigo amigoRemetente = amigoService.findFirstByEmail(conviteAprovado.getRemetente());
+            Usuario usuarioEntity = usuarioService.findByEmail(userAtual.getUsername());
+            List<Amigo> amigosDoUsuario = usuarioEntity.getAmigos();
+            amigosDoUsuario.add(amigoRemetente);
+            usuarioEntity.setAmigos(amigosDoUsuario);
+            
+            usuarioService.save(usuarioEntity);
+            //Adicionando amigo no Cara que enviou o convite.. TO-DO
+        }
         
         //Busca os convites que enviaram para ele
-        User userAtual = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Iterable<Convite> convites = conviteService.findByDestinatario(userAtual.getUsername());
-        
+        usuarioService.findByEmail(userAtual.getUsername()).setConvites((List) convites);
+
         //Envia convites.
         if (id != null) {
             Amigo amigoParaAdc = amigoService.findById(id);
-            User userRemetente = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             Convite convite = new Convite();
-
             convite.setDestinatario(amigoParaAdc.getEmail());
-            convite.setRemetente(userRemetente.getUsername());
+            convite.setRemetente(userAtual.getUsername());
             convite.setData(new Date());
 
             conviteService.save(convite);
-            
-            //Usuario userDestino = usuarioService.findByEmail(amigoParaAdc.getEmail());
-            
-            //userDestino.setConvites();
         }
-
         Post post = new Post();
         Amigo amigo = new Amigo();
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Usuario usuario = usuarioService.findByEmail(user.getUsername());
+        Usuario usuario = usuarioService.findByEmail(userAtual.getUsername());
 
         //model.addAttribute("amigos", amigoService.listAll());
         model.addAttribute("convites", convites);
         model.addAttribute("amigo", amigo);
         model.addAttribute("usuario", usuario);
         model.addAttribute("post", post);
-        
-        List<Post> posts = service.findAllByOrderByIdDesc();
 
+        List<Post> posts = service.findAllByOrderByIdDesc();
         model.addAttribute("posts", posts);
 
         return "home";
@@ -136,15 +141,15 @@ public class HomeController {
     }
 
     /*@RequestMapping(value = "/adicionar/{email}", method = RequestMethod.GET)
-    public String adicionarAmigo(@PathVariable String email) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Convite convite = new Convite();
+     public String adicionarAmigo(@PathVariable String email) {
+     User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+     Convite convite = new Convite();
 
-        convite.setDestinatario(email);
-        convite.setRemetente(user.getUsername());
-        convite.setData(new Date());
+     convite.setDestinatario(email);
+     convite.setRemetente(user.getUsername());
+     convite.setData(new Date());
 
-        conviteService.save(convite);
-        return "home";
-    }*/
+     conviteService.save(convite);
+     return "home";
+     }*/
 }

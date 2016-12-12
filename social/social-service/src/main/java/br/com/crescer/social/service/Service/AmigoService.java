@@ -8,6 +8,7 @@ package br.com.crescer.social.service.Service;
 import br.com.crescer.social.entity.Amigo;
 import br.com.crescer.social.entity.Usuario;
 import br.com.crescer.social.service.Repository.AmigoRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,11 @@ public class AmigoService {
     
     public Iterable<Amigo> findByEmail(String email){
         return repository.findByEmail(email);
+    }
+    
+    public Amigo findFirstByEmail(String email){
+        List<Amigo> lista = (List)repository.findByEmail(email);
+        return lista.get(0);
     }
     
     public Iterable<Amigo> findByNome(String nome){
