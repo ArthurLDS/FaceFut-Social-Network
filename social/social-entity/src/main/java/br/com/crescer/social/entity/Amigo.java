@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -43,9 +44,14 @@ public class Amigo implements Serializable{
     @ManyToOne
     private Time time;
     
+    @ManyToOne
+    @JoinColumn(name="idusuario", unique=false)
+    private Usuario usuario;
+    
     @OneToMany(cascade = ALL)
     private List<Post> posts;
-
+    
+    
     
     public void setId(Long id) {
         this.id = id;

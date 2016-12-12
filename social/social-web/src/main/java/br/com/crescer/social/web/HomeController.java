@@ -54,11 +54,14 @@ public class HomeController {
     ConviteService conviteService;
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    String home(Model model, @RequestParam(required = false) Long id, @RequestParam(required = false) Long idaprova) {
+    String home(Model model, @RequestParam(required = false) Long id, @RequestParam(required = false) Long idaprova, @RequestParam(required = false) Long idreprova) {
         User userAtual = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
+        
+        if(idreprova != null) {
+            Convite conviteReprovado = conviteService.findById(idreprova);
+            conviteService.deleteConvite(conviteReprovado);
+        }
         if (idaprova != null) {
-            
             //Aceitando e adicionando amigo no Usuario atual
             Convite conviteAprovado = conviteService.findById(idaprova);
             
