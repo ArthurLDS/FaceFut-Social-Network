@@ -194,8 +194,8 @@ public class HomeController {
     private List<Amigo> filtrarListaDeAmigos(List<Amigo> amigos, Usuario usuario) {
         List<String> nomeAmigos = new ArrayList<>();
         List<Amigo> amigosDoUsuario = usuario.getAmigos();
-        List<Amigo> amigosFiltrados = new ArrayList<>();
-
+        List<Amigo> amigosFiltrados = amigos;
+        
         for (int i = 0; i < amigosDoUsuario.size(); i++) {
             nomeAmigos.add(amigosDoUsuario.get(i).getEmail());
         }
@@ -204,16 +204,18 @@ public class HomeController {
             Amigo amigoAtual = amigos.get(i);
             if (amigosDoUsuario.size() > 0) {
                 for (int j = 0; j < nomeAmigos.size(); j++) {
-                    if (!amigoAtual.getEmail().equals(nomeAmigos.get(j)) && !amigoAtual.getEmail().equals(usuario.getEmail())) {
-                        amigosFiltrados.add(amigos.get(i));
+                    if (amigoAtual.getEmail().equals(nomeAmigos.get(j))) {
+                        amigosFiltrados.remove(amigoAtual);
                     }
                 }
-            } else if (amigos.get(i).getEmail().equals(usuario.getEmail())) {
-                amigos.remove(i);
-                amigosFiltrados = amigos;
+            } 
+        }
+        for(int i=0; i<amigosFiltrados.size();i++){
+            Amigo amigoAtual = amigos.get(i);
+            if (amigoAtual.getEmail().equals(usuario.getEmail())) {
+                amigosFiltrados.remove(amigoAtual);
             }
         }
-
         return amigosFiltrados;
     }
 }
