@@ -44,10 +44,6 @@ public class Amigo implements Serializable{
     @ManyToOne
     private Time time;
     
-    @ManyToOne
-    @JoinColumn(name="idusuario", unique=false)
-    private Usuario usuario;
-    
     @OneToMany(cascade = ALL)
     private List<Post> posts;
     

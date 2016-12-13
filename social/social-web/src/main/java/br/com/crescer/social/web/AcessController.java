@@ -25,7 +25,7 @@ public class AcessController {
     
     @RequestMapping("/login")
     String login(Model m) {
-        //adcRegistros();
+        adcRegistros();
         return "login"; 
     } 
     
@@ -41,7 +41,7 @@ public class AcessController {
     }
     
     //Método temporario, usar apenas no desenvilvimento
-    /*private void adcRegistros(){
+    private void adcRegistros(){
         Time time = new Time();
         time.setNome("Internacional");
         
@@ -63,5 +63,5 @@ public class AcessController {
         timeService.save(time4);
         timeService.save(time5);
         
-    }*/
+    }
 }

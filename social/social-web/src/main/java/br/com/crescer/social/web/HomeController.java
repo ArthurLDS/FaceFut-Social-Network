@@ -56,36 +56,36 @@ public class HomeController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     String home(Model model, @RequestParam(required = false) Long id, @RequestParam(required = false) Long idaprova, @RequestParam(required = false) Long idreprova) {
         User userAtual = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        
-        if(idreprova != null) {
+
+        if (idreprova != null) {
             Convite conviteReprovado = conviteService.findById(idreprova);
             conviteService.deleteConvite(conviteReprovado);
         }
         if (idaprova != null) {
             //Aceitando e adicionando amigo no Usuario atual
             Convite conviteAprovado = conviteService.findById(idaprova);
-            
+
             Amigo amigoRemetente = amigoService.findFirstByEmail(conviteAprovado.getRemetente());
             Usuario usuarioEntity = usuarioService.findByEmail(userAtual.getUsername());
             List<Amigo> amigosDoUsuario = usuarioEntity.getAmigos();
             amigosDoUsuario.add(amigoRemetente);
             usuarioEntity.setAmigos(amigosDoUsuario);
-            
+
             usuarioService.save(usuarioEntity);
-            
-            //Adicionando amigo no Cara que enviou o convite..
+
+            //Adicionando amigo no Usuario que enviou o convite..
             Amigo amigoDestinatario = amigoService.findFirstByEmail(conviteAprovado.getDestinatario());
             Usuario usuarioRemetente = usuarioService.findByEmail(conviteAprovado.getRemetente());
             List<Amigo> amigosDoRemetente = usuarioRemetente.getAmigos();
             amigosDoRemetente.add(amigoDestinatario);
             usuarioRemetente.setAmigos(amigosDoRemetente);
-            
+
             usuarioService.save(usuarioRemetente);
-            
+
             //Agora excluimos o convite
             conviteService.deleteConvite(conviteAprovado);
         }
-        
+
         //Busca os convites que enviaram para ele
         Iterable<Convite> convites = conviteService.findByDestinatario(userAtual.getUsername());
         usuarioService.findByEmail(userAtual.getUsername()).setConvites((List) convites);
@@ -116,7 +116,7 @@ public class HomeController {
 
         List<Post> posts = service.findAllByOrderByIdDesc();
         List<Post> postsFiltrados = filtrarPosts(amigos, posts, usuario);
-        
+
         model.addAttribute("posts", postsFiltrados);
         return "home";
     }
@@ -136,8 +136,11 @@ public class HomeController {
     @RequestMapping(value = "/pesquisar", method = RequestMethod.POST)
     public String pesquisar(Model model, @ModelAttribute Amigo amigao, RedirectAttributes redirectAttributes) {
 
+        User userSessao = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Usuario usuario = usuarioService.findByEmail(userSessao.getUsername());
+
         String nome = amigao.getNome();
-        Iterable<Amigo> amigos = amigoService.findByNome(nome);
+        Iterable<Amigo> amigos = filtrarListaDeAmigos((List) amigoService.findByNome(nome), usuario);
 
         // Mandando numero de dados encontrados para a tela.
         List<Amigo> lista = (List) amigos;
@@ -156,28 +159,60 @@ public class HomeController {
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
     public String listAll(RedirectAttributes redirectAttributes) {
 
+        User userSessao = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Usuario usuario = usuarioService.findByEmail(userSessao.getUsername());
+
         Iterable<Amigo> amigos = amigoService.listAll();
-        redirectAttributes.addFlashAttribute("amigos", amigos);
+        List<Amigo> listaAmigos = filtrarListaDeAmigos((List) amigos, usuario);
+        redirectAttributes.addFlashAttribute("amigos", listaAmigos);
         return "redirect:home";
     }
-    
-    private List<Post> filtrarPosts(List<Amigo> amigos, List<Post> posts, Usuario usuario){
+
+    private List<Post> filtrarPosts(List<Amigo> amigos, List<Post> posts, Usuario usuario) {
         List<String> nomeAmigos = new ArrayList<>();
-        
-        for(int i=0; i<amigos.size(); i++){
+
+        for (int i = 0; i < amigos.size(); i++) {
             nomeAmigos.add(amigos.get(i).getEmail());
         }
         List<Post> postsFiltrados = new ArrayList<>();
-        
-        for(int i=0; i<posts.size(); i++){
-            for(int j=0; j<nomeAmigos.size(); j++){
-                if(posts.get(i).getAutor().equals(nomeAmigos.get(j))){
+
+        for (int i = 0; i < posts.size(); i++) {
+            for (int j = 0; j < nomeAmigos.size(); j++) {
+                if (posts.get(i).getAutor().equals(nomeAmigos.get(j))) {
                     postsFiltrados.add(posts.get(i));
                 }
             }
-            if(posts.get(i).getAutor().equals(usuario.getEmail()))
+            if (posts.get(i).getAutor().equals(usuario.getEmail())) {
                 postsFiltrados.add(posts.get(i));
+            }
         }
         return postsFiltrados;
+    }
+
+    private List<Amigo> filtrarListaDeAmigos(List<Amigo> amigos, Usuario usuario) {
+        List<String> nomeAmigos = new ArrayList<>();
+        List<Amigo> amigosDoUsuario = usuario.getAmigos();
+        List<Amigo> amigosFiltrados = new ArrayList<>();
+
+        for (int i = 0; i < amigosDoUsuario.size(); i++) {
+            nomeAmigos.add(amigosDoUsuario.get(i).getEmail());
+        }
+
+        for (int i = 0; i < amigos.size(); i++) {
+            Amigo amigoAtual = amigos.get(i);
+            if (amigosDoUsuario.size() > 0) {
+                for (int j = 0; j < nomeAmigos.size(); j++) {
+                    if (!amigoAtual.getEmail().equals(nomeAmigos.get(j)) && !amigoAtual.getEmail().equals(usuario.getEmail())) {
+                        amigosFiltrados.add(amigos.get(i));
+                    }
+                }
+            }
+            else if(amigos.get(i).getEmail().equals(usuario.getEmail())){
+                amigos.remove(i);
+                amigosFiltrados = amigos;
+            }
+        }
+        
+        return amigosFiltrados;
     }
 }

@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -51,7 +52,7 @@ public class Usuario implements Serializable {
     @ManyToOne
     private Time time;
     
-    @OneToMany(cascade = ALL)
+    @ManyToMany
     private List<Amigo> amigos;
     
     @OneToMany(cascade = ALL)
