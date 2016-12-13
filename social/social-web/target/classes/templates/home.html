@@ -19,7 +19,7 @@ and open the template in the editor.
             <section class="col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Perfil
+                        <i class="fa fa-user-circle"></i> Perfil
                     </div>
                     <article class="panel-body">
                         <article class="col-md-4 block-perfil">
@@ -37,7 +37,9 @@ and open the template in the editor.
                 </div>
                 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Amigos</div>
+                    <div class="panel-heading">
+                        <i class="fa fa-group"></i> Amigos
+                    </div>
                     <div class="panel-body">
 
                         <article>
@@ -63,7 +65,8 @@ and open the template in the editor.
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading">Convites de amizade</div>
+                    <div class="panel-heading">
+                        <i class="fa fa-envelope-o"></i> Convites de amizade</div>
                     <div class="panel-body">
 
                         <article>
@@ -115,7 +118,9 @@ and open the template in the editor.
                 </article>
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Posts</div>
+                    <div class="panel-heading">
+                        <i class="fa fa-commenting-o"></i> Posts
+                    </div>
 
                     <div th:each="post :${posts}" class="panel-body" style="padding-right: 0px;">
 
@@ -143,7 +148,7 @@ and open the template in the editor.
 
                         <!---->
                         <form  th:action="@{/pesquisar}" th:object="${amigo}" method="POST">
-                            <article class="form-group">         <!---->
+                            <article class="form-group">         
                                 <input required="required" type="text" class="form-control" th:field="*{nome}" placeholder="Pesquise aqui"/>
                             </article>
                             <button class="btn btn-primary pull-right" type="submit" name="button">
