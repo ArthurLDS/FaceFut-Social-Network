@@ -125,8 +125,10 @@ public class HomeController {
     public String save(@ModelAttribute Post post) {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
+        Usuario usuario = usuarioService.findByEmail(user.getUsername());
+        
         post.setAutor(user.getUsername());
+        post.setTime(usuario.getTime().getNome());
         post.setData(new Date());
 
         service.save(post);
@@ -140,7 +142,7 @@ public class HomeController {
         Usuario usuario = usuarioService.findByEmail(userSessao.getUsername());
 
         String nome = amigao.getNome();
-        Iterable<Amigo> amigos = filtrarListaDeAmigos((List) amigoService.findByNome(nome), usuario);
+        Iterable<Amigo> amigos = filtrarListaDeAmigos((List) amigoService.findByNomeIgnoreCaseContaining(nome), usuario);
 
         // Mandando numero de dados encontrados para a tela.
         List<Amigo> lista = (List) amigos;
@@ -206,13 +208,12 @@ public class HomeController {
                         amigosFiltrados.add(amigos.get(i));
                     }
                 }
-            }
-            else if(amigos.get(i).getEmail().equals(usuario.getEmail())){
+            } else if (amigos.get(i).getEmail().equals(usuario.getEmail())) {
                 amigos.remove(i);
                 amigosFiltrados = amigos;
             }
         }
-        
+
         return amigosFiltrados;
     }
 }

@@ -35,7 +35,33 @@ and open the template in the editor.
                         </article>
                     </article>
                 </div>
+                
+                <div class="panel panel-default">
+                    <div class="panel-heading">Amigos</div>
+                    <div class="panel-body">
 
+                        <article>
+                            <div th:each="friend :${friends}" class="panel-body col-md-12">
+
+                                <article class="col-md-2" style="padding: 0px;">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Facebook_head.png" style="width: 38px; height: 38px;"/>
+                                </article>
+                                <article class="col-md-10" style="padding-left: 15px;">
+                                    <div>
+                                        <strong><spam th:text="${friend.nome}">Remetente</spam></strong>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-heart" style="font-size:14px;color:red"></i>
+                                        <spam th:text="${friend.time.nome}">Remetente</spam>
+                                    </div>
+                                    
+                                </article>
+                            </div>
+                        </article>
+
+
+                    </div>
+                </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">Convites de amizade</div>
                     <div class="panel-body">
@@ -78,7 +104,10 @@ and open the template in the editor.
                             <article class="form-group">
                                 <textarea required="required" th:field="*{texto}" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
                             </article>
-                            <button class="btn btn-success pull-right" type="sumit" name="button">Publicar</button>
+                            <button class="btn btn-success pull-right" type="sumit" name="button">
+                                Publicar
+                                <i class="fa fa-paper-plane-o" style="font-size:18px"></i>
+                            </button>
 
                         </form>
 
@@ -95,8 +124,12 @@ and open the template in the editor.
                         </article>
                         <article class="col-md-10" style="padding-left: 0px;">
                             <strong><p style="margin: 0px;" th:text="${post.autor}">Autor</p></strong>
-                            <p class="post-data" th:text="${#dates.format(post.data, 'dd/MM/yyyy hh:mm')}">Data</p>
-                            <p th:text="${post.texto}">Texto</p>
+                            <i class="fa fa-calendar-o" style="font-size: 14.5px; color: #555;"></i>
+                            <spam class="post-data" 
+                               th:text="${#dates.format(post.data, 'dd/MM/yyyy hh:mm')}">Data</spam><br/>
+                            <i class="fa fa-heart-o" style="font-size: 14.5px; color: #555;"></i>
+                            <spam class="post-time" th:text="${post.time}">Time</spam>
+                            <p class="post-txt" th:text="${post.texto}">Texto</p>
                         </article>
 
                     </div>
@@ -113,7 +146,10 @@ and open the template in the editor.
                             <article class="form-group">         <!---->
                                 <input required="required" type="text" class="form-control" th:field="*{nome}" placeholder="Pesquise aqui"/>
                             </article>
-                            <button class="btn btn-primary pull-right" type="submit" name="button">Pesquisar</button>
+                            <button class="btn btn-primary pull-right" type="submit" name="button">
+                                <i class="fa fa-search" style="font-size: 18px"></i>   
+                                Pesquisar
+                            </button>
 
                             <a class="btn btn-info btn-amigo-refresh pull-right" th:href="@{/listAll}" name="button">
                                 <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
@@ -153,7 +189,11 @@ and open the template in the editor.
                     </div>
                 </div>
             </aside>
-
         </section>
+        
+        <footer th:replace="fragments :: footer">
+            
+        </footer>
+        
     </body>
 </html>

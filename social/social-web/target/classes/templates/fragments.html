@@ -55,9 +55,20 @@ and open the template in the editor.
             }
             /*Posts*/
             .post-data{
-                margin-top: 2px;
+                margin-bottom: 2px;
+                margin-top:4px;
                 color: #888;
-                font-size: 11pt;
+                font-size: 13.5px;
+            }
+            .post-time{
+                color: #888;
+                font-size: 13.5px;
+                margin-bottom: 10px;
+            }
+            .post-txt{
+                padding-top: 10px;
+                margin-bottom: 0px;
+                font-size: 16px;
             }
             /* Home */
             .divisor{
@@ -133,14 +144,13 @@ and open the template in the editor.
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-user-circle" style="font-size:18px"></i>
-                                        <span sec:authentication="name"></span>
-                                        <span class="caret"></span>
+                                        <span sec:authentication="name"></span> <span class="caret"></span>
                                     </a>
-                                    <select class="dropdown-menu">
-                                        <option><a href="#">Another action</a></option>
-                                        <option><a href="#">Action</a></option>
-                                    </select>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="logout">Sair</a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div><!-- /.navbar-collapse -->
@@ -148,5 +158,11 @@ and open the template in the editor.
                 </section>
             </nav>
         </div>
+
+        <div th:fragment="footer">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        </div>
+
     </body>
 </html>
