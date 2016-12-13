@@ -42,7 +42,20 @@ public class Post implements Serializable{
     @Basic(optional = false)
     @Column(name = "DATA_POST")
     private Date data;
+    
+    @Basic(optional = false)
+    @Column(name = "TIME")
+    private String time;
 
+    
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+    
     public Date getData() {
         return data;
     }
