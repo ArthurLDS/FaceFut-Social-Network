@@ -25,7 +25,6 @@ public class AcessController {
     
     @RequestMapping("/login")
     String login(Model m) {
-        adcRegistros();
         return "login"; 
     } 
     
@@ -40,28 +39,4 @@ public class AcessController {
         return "home";
     }
     
-    //Método temporario, usar apenas no desenvilvimento
-    private void adcRegistros(){
-        Time time = new Time();
-        time.setNome("Internacional");
-        
-        Time time2 = new Time();
-        time2.setNome("Grêmio");
-        
-        Time time3 = new Time();
-        time3.setNome("Brasil de Pelotas");
-        
-        Time time4 = new Time();
-        time4.setNome("Juventude");
-        
-        Time time5 = new Time();
-        time5.setNome("Chapecoensce");
-        
-        timeService.save(time);
-        timeService.save(time2);
-        timeService.save(time3);
-        timeService.save(time4);
-        timeService.save(time5);
-        
-    }
 }
