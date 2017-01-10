@@ -133,9 +133,9 @@ and open the template in the editor.
                     <article class="panel-body" th:if="${posts.size()} == 0">
                         <i>Nenhum postagem feita no momento, posta algo aí ;)</i>
                     </article>
-                    
+
                     <div th:each="post :${posts}" class="panel-body" style="padding-right: 0px;">
-                        
+
                         <article class="col-md-2" style="padding-right: 0px;">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Facebook_head.png" style="width: 40px; height: 40px;"/>
                         </article>
@@ -153,20 +153,22 @@ and open the template in the editor.
                 </div>
 
             </section>
+
+            <!-- Pesquisa de amigos -->
             <aside class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">Pesquisar amigos</div>
                     <div class="panel-body">
 
-                        <!---->
-                        <form  th:action="@{/pesquisar}" th:object="${amigo}" method="POST">
+                        <!--<form>-->
                             <article class="form-group">         
-                                <input required="required" type="text" class="form-control" th:field="*{nome}" placeholder="Pesquise aqui"/>
+                                <input id="txt-pesquisa-amigo" required="required" type="text" class="form-control"  placeholder="Pesquise aqui"/>
                             </article>
-                            <button class="btn btn-primary pull-right" type="submit" name="button">
+                            <button id="btn-pesquisar-amigo" class="btn btn-primary pull-right" type="submit" name="button">
                                 <i class="fa fa-search" style="font-size: 18px"></i>   
                                 Pesquisar
                             </button>
+                        
 
                             <a class="btn btn-info btn-amigo-refresh pull-right" th:href="@{/listAll}" name="button">
                                 <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
@@ -178,39 +180,23 @@ and open the template in the editor.
                             <div class="alert alert-warning amigo-busca" th:if="${acheiNada}">
                                 <strong><span th:text="${acheiNada}"></span> resultado(s) encontrados</strong>
                             </div>
-                        </form>
-
-                        <article th:if="${amigos}">
-                            <div th:each="amigo :${amigos}" class="panel-body col-md-12" style="padding-right: 0px;">
-
-                                <article class="col-md-2" style="padding: 0px;">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Facebook_head.png" style="width: 40px; height: 40px;"/>
-                                </article>
-                                <article class="col-md-10" style="padding-left: 0px;">
-                                    <div>
-                                        Nome: <strong><spam style="margin: 0px;" th:text="${amigo.nome}">Autor</spam></strong>
-                                    </div>
-                                    <div>
-                                        Email: <strong><spam style="margin: 0px;" th:text="${amigo.email}">Email</spam></strong>
-                                    </div>
-                                    <div>
-                                        Time: <strong><spam th:text="${amigo.time.nome}">Time</spam></strong>
-                                    </div>
-                                    <a th:href="@{${'/home'}(id=${amigo.id})}" class="btn btn-success btn-adicionar">
-                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        Adicionar amigo
-                                    </a>
-                                </article>
-                            </div>
+                        <!--</form>-->
+                        
+                        <!-- Aqui será renderizada a pesquisa -->
+                        <article id="box-pesquisaDeAmigos">
+                            
                         </article>
+                        
                     </div>
                 </div>
             </aside>
+
         </section>
 
         <footer th:replace="fragments :: footer">
 
         </footer>
+        <script th:src="@{/js/pesquisa.js}"></script>
 
     </body>
 </html>
