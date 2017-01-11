@@ -135,29 +135,6 @@ public class HomeController {
         return "redirect:home";
     }
 
-    @RequestMapping(value = "/pesquisar", method = RequestMethod.POST)
-    public String pesquisar(Model model, @ModelAttribute Amigo amigao, RedirectAttributes redirectAttributes) {
-
-        User userSessao = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Usuario usuario = usuarioService.findByEmail(userSessao.getUsername());
-
-        String nome = amigao.getNome();
-        Iterable<Amigo> amigos = filtrarListaDeAmigos((List) amigoService.findByNomeIgnoreCaseContaining(nome), usuario);
-
-        // Mandando numero de dados encontrados para a tela.
-        List<Amigo> lista = (List) amigos;
-
-        int quantidade = lista.size();
-        if (quantidade != 0) {
-            redirectAttributes.addFlashAttribute("msg", quantidade);
-        } else {
-            redirectAttributes.addFlashAttribute("acheiNada", "0");
-        }
-
-        redirectAttributes.addFlashAttribute("amigos", amigos);
-        return "redirect:home";
-    }
-
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
     public String listAll(RedirectAttributes redirectAttributes) {
 
