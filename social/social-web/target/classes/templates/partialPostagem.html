@@ -1,0 +1,20 @@
+<article class="panel-body" th:if="${posts.size()} == 0">
+    <i>Nenhum postagem feita no momento, posta algo aí ;)</i>
+</article>
+
+<div th:each="post :${posts}" class="panel-body" style="padding-right: 0px;">
+
+    <article class="col-md-2" style="padding-right: 0px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Facebook_head.png" style="width: 40px; height: 40px;"/>
+    </article>
+    <article class="col-md-10" style="padding-left: 0px;">
+        <strong><p style="margin: 0px;" th:text="${post.autor}">Autor</p></strong>
+        <i class="fa fa-calendar-o" style="font-size: 14.5px; color: #555;"></i>
+        <spam class="post-data" 
+              th:text="${#dates.format(post.data, 'dd/MM/yyyy hh:mm')}">Data</spam><br/>
+        <i class="fa fa-heart-o" style="font-size: 14.5px; color: #555;"></i>
+        <spam class="post-time" th:text="${post.time}">Time</spam>
+        <p class="post-txt" th:text="${post.texto}">Texto</p>
+    </article>
+
+</div>
