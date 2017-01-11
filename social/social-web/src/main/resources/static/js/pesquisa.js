@@ -22,7 +22,6 @@ pesquisa.pesquisar = function(){
                 pesquisa.renderizarResultados(response);
             }
         )
-    
 };
 
 pesquisa.renderizarResultados = function(response){
