@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(value="pesquisa")
 public class PesquisaAmigoController {
-    @Autowired
-    UsuarioService usuarioService;
     
     @Autowired
     AmigoService amigoService;
