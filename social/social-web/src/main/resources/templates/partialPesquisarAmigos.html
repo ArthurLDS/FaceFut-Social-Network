@@ -5,8 +5,7 @@
 
 <div class="alert alert-warning amigo-busca" th:if="${amigos.size()} == 0">
     <strong><span th:text="${amigos.size()}"></span> resultado(s) encontrados</strong>
-</div>-
-
+</div>
 
 <article th:if="${amigos}">
     <div th:each="amigo :${amigos}" class="panel-body col-md-12" style="padding-right: 0px;">
