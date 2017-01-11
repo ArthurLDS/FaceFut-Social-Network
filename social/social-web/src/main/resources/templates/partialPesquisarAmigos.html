@@ -1,10 +1,10 @@
 
 <div class="alert alert-info amigo-busca amigo-alert-basic" th:if="${amigos.size()} > 0">
-    <strong><span th:text="${amigos.size()}"></span> resultado(s) encontrados</strong>
+    <strong><span th:text="${amigos.size()}"></span> resultado(s) encontrado(s)</strong>
 </div>
 
 <div class="alert alert-warning amigo-busca" th:if="${amigos.size()} == 0">
-    <strong><span th:text="${amigos.size()}"></span> resultado(s) encontrados</strong>
+    <strong><span th:text="${amigos.size()}"></span> resultado(s) encontrado(s)</strong>
 </div>
 
 <article th:if="${amigos}">

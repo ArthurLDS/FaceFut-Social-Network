@@ -106,10 +106,11 @@ and open the template in the editor.
                     </div>
                 </div>
             </section>
+            
             <section class="col-md-5">
                 <article class="panel panel-default">
                     <section class="panel-body">
-                        
+
                         <article class="form-group">
                             <textarea id="txt-post" required="required" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
                         </article>
@@ -117,7 +118,7 @@ and open the template in the editor.
                             Publicar
                             <i class="fa fa-paper-plane-o" style="font-size:18px"></i>
                         </button>
-                        
+
                     </section>
                 </article>
 
@@ -141,17 +142,12 @@ and open the template in the editor.
                     <div class="panel-body">
 
                         <article class="form-group">         
-                            <input id="txt-pesquisa-amigo" required="required" type="text" class="form-control"  placeholder="Pesquise aqui"/>
+                            <input id="txt-pesquisa-amigo" required="required" type="text" class="form-control txt-pesquisa"  placeholder="Pesquise aqui"/>
+                            <button id="btn-pesquisar-amigo" class="btn btn-primary pull-right" type="submit" name="button">
+                                <i class="fa fa-search" style="font-size: 18px"></i>
+                            </button>
                         </article>
-                        <button id="btn-pesquisar-amigo" class="btn btn-primary pull-right" type="submit" name="button">
-                            <i class="fa fa-search" style="font-size: 18px"></i>   
-                            Pesquisar
-                        </button>
 
-                        <a class="btn btn-info btn-amigo-refresh pull-right" th:href="@{/listAll}" name="button">
-                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-                        </a>
-                        
                         <!-- Aqui será renderizada a pesquisa -->
                         <article id="box-pesquisaDeAmigos">
 
@@ -168,6 +164,6 @@ and open the template in the editor.
         </footer>
         <script th:src="@{/js/pesquisa.js}"></script>
         <script th:src="@{/js/postagem.js}"></script>
-        
+
     </body>
 </html>

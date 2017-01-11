@@ -3,7 +3,7 @@
 </article>
 
 <div th:each="post :${posts}" class="panel-body" style="padding-right: 0px;">
-
+    
     <article class="col-md-2" style="padding-right: 0px;">
         <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Facebook_head.png" style="width: 40px; height: 40px;"/>
     </article>
@@ -16,5 +16,5 @@
         <spam class="post-time" th:text="${post.time}">Time</spam>
         <p class="post-txt" th:text="${post.texto}">Texto</p>
     </article>
-
+    
 </div>
