@@ -100,9 +100,7 @@ public class HomeController {
 
             conviteService.save(convite);
         }
-        Post post = new Post();
         Amigo amigo = new Amigo();
-
         Usuario usuario = usuarioService.findByEmail(userAtual.getUsername());
 
         //model.addAttribute("amigos", amigoService.listAll());
@@ -112,27 +110,8 @@ public class HomeController {
         model.addAttribute("convites", convites);
         model.addAttribute("amigo", amigo);
         model.addAttribute("usuario", usuario);
-        model.addAttribute("post", post);
 
-        List<Post> posts = service.findAllByOrderByIdDesc();
-        List<Post> postsFiltrados = filtrarPosts(amigos, posts, usuario);
-
-        model.addAttribute("posts", postsFiltrados);
         return "home";
-    }
-
-    @RequestMapping(value = "/postar", method = RequestMethod.POST)
-    public String save(@ModelAttribute Post post) {
-
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Usuario usuario = usuarioService.findByEmail(user.getUsername());
-        
-        post.setAutor(user.getUsername());
-        post.setTime(usuario.getTime().getNome());
-        post.setData(new Date());
-
-        service.save(post);
-        return "redirect:home";
     }
 
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
@@ -146,28 +125,7 @@ public class HomeController {
         redirectAttributes.addFlashAttribute("amigos", listaAmigos);
         return "redirect:home";
     }
-
-    private List<Post> filtrarPosts(List<Amigo> amigos, List<Post> posts, Usuario usuario) {
-        List<String> nomeAmigos = new ArrayList<>();
-
-        for (int i = 0; i < amigos.size(); i++) {
-            nomeAmigos.add(amigos.get(i).getEmail());
-        }
-        List<Post> postsFiltrados = new ArrayList<>();
-
-        for (int i = 0; i < posts.size(); i++) {
-            for (int j = 0; j < nomeAmigos.size(); j++) {
-                if (posts.get(i).getAutor().equals(nomeAmigos.get(j))) {
-                    postsFiltrados.add(posts.get(i));
-                }
-            }
-            if (posts.get(i).getAutor().equals(usuario.getEmail())) {
-                postsFiltrados.add(posts.get(i));
-            }
-        }
-        return postsFiltrados;
-    }
-
+    
     private List<Amigo> filtrarListaDeAmigos(List<Amigo> amigos, Usuario usuario) {
         List<String> nomeAmigos = new ArrayList<>();
         List<Amigo> amigosDoUsuario = usuario.getAmigos();

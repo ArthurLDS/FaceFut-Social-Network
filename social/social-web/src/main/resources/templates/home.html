@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head th:replace="fragments :: head('FaceFut - Home')">
 
@@ -65,7 +60,6 @@ and open the template in the editor.
                             </div>
                         </article>
 
-
                     </div>
                 </div>
                 <div class="panel panel-default">
@@ -101,24 +95,22 @@ and open the template in the editor.
                                 </article>
                             </div>
                         </article>
-
-
                     </div>
                 </div>
             </section>
-            
+
             <section class="col-md-5">
                 <article class="panel panel-default">
                     <section class="panel-body">
-
-                        <article class="form-group">
-                            <textarea id="txt-post" required="required" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
-                        </article>
-                        <button id="btn-postar" class="btn btn-success pull-right" type="sumit" name="button">
-                            Publicar
-                            <i class="fa fa-paper-plane-o" style="font-size:18px"></i>
-                        </button>
-
+                        
+                            <article class="form-group">
+                                <textarea onKeyPress="return submitenter(this,event)" id="txt-post" required="required" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
+                            </article>
+                            <button id="btn-postar" class="btn btn-success pull-right" type="sumit" name="button">
+                                Publicar
+                                <i class="fa fa-paper-plane-o" style="font-size:18px"></i>
+                            </button>
+                        
                     </section>
                 </article>
 

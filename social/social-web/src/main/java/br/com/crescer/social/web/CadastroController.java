@@ -54,8 +54,8 @@ public class CadastroController {
          
          if (!bindingResult.hasErrors()){
             
-             
             usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
+            
             service.save(usuario);
             //Este método save fará um Parse de Usuario para Amigo.
             amigoService.save(usuario); 

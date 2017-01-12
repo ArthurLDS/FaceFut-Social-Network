@@ -11,28 +11,28 @@ $(function () {
     postagem.carregarPosts();
 });
 
-postagem.configurarForm = function(){
+postagem.configurarForm = function () {
     $txtPost = $('#txt-post');
     $btnPost = $('#btn-postar');
-    
+
     $btnPost.click(postagem.postar);
 };
 
-postagem.postar = function(){
-    
-    $.post("/postagemRest/postar", {texto : $txtPost.val()})
-        .then(function(){
+postagem.postar = function () {
+
+    $.post("/postagemRest/postar", {texto: $txtPost.val()})
+            .then(function () {
                 $txtPost.val('');
                 postagem.carregarPosts();
-              }
-        );
+            }
+            );
 };
 
-postagem.carregarPosts = function(){
-    
+postagem.carregarPosts = function () {
+
     $.get("/postagem/carregarPosts")
-        .then(function(response){
-             $('#box-posts').html(response);
-        });
+            .then(function (response) {
+                $('#box-posts').html(response);
+            });
 }
 
