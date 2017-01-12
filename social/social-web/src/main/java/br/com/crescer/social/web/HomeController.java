@@ -100,6 +100,7 @@ public class HomeController {
 
             conviteService.save(convite);
         }
+        
         Amigo amigo = new Amigo();
         Usuario usuario = usuarioService.findByEmail(userAtual.getUsername());
 
@@ -112,45 +113,5 @@ public class HomeController {
         model.addAttribute("usuario", usuario);
 
         return "home";
-    }
-
-    @RequestMapping(value = "/listAll", method = RequestMethod.GET)
-    public String listAll(RedirectAttributes redirectAttributes) {
-
-        User userSessao = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Usuario usuario = usuarioService.findByEmail(userSessao.getUsername());
-
-        Iterable<Amigo> amigos = amigoService.listAll();
-        List<Amigo> listaAmigos = filtrarListaDeAmigos((List) amigos, usuario);
-        redirectAttributes.addFlashAttribute("amigos", listaAmigos);
-        return "redirect:home";
-    }
-    
-    private List<Amigo> filtrarListaDeAmigos(List<Amigo> amigos, Usuario usuario) {
-        List<String> nomeAmigos = new ArrayList<>();
-        List<Amigo> amigosDoUsuario = usuario.getAmigos();
-        List<Amigo> amigosFiltrados = amigos;
-        
-        for (int i = 0; i < amigosDoUsuario.size(); i++) {
-            nomeAmigos.add(amigosDoUsuario.get(i).getEmail());
-        }
-
-        for (int i = 0; i < amigos.size(); i++) {
-            Amigo amigoAtual = amigos.get(i);
-            if (amigosDoUsuario.size() > 0) {
-                for (int j = 0; j < nomeAmigos.size(); j++) {
-                    if (amigoAtual.getEmail().equals(nomeAmigos.get(j))) {
-                        amigosFiltrados.remove(amigoAtual);
-                    }
-                }
-            } 
-        }
-        for(int i=0; i<amigosFiltrados.size();i++){
-            Amigo amigoAtual = amigos.get(i);
-            if (amigoAtual.getEmail().equals(usuario.getEmail())) {
-                amigosFiltrados.remove(amigoAtual);
-            }
-        }
-        return amigosFiltrados;
     }
 }
