@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-var postagem = [];
+var postagem = {};
 
 $(function () {
     postagem.configurarForm();

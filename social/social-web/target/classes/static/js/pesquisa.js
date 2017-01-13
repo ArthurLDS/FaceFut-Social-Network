@@ -2,7 +2,7 @@
 @Autor: Arthur Lima de Souza
  **/
 
-var pesquisa = [];
+var pesquisa = {};
 
 $(function(){
     pesquisa.configurarBotoes();

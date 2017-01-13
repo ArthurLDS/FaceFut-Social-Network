@@ -90,17 +90,6 @@ public class HomeController {
         Iterable<Convite> convites = conviteService.findByDestinatario(userAtual.getUsername());
         usuarioService.findByEmail(userAtual.getUsername()).setConvites((List) convites);
 
-        //Envia convites.
-        if (id != null) {
-            Amigo amigoParaAdc = amigoService.findById(id);
-            Convite convite = new Convite();
-            convite.setDestinatario(amigoParaAdc.getEmail());
-            convite.setRemetente(userAtual.getUsername());
-            convite.setData(new Date());
-
-            conviteService.save(convite);
-        }
-        
         Amigo amigo = new Amigo();
         Usuario usuario = usuarioService.findByEmail(userAtual.getUsername());
 
