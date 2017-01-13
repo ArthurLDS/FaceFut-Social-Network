@@ -54,7 +54,7 @@ public class HomeController {
     ConviteService conviteService;
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    String home(Model model, @RequestParam(required = false) Long id, @RequestParam(required = false) Long idaprova, @RequestParam(required = false) Long idreprova) {
+    String home(Model model, @RequestParam(required = false) Long idaprova, @RequestParam(required = false) Long idreprova) {
         User userAtual = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (idreprova != null) {
@@ -94,9 +94,6 @@ public class HomeController {
         Usuario usuario = usuarioService.findByEmail(userAtual.getUsername());
 
         //model.addAttribute("amigos", amigoService.listAll());
-        List<Amigo> amigos = usuario.getAmigos();
-        model.addAttribute("friends", amigos);
-        model.addAttribute("numAmigos", usuario.getAmigos().size());
         model.addAttribute("convites", convites);
         model.addAttribute("amigo", amigo);
         model.addAttribute("usuario", usuario);
