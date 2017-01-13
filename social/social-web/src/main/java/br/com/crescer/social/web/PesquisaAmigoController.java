@@ -6,6 +6,7 @@
 package br.com.crescer.social.web;
 
 import br.com.crescer.social.entity.Amigo;
+import br.com.crescer.social.entity.Convite;
 import br.com.crescer.social.entity.Usuario;
 import br.com.crescer.social.service.Service.AmigoService;
 import br.com.crescer.social.service.Service.UsuarioService;
@@ -18,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 /**
  *
  * @author Arthur
@@ -68,6 +68,8 @@ public class PesquisaAmigoController {
                 amigosFiltrados.remove(amigoAtual);
             }
         }
+        
         return amigosFiltrados;
+                
     }
 }
