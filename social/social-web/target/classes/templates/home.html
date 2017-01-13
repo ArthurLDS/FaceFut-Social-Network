@@ -22,7 +22,12 @@
                         </article>
                         <article class="col-md-8 block-perfil block-info-perfil">
                             <div class="block-perfil-nome"><strong><spam th:text="${usuario.nome}" ></spam></strong></div>
-                            <div class="block-perfil-info-adc"><spam class="badge" th:text="${numAmigos}"></spam> Amigos</div>
+                            
+                            <div class="block-perfil-info-adc">
+                                <spam id="spam-num-amigos" class="badge"></spam> 
+                                Amigos
+                            </div>
+                            
                             <div class="block-perfil-info-adc">
                                 <i class="fa fa-heart" style="font-size:18px;color:red"></i> 
                                 <spam th:text="${usuario.time.nome}"></spam>
@@ -35,32 +40,11 @@
                     <div class="panel-heading">
                         <i class="fa fa-group"></i> Amigos
                     </div>
-                    <div class="panel-body">
-
-                        <article th:if="${friends.size()} == 0">
-                            <i>Nenhum amigo no momento.</i>
-                        </article>
-
-                        <article>
-                            <div th:each="friend :${friends}" class="panel-body col-md-12">
-
-                                <article class="col-md-2" style="padding: 0px;">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Facebook_head.png" style="width: 38px; height: 38px;"/>
-                                </article>
-                                <article class="col-md-10" style="padding-left: 15px;">
-                                    <div>
-                                        <strong><spam th:text="${friend.nome}">Remetente</spam></strong>
-                                    </div>
-                                    <div>
-                                        <i class="fa fa-heart" style="font-size:14px;color:red"></i>
-                                        <spam th:text="${friend.time.nome}">Remetente</spam>
-                                    </div>
-
-                                </article>
-                            </div>
-                        </article>
-
+                    
+                    <div id="box-lista-amigos" class="panel-body">
+                        <!-- Listagem de amigos aqui feita pelo JavaScript-->
                     </div>
+                
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
