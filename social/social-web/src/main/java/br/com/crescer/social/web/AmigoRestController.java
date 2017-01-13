@@ -25,7 +25,7 @@ import org.springframework.security.core.userdetails.User;
  * @author Arthur
  */
 @RestController
-@RequestMapping(value="/amigo")
+@RequestMapping(value="/amigoRest")
 public class AmigoRestController {
     
     @Autowired
@@ -38,24 +38,27 @@ public class AmigoRestController {
     @RequestMapping(value="/enviarConvite", method = RequestMethod.GET) // Colocar PUT Depois
     public void enviarConvite(Long id){
         
-        User userSessao = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Amigo amigoDestinatario = amigoService.findById(id);
         
-        //Formatando convite
-        /*Convite convite = new Convite();
-        convite.setRemetente(userSessao.getUsername());
-        convite.setDestinatario(amigoDestinatario.getEmail());
-        convite.setData(new Date());*/
-        
-        Convite convite = new Convite(userSessao.getUsername(), amigoDestinatario.getEmail(), new Date());
+        Convite convite = new Convite(getUserSessao().getUsername(), amigoDestinatario.getEmail(), new Date());
         conviteService.save(convite);
         
-        Usuario usuarioAtual = usuarioService.findByEmail(userSessao.getUsername());
+        Usuario usuarioAtual = usuarioService.findByEmail(getUserSessao().getUsername());
         
         List<Convite> convitesUsuario = usuarioAtual.getConvites();
         convitesUsuario.add(convite);
         usuarioAtual.setConvites(convitesUsuario);
-        usuarioService.save(usuarioAtual);
-        
+        usuarioService.save(usuarioAtual);   
+    }
+    
+    @RequestMapping(value="/atualizarNumAmigos", method = RequestMethod.GET)
+    public Integer atualizarNumAmigos(){
+        Usuario usuario = usuarioService.findByEmail(getUserSessao().getUsername());
+        return usuario.getAmigos().size();
+    }
+    
+    
+    private User getUserSessao(){
+        return (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }
