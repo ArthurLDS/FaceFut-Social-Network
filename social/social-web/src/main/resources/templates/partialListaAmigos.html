@@ -1,0 +1,22 @@
+<article th:if="${amigos.size()} == 0">
+    <i>Nenhum amigo no momento.</i>
+</article>
+
+<article>
+    <div th:each="amigo :${amigos}" class="panel-body col-md-12">
+
+        <article class="col-md-2" style="padding: 0px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Facebook_head.png" style="width: 38px; height: 38px;"/>
+        </article>
+        <article class="col-md-10" style="padding-left: 15px;">
+            <div>
+                <strong><spam th:text="${amigo.nome}">Remetente</spam></strong>
+            </div>
+            <div>   
+                <i class="fa fa-heart" style="font-size:14px;color:red"></i>
+                <spam th:text="${amigo.time.nome}">Remetente</spam>
+            </div>
+
+        </article>
+    </div>
+</article>
