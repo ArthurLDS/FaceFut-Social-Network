@@ -46,40 +46,15 @@
                     </div>
                 
                 </div>
+                
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <i class="fa fa-envelope-o"></i> Convites de amizade</div>
-                    <div class="panel-body">
-
-                        <article th:if="${convites.size()} == 0">
-                            <i>Nenhum convite recebido no momento.</i>
-                        </article>
-
-                        <article>
-                            <div th:each="convite :${convites}" class="panel-body col-md-12">
-
-                                <article class="col-md-2" style="padding: 0px;">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Facebook_head.png" style="width: 40px; height: 40px;"/>
-                                </article>
-                                <article class="col-md-10" style="padding-left: 15px;">
-                                    <div>
-                                        Email: <strong><spam th:text="${convite.remetente}">Remetente</spam></strong>
-                                    </div>
-                                    <div>
-                                        Data: <strong><spam th:text="${#dates.format(convite.data, 'dd/MM/yyyy hh:mm')}">Data</spam></strong>
-                                    </div>
-                                    <a th:href="@{${'/home'}(idaprova=${convite.id})}" class="btn btn-success btn-solicitacao">
-                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                        Aceitar
-                                    </a>
-                                    <a th:href="@{${'/home'}(idreprova=${convite.id})}" class="btn btn-danger btn-solicitacao">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                        Reprovar
-                                    </a>
-                                </article>
-                            </div>
-                        </article>
+                    
+                    <div id="box-listagem-convites" class="panel-body">
+                        <!-- Aqui será renderizada a lista de convites por JavaScript -->
                     </div>
+                    
                 </div>
             </section>
 
@@ -102,10 +77,9 @@
                     <div class="panel-heading">
                         <i class="fa fa-commenting-o"></i> Posts
                     </div>
-
-                    <!-- Aqui será inserido os posts -->
+                    
                     <section id="box-posts">
-
+                        <!-- Aqui será inserido os posts -->
                     </section>
 
                 </div>

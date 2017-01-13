@@ -7,10 +7,12 @@ var amigo = {};
 $(function(){
     amigo.carregarListaAmigos();
     amigo.atualizarNumeroDeAmigos();
+    amigo.carregarConvitesRecebidos();
     setInterval(
         function(){
             amigo.carregarListaAmigos();
             amigo.atualizarNumeroDeAmigos();
+            amigo.carregarConvitesRecebidos();
         }, 5000);
 });
 
@@ -46,5 +48,30 @@ amigo.atualizarNumeroDeAmigos = function(){
             .then(function(response){
                  $('#spam-num-amigos').text(response);
             });
-}
+};
+
+amigo.carregarConvitesRecebidos = function(){
+    
+    $.get("/amigo/carregarConvites")
+            .then(function(response){
+                 $('#box-listagem-convites').html(response);
+            });
+};
+
+amigo.aceitarConvite = function(id){
+    
+    $.post("/amigoRest/aceitarConvite", {id})
+            .then(function(){
+                amigo.carregarConvitesRecebidos();
+            });
+};
+
+amigo.recusarConvite = function(id){
+    
+    $.post("/amigoRest/recusarConvite", {id})
+            .then(function(){
+               amigo.carregarConvitesRecebidos();
+            });
+};
+
 
