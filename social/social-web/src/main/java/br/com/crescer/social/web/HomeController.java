@@ -54,50 +54,11 @@ public class HomeController {
     ConviteService conviteService;
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    String home(Model model, @RequestParam(required = false) Long idaprova, @RequestParam(required = false) Long idreprova) {
+    String home(Model model) {
         User userAtual = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if (idreprova != null) {
-            Convite conviteReprovado = conviteService.findById(idreprova);
-            conviteService.deleteConvite(conviteReprovado);
-        }
-        if (idaprova != null) {
-            //Aceitando e adicionando amigo no Usuario atual
-            Convite conviteAprovado = conviteService.findById(idaprova);
-
-            Amigo amigoRemetente = amigoService.findFirstByEmail(conviteAprovado.getRemetente());
-            Usuario usuarioEntity = usuarioService.findByEmail(userAtual.getUsername());
-            List<Amigo> amigosDoUsuario = usuarioEntity.getAmigos();
-            amigosDoUsuario.add(amigoRemetente);
-            usuarioEntity.setAmigos(amigosDoUsuario);
-
-            usuarioService.save(usuarioEntity);
-
-            //Adicionando amigo no Usuario que enviou o convite..
-            Amigo amigoDestinatario = amigoService.findFirstByEmail(conviteAprovado.getDestinatario());
-            Usuario usuarioRemetente = usuarioService.findByEmail(conviteAprovado.getRemetente());
-            List<Amigo> amigosDoRemetente = usuarioRemetente.getAmigos();
-            amigosDoRemetente.add(amigoDestinatario);
-            usuarioRemetente.setAmigos(amigosDoRemetente);
-
-            usuarioService.save(usuarioRemetente);
-
-            //Agora excluimos o convite
-            conviteService.deleteConvite(conviteAprovado);
-        }
-
-        //Busca os convites que enviaram para ele
-        Iterable<Convite> convites = conviteService.findByDestinatario(userAtual.getUsername());
-        usuarioService.findByEmail(userAtual.getUsername()).setConvites((List) convites);
-
-        Amigo amigo = new Amigo();
         Usuario usuario = usuarioService.findByEmail(userAtual.getUsername());
-
-        //model.addAttribute("amigos", amigoService.listAll());
-        model.addAttribute("convites", convites);
-        model.addAttribute("amigo", amigo);
         model.addAttribute("usuario", usuario);
-
         return "home";
     }
 }
