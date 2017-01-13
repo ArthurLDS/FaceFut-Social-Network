@@ -21,6 +21,17 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity
 public class Convite implements Serializable{
+    
+    public Convite(String remetente, String destinatario, Date data){
+        this.remetente = remetente;
+        this.destinatario = destinatario;
+        this.data = data;
+    }
+    
+    public Convite(){
+        
+    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CONVITE")
     @SequenceGenerator(name = "SEQ_CONVITE", sequenceName = "SEQ_CONVITE", allocationSize = 1)
