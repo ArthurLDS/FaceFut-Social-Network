@@ -9,6 +9,11 @@ var postagem = {};
 $(function () {
     postagem.configurarForm();
     postagem.carregarPosts();
+    
+    setInterval(function(){
+        postagem.carregarPosts();
+    }, 5000);
+    
 });
 
 postagem.configurarForm = function () {
