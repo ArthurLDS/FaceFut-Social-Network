@@ -5,8 +5,12 @@
  */
 package br.com.crescer.social.web;
 
+import br.com.crescer.social.entity.Convite;
 import br.com.crescer.social.entity.Usuario;
+import br.com.crescer.social.service.Service.AmigoService;
+import br.com.crescer.social.service.Service.ConviteService;
 import br.com.crescer.social.service.Service.UsuarioService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -25,6 +29,8 @@ public class AmigoController {
     
     @Autowired
     UsuarioService usuarioService;
+    @Autowired
+    ConviteService conviteService;
     
     @RequestMapping(value="/carregarListaAmigos", method =  RequestMethod.GET)
     public String carregarListaAmigos(Model model){
@@ -35,4 +41,17 @@ public class AmigoController {
         model.addAttribute("amigos", usuario.getAmigos());
         return "partialListaAmigos";
     } 
+    
+    @RequestMapping(value="carregarConvites", method = RequestMethod.GET)
+    public String carregarConvites(Model model){
+        
+        Iterable<Convite> convites = conviteService.findByDestinatario(getUserSessao().getUsername());
+        
+        model.addAttribute("convites", convites);
+        return "partialListagemConvites";
+    }
+    
+    private User getUserSessao(){
+        return (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
 }
