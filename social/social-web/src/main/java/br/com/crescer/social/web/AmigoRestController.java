@@ -25,40 +25,77 @@ import org.springframework.security.core.userdetails.User;
  * @author Arthur
  */
 @RestController
-@RequestMapping(value="/amigoRest")
+@RequestMapping(value = "/amigoRest")
 public class AmigoRestController {
-    
+
     @Autowired
     AmigoService amigoService;
     @Autowired
     UsuarioService usuarioService;
     @Autowired
     ConviteService conviteService;
-    
-    @RequestMapping(value="/enviarConvite", method = RequestMethod.GET) // Colocar PUT Depois
-    public void enviarConvite(Long id){
-        
+
+    @RequestMapping(value = "/enviarConvite", method = RequestMethod.GET) // Colocar PUT Depois
+    public void enviarConvite(Long id) {
+
         Amigo amigoDestinatario = amigoService.findById(id);
-        
+
         Convite convite = new Convite(getUserSessao().getUsername(), amigoDestinatario.getEmail(), new Date());
         conviteService.save(convite);
-        
+
         Usuario usuarioAtual = usuarioService.findByEmail(getUserSessao().getUsername());
-        
+
         List<Convite> convitesUsuario = usuarioAtual.getConvites();
         convitesUsuario.add(convite);
         usuarioAtual.setConvites(convitesUsuario);
-        usuarioService.save(usuarioAtual);   
+        usuarioService.save(usuarioAtual);
+    }
+
+    @RequestMapping(value = "/aceitarConvite", method = RequestMethod.POST)
+    public void aceitarConvite(Long id) {
+        
+        //Aceitando e adicionando amigo no Usuario atual
+        Convite conviteAprovado = conviteService.findById(id);
+
+        Amigo amigoRemetente = amigoService.findFirstByEmail(conviteAprovado.getRemetente());
+        Usuario usuarioEntity = usuarioService.findByEmail(getUserSessao().getUsername());
+        List<Amigo> amigosDoUsuario = usuarioEntity.getAmigos();
+        amigosDoUsuario.add(amigoRemetente);
+        usuarioEntity.setAmigos(amigosDoUsuario);
+
+        usuarioService.save(usuarioEntity);
+
+        //Adicionando amigo no Usuario que enviou o convite..
+        Amigo amigoDestinatario = amigoService.findFirstByEmail(conviteAprovado.getDestinatario());
+        Usuario usuarioRemetente = usuarioService.findByEmail(conviteAprovado.getRemetente());
+        List<Amigo> amigosDoRemetente = usuarioRemetente.getAmigos();
+        amigosDoRemetente.add(amigoDestinatario);
+        usuarioRemetente.setAmigos(amigosDoRemetente);
+        
+        List<Convite> convites = usuarioRemetente.getConvites();
+        convites.remove(conviteAprovado);        
+        usuarioRemetente.setConvites(convites);
+        
+        usuarioService.save(usuarioRemetente);
+
+        //Agora excluimos o convite
+        conviteService.deleteConvite(conviteAprovado);
     }
     
-    @RequestMapping(value="/atualizarNumAmigos", method = RequestMethod.GET)
-    public Integer atualizarNumAmigos(){
+    @RequestMapping(value="/recusarConvite", method = RequestMethod.POST)
+    public void recusarConvite(Long id){
+        
+        Convite conviteReprovado = conviteService.findById(id);
+        conviteService.deleteConvite(conviteReprovado);
+    }
+
+    @RequestMapping(value = "/atualizarNumAmigos", method = RequestMethod.GET)
+    public Integer atualizarNumAmigos() {
         Usuario usuario = usuarioService.findByEmail(getUserSessao().getUsername());
         return usuario.getAmigos().size();
     }
-    
-    
-    private User getUserSessao(){
-        return (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+    private User getUserSessao() {
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }
