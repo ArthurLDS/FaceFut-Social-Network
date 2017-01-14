@@ -23,7 +23,7 @@
             <div>
                 Time: <strong><spam th:text="${amigo.time.nome}">Time</spam></strong>
             </div>  
-            <a th:href="'javascript:amigo.enviarConvite('+${amigo.id}+')'" class="btn btn-primary btn-adicionar">
+            <a th:disabled="${#lists.contains(convites, amigo.email)}" th:id="'btn-adicionar-'+${amigo.id}" th:href="'javascript:amigo.enviarConvite('+${amigo.id}+')'" class="btn btn-primary btn-adicionar">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
                 Adicionar amigo
             </a>

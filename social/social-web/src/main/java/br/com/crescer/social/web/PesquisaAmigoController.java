@@ -13,6 +13,7 @@ import br.com.crescer.social.service.Service.UsuarioService;
 import java.util.ArrayList;
 import org.springframework.security.core.userdetails.User;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,9 @@ public class PesquisaAmigoController {
         
         Iterable<Amigo> amigos = filtrarListaDeAmigos((List) amigoService.findByNomeIgnoreCaseContaining(filtro), usuario);
         model.addAttribute("amigos", amigos);
+        
+        List<String> destinatarios = usuario.getConvites().stream().map(c -> c.getDestinatario()).collect(Collectors.toList());
+        model.addAttribute("convites", destinatarios);
         return "partialPesquisarAmigos";
     }
     
@@ -47,7 +51,8 @@ public class PesquisaAmigoController {
         List<String> nomeAmigos = new ArrayList<>();
         List<Amigo> amigosDoUsuario = usuario.getAmigos();
         List<Amigo> amigosFiltrados = amigos;
-
+        
+        
         for (int i = 0; i < amigosDoUsuario.size(); i++) {
             nomeAmigos.add(amigosDoUsuario.get(i).getEmail());
         }
@@ -68,6 +73,7 @@ public class PesquisaAmigoController {
                 amigosFiltrados.remove(amigoAtual);
             }
         }
+        
         
         return amigosFiltrados;
                 

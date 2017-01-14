@@ -20,12 +20,12 @@ amigo.enviarConvite = function(id){
     
   $.get('/amigoRest/enviarConvite', {id})
           .then(function(){
-              amigo.desabilitarBtnAdicionar();
+              amigo.desabilitarBtnAdicionar(id);
           });
 };
 
-amigo.desabilitarBtnAdicionar = function(){
-    $btnAdicionar = $('.btn-adicionar');
+amigo.desabilitarBtnAdicionar = function(id){
+    $btnAdicionar = $('#btn-adicionar-' + id);
     
     $btnAdicionar.attr('disabled','disabled');
     $btnAdicionar.removeClass('btn-primary');
