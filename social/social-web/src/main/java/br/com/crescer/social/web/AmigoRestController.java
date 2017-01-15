@@ -35,7 +35,7 @@ public class AmigoRestController {
     @Autowired
     ConviteService conviteService;
 
-    @RequestMapping(value = "/enviarConvite", method = RequestMethod.GET) // Colocar PUT Depois
+    @RequestMapping(value = "/enviarConvite", method = RequestMethod.PUT)
     public void enviarConvite(Long id) {
 
         Amigo amigoDestinatario = amigoService.findById(id);
@@ -86,6 +86,13 @@ public class AmigoRestController {
     public void recusarConvite(Long id){
         
         Convite conviteReprovado = conviteService.findById(id);
+        Usuario usuario = usuarioService.findByEmail(conviteReprovado.getRemetente());
+        
+        List<Convite> convites = usuario.getConvites();
+        convites.remove(conviteReprovado);        
+        usuario.setConvites(convites);
+        
+        usuarioService.save(usuario);
         conviteService.deleteConvite(conviteReprovado);
     }
 
@@ -98,4 +105,5 @@ public class AmigoRestController {
     private User getUserSessao() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
+    
 }
