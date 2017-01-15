@@ -81,13 +81,14 @@ body{
 }
 .amigo-alert-basic{
     background-color: #969696;
+    border-color: #808080;
 }
 .btn-amigo-refresh{
     margin-right: 5px;
 }
 .txt-pesquisa{
     display: inline-block;
-    width: 83%;
+    width: 85%;
 }
 /* Solicitações de amizade */
 .btn-solicitacao{
