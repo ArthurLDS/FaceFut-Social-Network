@@ -38,44 +38,19 @@ public class PesquisaAmigoController {
         User userSessao = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Usuario usuario = usuarioService.findByEmail(userSessao.getUsername());
         
-        Iterable<Amigo> amigos = filtrarListaDeAmigos((List) amigoService.findByNomeIgnoreCaseContaining(filtro), usuario);
-        model.addAttribute("amigos", amigos);
+        List<Amigo> amigos = (List)amigoService.findByNomeIgnoreCaseContaining(filtro);
         
-        List<String> destinatarios = usuario.getConvites().stream().map(c -> c.getDestinatario()).collect(Collectors.toList());
-        model.addAttribute("convites", destinatarios);
+        model.addAttribute("amigos",amigos.stream()
+                                    .filter(a -> !a.getEmail().equals(usuario.getEmail()))
+                                    .collect(Collectors.toList()));
+        
+        model.addAttribute("amigosUsuario", usuario.getAmigos());
+        
+        List<String> convitesEnviados = usuario.getConvites().stream()
+                .map(c -> c.getDestinatario())
+                .collect(Collectors.toList());
+        
+        model.addAttribute("convitesEnviados", convitesEnviados);
         return "partialPesquisarAmigos";
-    }
-    
-    // Refatorar isto.
-    private List<Amigo> filtrarListaDeAmigos(List<Amigo> amigos, Usuario usuario) {
-        List<String> nomeAmigos = new ArrayList<>();
-        List<Amigo> amigosDoUsuario = usuario.getAmigos();
-        List<Amigo> amigosFiltrados = amigos;
-        
-        
-        for (int i = 0; i < amigosDoUsuario.size(); i++) {
-            nomeAmigos.add(amigosDoUsuario.get(i).getEmail());
-        }
-
-        for (int i = 0; i < amigos.size(); i++) {
-            Amigo amigoAtual = amigos.get(i);
-            if (amigosDoUsuario.size() > 0) {
-                for (int j = 0; j < nomeAmigos.size(); j++) {
-                    if (amigoAtual.getEmail().equals(nomeAmigos.get(j))) {
-                        amigosFiltrados.remove(amigoAtual);
-                    }
-                }
-            }
-        }
-        for (int i = 0; i < amigosFiltrados.size(); i++) {
-            Amigo amigoAtual = amigos.get(i);
-            if (amigoAtual.getEmail().equals(usuario.getEmail())) {
-                amigosFiltrados.remove(amigoAtual);
-            }
-        }
-        
-        
-        return amigosFiltrados;
-                
     }
 }
