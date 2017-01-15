@@ -23,10 +23,20 @@
             <div>
                 Time: <strong><spam th:text="${amigo.time.nome}">Time</spam></strong>
             </div>  
-            <a th:disabled="${#lists.contains(convites, amigo.email)}" th:id="'btn-adicionar-'+${amigo.id}" th:href="'javascript:amigo.enviarConvite('+${amigo.id}+')'" class="btn btn-primary btn-adicionar">
+            
+            <a th:if="${not #lists.contains(amigosUsuario, amigo)} and ${ not #lists.contains(convitesEnviados, amigo.email)}" th:id="'btn-adicionar-'+${amigo.id}" th:href="'javascript:amigo.enviarConvite('+${amigo.id}+')'" class="btn btn-primary btn-adicionar">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
                 Adicionar amigo
             </a>
+            <a th:if="${#lists.contains(amigosUsuario, amigo)}" class="btn btn-warning btn-adicionar">
+                <i class="fa fa-user-times" aria-hidden="true"></i>
+                Desfazer amizade
+            </a>
+            <a disabled="true" th:if="${#lists.contains(convitesEnviados, amigo.email)} and ${not #lists.contains(amigosUsuario, amigo)}" class="btn btn-success btn-adicionar">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                Convite enviado
+            </a>
+            
         </article>
     </div>
 </article>
