@@ -87,4 +87,15 @@ amigo.recusarConvite = function(id){
             });
 };
 
+amigo.desfazerAmizade = function(id){
+    
+    $.post("/amigoRest/desfazerAmizade", {id})
+            .then(function(){
+                pesquisa.pesquisar();
+                amigo.carregarListaAmigos();
+                amigo.atualizarNumeroDeAmigos();
+                postagem.carregarPosts();
+            });
+};
+
 

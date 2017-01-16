@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : Arthur
 */
 body{
+    /*background-image: url( https://braziljs.org/styles/images/bg02.png), 
+                      url(https://braziljs.org/styles/images/bg03.png),
+                      url(https://braziljs.org/styles/images/bg01.png);*/
+    background-repeat: no-repeat;
     background-image: url(http://imgview.info/download/20150424/chelsea-stadium-wallpaper-1538x809.jpg);
     background-repeat: no-repeat;
     background-size: cover;
