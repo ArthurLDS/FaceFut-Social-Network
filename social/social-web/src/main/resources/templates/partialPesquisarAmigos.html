@@ -28,7 +28,8 @@
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
                 Adicionar amigo
             </a>
-            <a th:if="${#lists.contains(amigosUsuario, amigo)}" class="btn btn-warning btn-adicionar">
+            <a th:if="${#lists.contains(amigosUsuario, amigo)}" 
+               th:href="'javascript:amigo.desfazerAmizade('+ ${amigo.id} +')'" class="btn btn-warning btn-adicionar">
                 <i class="fa fa-user-times" aria-hidden="true"></i>
                 Desfazer amizade
             </a>
