@@ -19,51 +19,49 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 /**
  *
  * @author Arthur
  */
 @Controller
 public class CadastroController {
-    
+
     @Autowired
     UsuarioService service;
-    
+
     @Autowired
     AmigoService amigoService = new AmigoService();
-    
+
     @Autowired
-    TimeService timeService =  new TimeService();
-    
-    
-    
-    @RequestMapping(value="/cadastro")
-    String cadastro(Model model){
-        
+    TimeService timeService = new TimeService();
+
+    @RequestMapping(value = "/cadastro", method = RequestMethod.GET)
+    String cadastro(Model model) {
+
         Usuario usuario = new Usuario();
         model.addAttribute("usuario", usuario);
         Iterable<Time> times = timeService.findAll();
         model.addAttribute("times", times);
-        
+
         return "cadastro";
     }
-    
-    
-     @RequestMapping(value="/cadastro", method= RequestMethod.POST)
-     public String save(@ModelAttribute Usuario usuario, BindingResult bindingResult, RedirectAttributes redirectAttributes){
-         
-         if (!bindingResult.hasErrors()){
-            
+
+    @RequestMapping(value = "/cadastro", method = RequestMethod.POST)
+    public String save(@ModelAttribute Usuario usuario, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        if (!bindingResult.hasErrors()) {
+
             usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
-            
+
             service.save(usuario);
             //Este método save fará um Parse de Usuario para Amigo.
-            amigoService.save(usuario); 
-            
+            amigoService.save(usuario);
+
             String nome = usuario.getNome().split(" ")[0];
-            redirectAttributes.addFlashAttribute("msg",  nome + " foi salvo(a) com sucesso!");
+            redirectAttributes.addFlashAttribute("msg", nome + " foi salvo(a) com sucesso!");
             return "redirect:cadastro";
         }
         return "cadastro";
-     }
+    }
 }
