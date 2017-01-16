@@ -1,12 +1,7 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
 /* 
-    Created on : 08/12/2016, 13:45:28
-    Author     : Arthur
+    @Author Arthur Lima de Souza 
 */
+
 body{
     /*background-image: url( https://braziljs.org/styles/images/bg02.png), 
                       url(https://braziljs.org/styles/images/bg03.png),
@@ -17,6 +12,16 @@ body{
     background-size: cover;
     background-attachment: fixed;
 }
+a {
+    color: #1243ff;
+    text-decoration: none;
+}
+a:hover, a:focus {
+    color: #00129c;
+    text-decoration: underline;
+}
+
+// Botões
 .btn-danger:hover{
     background-color: #a90e0e;
     border-color: #a90e0e;
