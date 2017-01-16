@@ -95,7 +95,28 @@ public class AmigoRestController {
         usuarioService.save(usuario);
         conviteService.deleteConvite(conviteReprovado);
     }
-
+    
+    @RequestMapping(value="/desfazerAmizade", method = RequestMethod.POST)
+    public void desfazerAmizade(Long id){
+        //Deletando relação de amizade na primeira extremidade.
+        Usuario usuario = usuarioService.findByEmail(getUserSessao().getUsername());
+        Amigo exAmigo = amigoService.findById(id);
+        
+        List<Amigo> amigosDoUsuario = usuario.getAmigos();
+        amigosDoUsuario.remove(exAmigo);
+        usuario.setAmigos(amigosDoUsuario);
+        usuarioService.save(usuario);
+        
+        //Deletando relação de amizade na outra extremidade.
+        Usuario usuario2 = usuarioService.findByEmail(exAmigo.getEmail());
+        Amigo exAmigo2 = amigoService.findFirstByEmail(usuario.getEmail());
+        
+        List<Amigo> amigosDoUsuario2 = usuario2.getAmigos(); 
+        amigosDoUsuario2.remove(exAmigo2);
+        usuario2.setAmigos(amigosDoUsuario2);
+        usuarioService.save(usuario2);
+    } 
+    
     @RequestMapping(value = "/atualizarNumAmigos", method = RequestMethod.GET)
     public Integer atualizarNumAmigos() {
         Usuario usuario = usuarioService.findByEmail(getUserSessao().getUsername());
