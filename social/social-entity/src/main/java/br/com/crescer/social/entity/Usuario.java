@@ -5,21 +5,24 @@
  */
 package br.com.crescer.social.entity;
 
-import com.sun.glass.ui.Size;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
 import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -36,20 +39,27 @@ public class Usuario implements Serializable {
     @Column(name = "ID_USUARIO")
     private Long id;
 
-    //@Size(min = 1, max = 100, message = "DEU MERDA NO CAMPO {0}")
+    @NotNull
+    @Size(min = 1, max = 255, message = "O mínimo de caracteres é 1 e o máximo é 255.")
     @Basic(optional = false)
     @Column(name = "NM_USUARIO")
     private String nome;
     
+    @NotNull
+    @Size(min = 1, max = 255, message = "O mínimo de caracteres é 1 e o máximo é 255.")
     @Basic(optional = false)
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", unique = true)
     private String email;
     
+    @NotNull
+    @Size(min = 1, max = 255, message = "O mínimo de caracteres é 1 e o máximo é 255.")
     @Basic(optional = false)
     @Column(name = "SENHA")
     private String senha;
     
-    @ManyToOne
+    @NotNull
+    @JoinColumn(name = "ID_TIME", nullable = false, foreignKey = @ForeignKey(name="FK_USUARIO_TIME"))
+    @ManyToOne(targetEntity = Time.class)
     private Time time;
     
     @ManyToMany

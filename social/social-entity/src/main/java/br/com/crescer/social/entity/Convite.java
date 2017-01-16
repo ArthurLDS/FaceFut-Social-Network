@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -29,7 +30,6 @@ public class Convite implements Serializable{
     }
     
     public Convite(){
-        
     }
     
     @Id
@@ -39,14 +39,17 @@ public class Convite implements Serializable{
     @Column(name = "ID_CONVITE")
     private Long id;
     
+    @NotNull
     @Basic(optional = false)
     @Column(name = "REMETENTE")
     private String remetente;
     
+    @NotNull
     @Basic(optional = false)
     @Column(name = "DESTINATARIO")
     private String destinatario;
     
+    @NotNull
     @Basic(optional = false)
     @Column(name = "DATA_CONVITE")
     private Date data;

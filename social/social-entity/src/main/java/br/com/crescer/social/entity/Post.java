@@ -15,6 +15,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -22,7 +25,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "POST")
-public class Post implements Serializable{
+public class Post implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_POST")
@@ -30,24 +33,29 @@ public class Post implements Serializable{
     @Basic(optional = false)
     @Column(name = "ID_POST")
     private Long id;
-    
+
+    @NotNull
     @Basic(optional = false)
     @Column(name = "AUTOR")
     private String autor;
-    
+
+    @NotNull
+    @Size(min = 1, max = 255, message = "O mínimo de caracteres é 1 e o máximo é 255.")
     @Basic(optional = false)
     @Column(name = "TEXTO")
     private String texto;
-    
+
+    @NotNull
     @Basic(optional = false)
     @Column(name = "DATA_POST")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date data;
-    
+
+    @NotNull
     @Basic(optional = false)
     @Column(name = "TIME")
     private String time;
 
-    
     public String getTime() {
         return time;
     }
@@ -55,7 +63,7 @@ public class Post implements Serializable{
     public void setTime(String time) {
         this.time = time;
     }
-    
+
     public Date getData() {
         return data;
     }
@@ -64,7 +72,6 @@ public class Post implements Serializable{
         this.data = data;
     }
 
-    
     public Long getId() {
         return id;
     }
@@ -88,7 +95,5 @@ public class Post implements Serializable{
     public void setTexto(String texto) {
         this.texto = texto;
     }
-    
-
 
 }

@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -41,13 +43,13 @@ public class Amigo implements Serializable{
     @Column(name = "EMAIL")
     private String email;
     
-    @ManyToOne
+    @NotNull
+    @JoinColumn(name = "ID_TIME", nullable = false, foreignKey = @ForeignKey(name="FK_USUARIO_TIME"))
+    @ManyToOne(targetEntity = Time.class)
     private Time time;
     
     @OneToMany(cascade = ALL)
     private List<Post> posts;
-    
-    
     
     public void setId(Long id) {
         this.id = id;
