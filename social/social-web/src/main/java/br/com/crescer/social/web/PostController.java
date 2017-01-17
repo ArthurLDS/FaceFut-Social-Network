@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import org.springframework.security.core.userdetails.User;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -50,23 +51,13 @@ public class PostController {
     }
     
     private List<Post> filtrarPosts(List<Amigo> amigos, List<Post> posts, Usuario usuario) {
-                
-        List<String> nomeAmigos = new ArrayList<>();
-        amigos.stream().forEach((amigo) -> {
-            nomeAmigos.add(amigo.getEmail());
-        });
-        List<Post> postsFiltrados = new ArrayList<>();
-
-        for (int i = 0; i < posts.size(); i++) {
-            for (int j = 0; j < nomeAmigos.size(); j++) {
-                if (posts.get(i).getAutor().equals(nomeAmigos.get(j))) {
-                    postsFiltrados.add(posts.get(i));
-                }
-            }
-            if (posts.get(i).getAutor().equals(usuario.getEmail())) {
-                postsFiltrados.add(posts.get(i));
-            }
-        }
-        return postsFiltrados;
+        
+        List<String> emailAmigos = amigos.stream()
+                .map(a -> a.getEmail())
+                .collect(Collectors.toList());
+        
+        return posts.stream()
+                .filter (p -> emailAmigos.contains(p.getAutor()) || p.getAutor().equals(usuario.getEmail()))
+                .collect(Collectors.toList());
     }
 }

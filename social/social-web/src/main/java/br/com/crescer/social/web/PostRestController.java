@@ -38,11 +38,7 @@ public class PostRestController {
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Usuario usuarioLogado = usuarioService.findByEmail(user.getUsername());
         
-        Post post = new Post();
-        post.setAutor(usuarioLogado.getEmail());
-        post.setTexto(texto);
-        post.setTime(usuarioLogado.getTime().getNome());
-        post.setData(new Date());
+        Post post = new Post(usuarioLogado.getEmail(), texto, new Date(), usuarioLogado.getTime().getNome());
         
         postService.save(post);
     }
