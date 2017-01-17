@@ -3,14 +3,17 @@
 */
 
 body{
+    background: url(https://www.futbin.com/design/img/packs/packsbg.jpg?v=133333445) no-repeat center center fixed;
     /*background-image: url( https://braziljs.org/styles/images/bg02.png), 
                       url(https://braziljs.org/styles/images/bg03.png),
-                      url(https://braziljs.org/styles/images/bg01.png);*/
+                      url(https://braziljs.org/styles/images/bg01.png);
     background-repeat: no-repeat;
-    background-image: url(http://imgview.info/download/20150424/chelsea-stadium-wallpaper-1538x809.jpg);
+    background-image: url(https://raw.githubusercontent.com/ArthurLDS/FaceFut/master/bg-image.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    color: #fdfdfd;*/
+    color: #f9f9f9;
 }
 a {
     color: #1243ff;
@@ -20,7 +23,19 @@ a:hover, a:focus {
     color: #00129c;
     text-decoration: underline;
 }
+.panel{
+    background-color: rgba(53, 53, 53, 0.5);
+    border: 0px solid #4c4c4c;
+}
+.panel-default>.panel-heading {
+    color: #e8e8e8;
+    background-color: rgba(68, 68, 68, 0.5);
+    border-color: #18bc9c;
+}
+.navbar{
+    border-bottom: 2px solid #15a589;
 
+}
 // Botões
 .btn-danger:hover{
     background-color: #a90e0e;
@@ -53,7 +68,7 @@ a:hover, a:focus {
 }
 /*Panel*/
 .panel{
-    box-shadow: 1px 1px 20px #222;
+    //box-shadow: 1px 1px 20px #222;
 }
 /*Posts*/
 .post-data{
