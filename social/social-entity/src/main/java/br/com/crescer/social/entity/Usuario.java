@@ -8,7 +8,7 @@ package br.com.crescer.social.entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import static javax.persistence.CascadeType.ALL;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -65,10 +65,10 @@ public class Usuario implements Serializable {
     @ManyToMany
     private List<Amigo> amigos;
     
-    @OneToMany(cascade = ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Post> posts;
     
-    @OneToMany(cascade = ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Convite> convites;
 
     

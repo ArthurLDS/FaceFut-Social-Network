@@ -50,7 +50,7 @@ public class PostController {
     }
     
     private List<Post> filtrarPosts(List<Amigo> amigos, List<Post> posts, Usuario usuario) {
-        
+                
         List<String> nomeAmigos = new ArrayList<>();
         amigos.stream().forEach((amigo) -> {
             nomeAmigos.add(amigo.getEmail());

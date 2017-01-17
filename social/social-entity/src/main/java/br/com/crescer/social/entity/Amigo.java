@@ -35,12 +35,14 @@ public class Amigo implements Serializable{
     @Column(name = "ID_AMIGO")
     private Long id;
     
+    @NotNull
     @Basic(optional = false)
     @Column(name = "NM_AMIGO")
     private String nome;
     
+    @NotNull
     @Basic(optional = false)
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", unique = true)
     private String email;
     
     @NotNull
