@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
     <head th:replace="fragments :: head('FaceFut - Home')">
 
     </head>
+
     <body>
         <nav th:replace="fragments :: navbar">
 
@@ -22,12 +24,12 @@
                         </article>
                         <article class="col-md-8 block-perfil block-info-perfil">
                             <div class="block-perfil-nome"><strong><spam th:text="${usuario.nome}" ></spam></strong></div>
-                            
+
                             <div class="block-perfil-info-adc">
                                 <spam id="spam-num-amigos" class="badge"></spam> 
                                 Amigos
                             </div>
-                            
+
                             <div class="block-perfil-info-adc">
                                 <i class="fa fa-heart" style="font-size:18px;color:red"></i> 
                                 <spam th:text="${usuario.time.nome}"></spam>
@@ -40,36 +42,36 @@
                     <div class="panel-heading">
                         <i class="fa fa-group"></i> Amigos
                     </div>
-                    
+
                     <div id="box-lista-amigos" class="panel-body">
                         <!-- Listagem de amigos aqui feita pelo JavaScript-->
                     </div>
-                
+
                 </div>
-                
+
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <i class="fa fa-envelope-o"></i> Convites de amizade</div>
-                    
+
                     <div id="box-listagem-convites" class="panel-body">
                         <!-- Aqui será renderizada a lista de convites por JavaScript -->
                     </div>
-                    
+
                 </div>
             </section>
 
             <section class="col-md-5">
                 <article class="panel panel-default">
                     <section class="panel-body">
-                        
-                            <article class="form-group">
-                                <textarea onKeyPress="return submitenter(this,event)" id="txt-post" required="required" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
-                            </article>
-                            <button id="btn-postar" class="btn btn-success pull-right" type="sumit" name="button">
-                                Publicar
-                                <i class="fa fa-paper-plane-o" style="font-size:18px"></i>
-                            </button>
-                        
+
+                        <article class="form-group">
+                            <textarea onKeyPress="return submitenter(this, event)" id="txt-post" required="required" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
+                        </article>
+                        <button id="btn-postar" class="btn btn-success pull-right" type="sumit" name="button">
+                            Publicar
+                            <i class="fa fa-paper-plane-o" style="font-size:18px"></i>
+                        </button>
+
                     </section>
                 </article>
 
@@ -77,7 +79,7 @@
                     <div class="panel-heading">
                         <i class="fa fa-commenting-o"></i> Posts
                     </div>
-                    
+
                     <section id="box-posts">
                         <!-- Aqui será inserido os posts -->
                     </section>
