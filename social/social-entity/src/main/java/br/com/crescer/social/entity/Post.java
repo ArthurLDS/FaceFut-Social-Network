@@ -28,6 +28,16 @@ import javax.validation.constraints.Size;
 @Table(name = "POST")
 public class Post implements Serializable {
 
+    public Post() {
+    }
+    
+    public Post(String autor, String texto, Date data, String time){
+        this.autor = autor;
+        this.texto = texto;
+        this.data = data;
+        this.time = time;
+    }        
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_POST")
     @SequenceGenerator(name = "SEQ_POST", sequenceName = "SEQ_POST", allocationSize = 1)
