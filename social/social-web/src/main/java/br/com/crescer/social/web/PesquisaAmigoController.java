@@ -46,7 +46,7 @@ public class PesquisaAmigoController {
         
         model.addAttribute("amigosUsuario", usuario.getAmigos());
         
-        List<String> convitesEnviados = usuario.getConvites().stream()
+        List<String> convitesEnviados = usuario.getConvitesEnviados().stream()
                 .map(c -> c.getDestinatario())
                 .collect(Collectors.toList());
         

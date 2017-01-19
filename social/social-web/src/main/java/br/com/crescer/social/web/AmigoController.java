@@ -45,7 +45,7 @@ public class AmigoController {
     @RequestMapping(value="carregarConvites", method = RequestMethod.GET)
     public String carregarConvites(Model model){
         Usuario usuario = usuarioService.findByEmail(getUserSessao().getUsername());
-        Iterable<Convite> convites = usuario.getConvites();
+        Iterable<Convite> convites = usuario.getConvitesRecebidos();
         
         model.addAttribute("convites", convites);
         return "partialListagemConvites";
