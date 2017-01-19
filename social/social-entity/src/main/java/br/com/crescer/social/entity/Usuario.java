@@ -69,8 +69,34 @@ public class Usuario implements Serializable {
     private List<Post> posts;
     
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Convite> convites;
+    private List<Convite> convitesRecebidos;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Convite> convitesEnviados;
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public void setConvitesRecebidos(List<Convite> convitesRecebidos) {
+        this.convitesRecebidos = convitesRecebidos;
+    }
+
+    public void setConvitesEnviados(List<Convite> convitesEnviados) {
+        this.convitesEnviados = convitesEnviados;
+    }
+    
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public List<Convite> getConvitesRecebidos() {
+        return convitesRecebidos;
+    }
+
+    public List<Convite> getConvitesEnviados() {
+        return convitesEnviados;
+    }
     
     public List<Amigo> getAmigos() {
         return amigos;
@@ -78,14 +104,6 @@ public class Usuario implements Serializable {
 
     public void setAmigos(List<Amigo> amigos) {
         this.amigos = amigos;
-    }
-    
-    public void setConvites(List<Convite> convites) {
-        this.convites = convites;
-    }
-
-    public List<Convite> getConvites() {
-        return convites;
     }
     
     public Long getId() {
