@@ -58,6 +58,7 @@ public class AmigoService {
         amigo.setNome(usuario.getNome());
         amigo.setEmail(usuario.getEmail());
         amigo.setTime(usuario.getTime());
+        amigo.setPerfil(usuario.getPerfil());
         
         repository.save(amigo);
     }

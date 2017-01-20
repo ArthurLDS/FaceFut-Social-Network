@@ -18,5 +18,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.servicemix.bundles</groupId>
+            <artifactId>org.apache.servicemix.bundles.spring-web</artifactId>
+            <version>4.2.5.RELEASE_1</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

@@ -19,7 +19,7 @@ and open the template in the editor.
 
                 <article class="panel-body login-panel-body">
 
-                    <form action="#" th:action="@{/cadastro}" th:object="${usuario}" method="POST">
+                    <form id="upload-file-form" th:object="${usuario}">
 
                         <article th:classappend="${#fields.hasErrors('nome')} ? has-error" class="form-group" >
 
@@ -44,10 +44,8 @@ and open the template in the editor.
                         </article>
 
                         <article class="form-group">
-                            <form id="upload-file-form" enctype="multipart/form-data">
-                                <label for="upload-file-input">Faça upload de sua imagem de perfil: </label>
-                                <input id="upload-file-input" type="file" name="uploadfile" accept="*" />
-                            </form>
+                            <label for="upload-file-input">Faça upload de sua imagem de perfil: </label>
+                            <input id="upload-file-input" type="file" name="uploadfile" accept="*" />
                         </article>
 
                         <article class="form-group">
@@ -60,36 +58,39 @@ and open the template in the editor.
                         </div>
 
                         <article class="form-group">
-                            <button type="submit" name="button" class="btn btn-primary">Cadastrar</button>
+                            <button id="btn-submit" name="button" class="btn btn-primary">Cadastrar</button>
                         </article>
                     </form>
-
                 </article>
             </article>
         </section>
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script>
-            $(function () {
-                $("#upload-file-input").on("change", uploadFile);
+            $(document).ready(function () {
+                $("#btn-submit").on("click", uploadFile);
             });
 
-            function uploadFile(){
+            /**
+             * Upload the file sending it via Ajax at the Spring Boot server.
+             */
+            function uploadFile() {
                 $.ajax({
-                   url: '/uploadFile',
-                   type: 'POST',
-                   data: new FormData($('#upload-file-form'[0]))
-                   enctype: 'multipart/form-data',
-                   processData: false,
-                   contentType: false,
-                   cache: false,
-                   success: function () {
-                       alert("Foi!!");
-                   },
-                   error: function () {
-                       alert("Algo deu errado!");
-                   } 
+                    url: "/uploadFile",
+                    type: "POST",
+                    data: new FormData($("#upload-file-form")[0]),
+                    enctype: 'multipart/form-data',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function () {
+                        alert("Foi!!");
+                    },
+                    error: function () {
+                        alert("Algo deu errado!");
+                    }
                 });
-            }
+            } // function uploadFile
         </script>
     </body>
 </html>
