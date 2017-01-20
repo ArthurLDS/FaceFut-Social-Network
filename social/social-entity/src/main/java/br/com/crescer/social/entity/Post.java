@@ -8,11 +8,17 @@ package br.com.crescer.social.entity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -31,11 +37,12 @@ public class Post implements Serializable {
     public Post() {
     }
     
-    public Post(String autor, String texto, Date data, String time){
+    public Post(String autor, String texto, Date data, String time, Perfil perfil){
         this.autor = autor;
         this.texto = texto;
         this.data = data;
         this.time = time;
+        this.perfil = perfil;
     }        
     
     @Id
@@ -66,7 +73,19 @@ public class Post implements Serializable {
     @Basic(optional = false)
     @Column(name = "TIME")
     private String time;
+    
+    @JoinColumn(name = "ID_PERFIL", nullable = false, foreignKey = @ForeignKey(name="FK_POST_PERFIL"))
+    @ManyToOne(targetEntity = Perfil.class)
+    private Perfil perfil;
 
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
+    
     public String getTime() {
         return time;
     }

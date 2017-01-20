@@ -8,11 +8,15 @@ package br.com.crescer.social.entity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 
@@ -23,10 +27,11 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Convite implements Serializable{
     
-    public Convite(String remetente, String destinatario, Date data){
+    public Convite(String remetente, String destinatario, Date data, Perfil perfil){
         this.remetente = remetente;
         this.destinatario = destinatario;
         this.data = data;
+        this.perfil = perfil;
     }
     
     public Convite(){
@@ -53,7 +58,19 @@ public class Convite implements Serializable{
     @Basic(optional = false)
     @Column(name = "DATA_CONVITE")
     private Date data;
+    
+    @OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name="ID_PERFIL", nullable=false)
+    private Perfil perfil;
 
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
+    
     public Long getId() {
         return id;
     }
