@@ -38,8 +38,9 @@ public class AmigoRestController {
     @RequestMapping(value = "/enviarConvite", method = RequestMethod.PUT)
     public void enviarConvite(Long id) {
         Amigo amigoDestinatario = amigoService.findById(id);
-
-        Convite convite = new Convite(getUserSessao().getUsername(), amigoDestinatario.getEmail(), new Date());
+        Usuario usuarioRemetente = usuarioService.findByEmail(getUserSessao().getUsername());
+        
+        Convite convite = new Convite(getUserSessao().getUsername(), amigoDestinatario.getEmail(), new Date(), usuarioRemetente.getPerfil());
         conviteService.save(convite);
 
         //Adicionando convite no usuario Destinatario
@@ -47,7 +48,7 @@ public class AmigoRestController {
         adicionarConviteUsuario(usuarioDestinatario, convite, "DESTINATARIO");
         
         //Adicionando convite no usuario rementente
-        Usuario usuarioRemetente = usuarioService.findByEmail(getUserSessao().getUsername());
+        
         adicionarConviteUsuario(usuarioRemetente, convite, "REMETENTE");
     }
 
