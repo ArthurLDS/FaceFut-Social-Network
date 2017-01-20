@@ -12,10 +12,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
@@ -31,7 +33,7 @@ public class Convite implements Serializable{
         this.remetente = remetente;
         this.destinatario = destinatario;
         this.data = data;
-        this.perfil = perfil;
+        this.perfilRemetente = perfil;
     }
     
     public Convite(){
@@ -59,16 +61,16 @@ public class Convite implements Serializable{
     @Column(name = "DATA_CONVITE")
     private Date data;
     
-    @OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name="ID_PERFIL", nullable=false)
-    private Perfil perfil;
+    @JoinColumn(name = "ID_PERFIL", nullable = false, foreignKey = @ForeignKey(name="FK_CONVITE_PERFIL"))
+    @ManyToOne(targetEntity = Perfil.class)
+    private Perfil perfilRemetente;
 
-    public Perfil getPerfil() {
-        return perfil;
+    public Perfil getPerfilRemetente() {
+        return perfilRemetente;
     }
 
-    public void setPerfil(Perfil perfil) {
-        this.perfil = perfil;
+    public void setPerfilRemetente(Perfil perfilRemetente) {
+        this.perfilRemetente = perfilRemetente;
     }
     
     public Long getId() {

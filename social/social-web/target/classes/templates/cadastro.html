@@ -35,23 +35,30 @@ and open the template in the editor.
                         <article class="form-group">
 
                             <select class="form-control" th:field="*{time}" required="required">
-                                
+
                                 <option th:each="time :${times}" th:value="${time.id}" th:text="${time.nome}">
                                 </option>
-                                
+
                             </select>
 
                         </article>
 
                         <article class="form-group">
+                            <form id="upload-file-form" enctype="multipart/form-data">
+                                <label for="upload-file-input">Faça upload de sua imagem de perfil: </label>
+                                <input id="upload-file-input" type="file" name="uploadfile" accept="*" />
+                            </form>
+                        </article>
+
+                        <article class="form-group">
                             <input class="form-control" type="password" th:field="*{senha}" placeholder="Senha" required="required"/>
                         </article>
-                        
+
                         <div class="alert alert-success" th:if="${msg}">
                             <strong>Ok!</strong> <span th:text="${msg}"></span>
                             <a th:href="@{/login}"> Fazer login</a>
                         </div>
-                        
+
                         <article class="form-group">
                             <button type="submit" name="button" class="btn btn-primary">Cadastrar</button>
                         </article>
@@ -60,5 +67,29 @@ and open the template in the editor.
                 </article>
             </article>
         </section>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>
+            $(function () {
+                $("#upload-file-input").on("change", uploadFile);
+            });
+
+            function uploadFile(){
+                $.ajax({
+                   url: '/uploadFile',
+                   type: 'POST',
+                   data: new FormData($('#upload-file-form'[0]))
+                   enctype: 'multipart/form-data',
+                   processData: false,
+                   contentType: false,
+                   cache: false,
+                   success: function () {
+                       alert("Foi!!");
+                   },
+                   error: function () {
+                       alert("Algo deu errado!");
+                   } 
+                });
+            }
+        </script>
     </body>
 </html>
