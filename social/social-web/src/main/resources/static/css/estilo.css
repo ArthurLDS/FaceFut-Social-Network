@@ -133,5 +133,18 @@ a:hover, a:focus {
 .block-perfil-info-adc{
     margin-bottom: 4px;
 }
+.perfil-img{
+    border: 2px solid #969696;
+    border-radius: 100%;
+    box-shadow: 1px 1px 5px #353535;
+}
+.perfil-img-min{
+    height: 50px;
+    width: 50px;
+}
+.perfil-img-med{
+    width: 95px; 
+    height: 97px;
+}
 
 
