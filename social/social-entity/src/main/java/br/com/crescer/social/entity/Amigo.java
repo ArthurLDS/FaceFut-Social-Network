@@ -52,10 +52,7 @@ public class Amigo implements Serializable{
     @JoinColumn(name = "ID_TIME", nullable = false, foreignKey = @ForeignKey(name="FK_USUARIO_TIME"))
     @ManyToOne(targetEntity = Time.class)
     private Time time;
-    
-    @OneToMany(cascade = ALL)
-    private List<Post> posts;
-    
+ 
     @OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name="ID_PERFIL", nullable=false)
     private Perfil perfil;
@@ -83,11 +80,6 @@ public class Amigo implements Serializable{
     public void setTime(Time time) {
         this.time = time;
     }
-
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
-    
     
     public Long getId() {
         return id;
@@ -103,10 +95,6 @@ public class Amigo implements Serializable{
 
     public Time getTime() {
         return time;
-    }
-
-    public List<Post> getPosts() {
-        return posts;
     }
     
 }
