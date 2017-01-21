@@ -37,12 +37,10 @@ public class Post implements Serializable {
     public Post() {
     }
     
-    public Post(String autor, String texto, Date data, String time, Perfil perfil){
-        this.autor = autor;
+    public Post(String texto, Date data, Perfil perfilAutor){
         this.texto = texto;
         this.data = data;
-        this.time = time;
-        this.perfil = perfil;
+        this.perfilAutor = perfilAutor;
     }        
     
     @Id
@@ -51,11 +49,6 @@ public class Post implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_POST")
     private Long id;
-
-    @NotNull
-    @Basic(optional = false)
-    @Column(name = "AUTOR")
-    private String autor;
 
     @NotNull
     @Size(min = 1, max = 255, message = "O mínimo de caracteres é 1 e o máximo é 255.")
@@ -68,32 +61,20 @@ public class Post implements Serializable {
     @Column(name = "DATA_POST")
     @Temporal(TemporalType.TIMESTAMP)
     private Date data;
-
-    @NotNull
-    @Basic(optional = false)
-    @Column(name = "TIME")
-    private String time;
     
     @JoinColumn(name = "ID_PERFIL", nullable = false, foreignKey = @ForeignKey(name="FK_POST_PERFIL"))
     @ManyToOne(targetEntity = Perfil.class)
-    private Perfil perfil;
+    private Perfil perfilAutor;
 
-    public Perfil getPerfil() {
-        return perfil;
+    
+    public Perfil getPerfilAutor() {
+        return perfilAutor;
     }
 
-    public void setPerfil(Perfil perfil) {
-        this.perfil = perfil;
+    public void setPerfilAutor(Perfil perfilAutor) {
+        this.perfilAutor = perfilAutor;
     }
     
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
     public Date getData() {
         return data;
     }
@@ -106,10 +87,6 @@ public class Post implements Serializable {
         return id;
     }
 
-    public String getAutor() {
-        return autor;
-    }
-
     public String getTexto() {
         return texto;
     }
@@ -118,9 +95,6 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
 
     public void setTexto(String texto) {
         this.texto = texto;
