@@ -38,34 +38,22 @@ public class Perfil {
     @Column(name = "ID_PERFIL")
     private Long id;
     
-    /*@NotNull
+    //@NotNull
     @Size(min = 1, max = 255, message = "O mínimo de caracteres é 1 e o máximo é 255.")
     @Basic(optional = false)
-    @Column(name = "NM_USUARIO")
+    @Column(name = "NOME")
     private String nome;
     
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 255, message = "O mínimo de caracteres é 1 e o máximo é 255.")
     @Basic(optional = false)
     @Column(name = "EMAIL", unique = true)
     private String email;
     
-    @NotNull
-    @JoinColumn(name = "ID_TIME", nullable = false, foreignKey = @ForeignKey(name="FK_USUARIO_TIME"))
+    //@NotNull
+    @JoinColumn(name = "ID_TIME", nullable = false, foreignKey = @ForeignKey(name="FK_PERFIL_TIME"))
     @ManyToOne(targetEntity = Time.class)
     private Time time;
-    
-     @ManyToMany
-    private List<Amigo> amigos;
-    
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Post> posts;
-    
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Convite> convitesRecebidos;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Convite> convitesEnviados;*/
     
     @Basic(optional = false)
     @Column(name="IMAGEM_PERFIL")
@@ -86,4 +74,29 @@ public class Perfil {
     public String getImagemPerfil() {
         return imagemPerfil;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
+    
 }
