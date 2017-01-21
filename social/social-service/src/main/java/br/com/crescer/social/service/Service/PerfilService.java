@@ -43,7 +43,7 @@ public class PerfilService {
             String caminhoArquivo = Paths.get(diretorioArquivo, nomeArquivo).toString();
 
             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(caminhoArquivo)));
-            stream.write(caminhoArquivo.getBytes());
+            stream.write(arquivo.getBytes());
             stream.close();
 
             return true;
