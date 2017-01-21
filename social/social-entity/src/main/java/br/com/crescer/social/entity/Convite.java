@@ -20,6 +20,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -27,64 +28,59 @@ import javax.validation.constraints.NotNull;
  * @author Arthur
  */
 @Entity
-public class Convite implements Serializable{
-    
-    public Convite(String remetente, String destinatario, Date data, Perfil perfil){
-        this.remetente = remetente;
-        this.destinatario = destinatario;
+@Table(name = "CONVITE")
+public class Convite implements Serializable {
+
+    public Convite(Date data, Perfil perfilRemetente, Perfil perfilDestinatario) {
         this.data = data;
-        this.perfilRemetente = perfil;
+        this.perfilRemetente = perfilRemetente;
+        this.perfilDestinatario = perfilDestinatario;
     }
-    
-    public Convite(){
+
+    public Convite() {
     }
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CONVITE")
     @SequenceGenerator(name = "SEQ_CONVITE", sequenceName = "SEQ_CONVITE", allocationSize = 1)
     @Basic(optional = false)
     @Column(name = "ID_CONVITE")
     private Long id;
+
+    /*@NotNull
+     @Basic(optional = false)
+     @Column(name = "REMETENTE")
+     private String remetente;
     
-    @NotNull
-    @Basic(optional = false)
-    @Column(name = "REMETENTE")
-    private String remetente;
-    
-    @NotNull
-    @Basic(optional = false)
-    @Column(name = "DESTINATARIO")
-    private String destinatario;
-    
+     @NotNull
+     @Basic(optional = false)
+     @Column(name = "DESTINATARIO")
+     private String destinatario;
+     */
     @NotNull
     @Basic(optional = false)
     @Column(name = "DATA_CONVITE")
     private Date data;
-    
-    @JoinColumn(name = "ID_PERFIL", nullable = false, foreignKey = @ForeignKey(name="FK_CONVITE_PERFIL_REMETENTE"))
+
+    @JoinColumn(name = "ID_PERFIL_REMETENTE", nullable = false, foreignKey = @ForeignKey(name = "FK_CONVITE_PERFIL_REMETENTE"))
     @ManyToOne(targetEntity = Perfil.class)
     private Perfil perfilRemetente;
 
-    public Perfil getPerfilRemetente() {
-        return perfilRemetente;
-    }
+    @JoinColumn(name = "ID_PERFIL_DESTINATARIO", nullable = false, foreignKey = @ForeignKey(name = "FK_CONVITE_PERFIL_DESTINATARIO"))
+    @ManyToOne(targetEntity = Perfil.class)
+    private Perfil perfilDestinatario;
 
-    public void setPerfilRemetente(Perfil perfilRemetente) {
-        this.perfilRemetente = perfilRemetente;
-    }
-    
     public Long getId() {
         return id;
     }
 
-    public String getRemetente() {
-        return remetente;
-    }
+    /*public String getRemetente() {
+     return remetente;
+     }
 
-    public String getDestinatario() {
-        return destinatario;
-    }
-
+     public String getDestinatario() {
+     return destinatario;
+     }*/
     public Date getData() {
         return data;
     }
@@ -93,15 +89,31 @@ public class Convite implements Serializable{
         this.id = id;
     }
 
-    public void setRemetente(String remetente) {
-        this.remetente = remetente;
-    }
+    /*public void setRemetente(String remetente) {
+     this.remetente = remetente;
+     }
 
-    public void setDestinatario(String destinatario) {
-        this.destinatario = destinatario;
-    }
-
+     public void setDestinatario(String destinatario) {
+     this.destinatario = destinatario;
+     }*/
     public void setData(Date data) {
         this.data = data;
     }
+
+    public Perfil getPerfilDestinatario() {
+        return perfilDestinatario;
+    }
+
+    public void setPerfilDestinatario(Perfil perfilDestinatario) {
+        this.perfilDestinatario = perfilDestinatario;
+    }
+    public Perfil getPerfilRemetente() {
+        return perfilRemetente;
+    }
+
+    public void setPerfilRemetente(Perfil perfilRemetente) {
+        this.perfilRemetente = perfilRemetente;
+    }
+    
+    
 }
