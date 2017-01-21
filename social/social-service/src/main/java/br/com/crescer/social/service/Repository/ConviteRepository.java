@@ -6,6 +6,7 @@
 package br.com.crescer.social.service.Repository;
 
 import br.com.crescer.social.entity.Convite;
+import br.com.crescer.social.entity.Perfil;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
@@ -14,9 +15,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface ConviteRepository extends PagingAndSortingRepository<Convite, Long>{
     
-    public Iterable<Convite> findByDestinatario(String destinatario);
+    public Iterable<Convite> findByPerfilDestinatario(Perfil destinatario);
     
-    public Iterable<Convite> findByRemetente(String remetente);
+    public Iterable<Convite> findByPerfilRemetente(Perfil remetente);
     
     public Convite findById(Long id);
     

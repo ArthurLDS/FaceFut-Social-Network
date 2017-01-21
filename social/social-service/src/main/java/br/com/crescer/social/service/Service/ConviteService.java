@@ -6,7 +6,10 @@
 package br.com.crescer.social.service.Service;
 
 import br.com.crescer.social.entity.Convite;
+import br.com.crescer.social.entity.Perfil;
+import br.com.crescer.social.entity.Usuario;
 import br.com.crescer.social.service.Repository.ConviteRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,9 @@ public class ConviteService {
     @Autowired
     ConviteRepository repository;
     
+    @Autowired
+    UsuarioService usuarioService;
+    
     public Iterable<Convite> findAll(){
         return repository.findAll();
     }
@@ -28,12 +34,12 @@ public class ConviteService {
         repository.save(convite);
     }
     
-    public Iterable<Convite> findByDestinatario(String destinatario){
-        return repository.findByDestinatario(destinatario);
+    public Iterable<Convite> findByPerfilDestinatario(Perfil destinatario){
+        return repository.findByPerfilDestinatario(destinatario);
     }
     
-    public Iterable<Convite> findByRemetente(String remetente){
-        return repository.findByRemetente(remetente);
+    public Iterable<Convite> findByPerfilRemetente(Perfil remetente){
+        return repository.findByPerfilRemetente(remetente);
     }
     
     public Convite findById(Long id){
@@ -42,5 +48,20 @@ public class ConviteService {
     
     public void deleteConvite(Convite convite){
         repository.delete(convite);
+    }
+    
+    public void adicionarConviteUsuario(Usuario usuario, Convite convite, String extremidade) {
+
+        if (extremidade.equals("REMETENTE")) {
+            List<Convite> convites = usuario.getConvitesEnviados();
+            convites.add(convite);
+            usuario.setConvitesEnviados(convites);    
+        }
+        else if(extremidade.equals("DESTINATARIO")){
+            List<Convite> convites = usuario.getConvitesRecebidos();
+            convites.add(convite);
+            usuario.setConvitesRecebidos(convites);
+        }
+        usuarioService.save(usuario);
     }
 }
