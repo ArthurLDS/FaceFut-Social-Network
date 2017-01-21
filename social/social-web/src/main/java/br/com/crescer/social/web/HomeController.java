@@ -43,16 +43,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class HomeController {
 
     @Autowired
-    PostService service;
-    @Autowired
     UsuarioService usuarioService;
-    @Autowired
-    AmigoService amigoService;
-    @Autowired
-    TimeService timeService;
-    @Autowired
-    ConviteService conviteService;
-
+    
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     String home(Model model) {
         User userAtual = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

@@ -8,7 +8,11 @@ and open the template in the editor.
     <head th:replace="fragments :: head('FaceFut - Cadastro')">
 
     </head>
-
+    <style>
+        body{
+            background: url(http://imgview.info/download/20150424/chelsea-stadium-wallpaper-1538x809.jpg) no-repeat center center fixed;
+        }
+    </style>
     <body>
         <section class="col-md-6 col-md-offset-3 login-block">
             <article class="panel panel-default cadastro-panel">
@@ -44,8 +48,8 @@ and open the template in the editor.
                         </article>
 
                         <article class="form-group">
-                            <label for="upload-file-input">Faça upload de sua imagem de perfil: </label>
-                            <input id="upload-file-input" type="file" name="uploadfile" accept="*" />
+                            <label class="cadastro-label-file" for="upload-file-input">Faça upload de sua imagem de perfil: </label>
+                            <input class="cadastro-input-file" id="upload-file-input" type="file" name="uploadfile" accept="*" />
                         </article>
 
                         <article class="form-group">
@@ -64,12 +68,12 @@ and open the template in the editor.
                 </article>
             </article>
         </section>
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script th:src="@{/js/cadastro.js}"></script>
-        
+
         <script>
-            
+
         </script>
     </body>
 </html>

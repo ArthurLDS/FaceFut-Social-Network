@@ -5,13 +5,13 @@
 <div th:each="post :${posts}" class="panel-body" style="padding-right: 0px;">
     
     <article class="col-md-2" style="padding-right: 0px;">
-        <img class="perfil-img perfil-img-min" th:src="${post.perfil.imagemPerfil}"/>
+        <img class="perfil-img perfil-img-min" th:src="${post.perfilAutor.imagemPerfil}"/>
     </article>
     <article class="col-md-10" style="padding-left: 0px;">
-        <strong><p style="margin: 0px;" th:text="${post.autor}">Autor</p></strong>
+        <strong><p style="margin: 0px;" th:text="${post.perfilAutor.nome}">Autor</p></strong>
         
         <i class="fa fa-futbol-o" style="font-size: 12px; color: #ddd;"></i>
-        <spam class="post-time" th:text="${post.time}">Time</spam>
+        <spam class="post-time" th:text="${post.perfilAutor.time.nome}">Time</spam>
         &nbsp;·
         <spam class="post-data" 
               th:text="${#dates.format(post.data, 'dd/MM/yyyy hh:mm')}" style="font-size: 12px;">
