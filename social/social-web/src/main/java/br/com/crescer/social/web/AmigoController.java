@@ -29,6 +29,7 @@ public class AmigoController {
     
     @Autowired
     UsuarioService usuarioService;
+    
     @Autowired
     ConviteService conviteService;
     

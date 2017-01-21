@@ -38,52 +38,36 @@ public class AmigoRestController {
     @RequestMapping(value = "/enviarConvite", method = RequestMethod.PUT)
     public void enviarConvite(Long id) {
         Amigo amigoDestinatario = amigoService.findById(id);
+
         Usuario usuarioRemetente = usuarioService.findByEmail(getUserSessao().getUsername());
-        
-        Convite convite = new Convite(getUserSessao().getUsername(), amigoDestinatario.getEmail(), new Date(), usuarioRemetente.getPerfil());
+        Usuario usuarioDestinatario = usuarioService.findByEmail(amigoDestinatario.getEmail());
+
+        Convite convite = new Convite(new Date(), usuarioRemetente.getPerfil(), usuarioDestinatario.getPerfil());
         conviteService.save(convite);
 
         //Adicionando convite no usuario Destinatario
-        Usuario usuarioDestinatario = usuarioService.findByEmail(amigoDestinatario.getEmail());
-        adicionarConviteUsuario(usuarioDestinatario, convite, "DESTINATARIO");
-        
+        conviteService.adicionarConviteUsuario(usuarioDestinatario, convite, "DESTINATARIO");
         //Adicionando convite no usuario rementente
-        
-        adicionarConviteUsuario(usuarioRemetente, convite, "REMETENTE");
+        conviteService.adicionarConviteUsuario(usuarioRemetente, convite, "REMETENTE");
     }
 
     @RequestMapping(value = "/aceitarConvite", method = RequestMethod.POST)
     public void aceitarConvite(Long id) {
 
-        //Aceitando e adicionando amigo no Usuario atual
         Convite conviteAprovado = conviteService.findById(id);
-
-        Amigo amigoRemetente = amigoService.findFirstByEmail(conviteAprovado.getRemetente());
+        
+        //Aceitando e adicionando amigo no Usuario atual
+        Amigo amigoRemetente = amigoService.findFirstByEmail(conviteAprovado.getPerfilRemetente().getEmail());
         Usuario usuarioDestinatario = usuarioService.findByEmail(getUserSessao().getUsername());
-        List<Amigo> amigosDoUsuario = usuarioDestinatario.getAmigos();
-        amigosDoUsuario.add(amigoRemetente);
-        usuarioDestinatario.setAmigos(amigosDoUsuario);
-
-        List<Convite> convitesDestinatario = usuarioDestinatario.getConvitesRecebidos();
-        convitesDestinatario.remove(conviteAprovado);
-        usuarioDestinatario.setConvitesRecebidos(convitesDestinatario);
-
-        usuarioService.save(usuarioDestinatario);
+        
+        amigoService.adicionarAmigo(usuarioDestinatario, amigoRemetente, conviteAprovado, "DESTINATARIO");
 
         //Adicionando amigo no Usuario que enviou o convite..
-        Amigo amigoDestinatario = amigoService.findFirstByEmail(conviteAprovado.getDestinatario());
-        Usuario usuarioRemetente = usuarioService.findByEmail(conviteAprovado.getRemetente());
-        List<Amigo> amigosDoRemetente = usuarioRemetente.getAmigos();
-        amigosDoRemetente.add(amigoDestinatario);
-        usuarioRemetente.setAmigos(amigosDoRemetente);
+        Amigo amigoDestinatario = amigoService.findFirstByEmail(conviteAprovado.getPerfilDestinatario().getEmail());
+        Usuario usuarioRemetente = usuarioService.findByEmail(conviteAprovado.getPerfilRemetente().getEmail());
 
-        List<Convite> convitesRemetente = usuarioRemetente.getConvitesEnviados();
-        convitesRemetente.remove(conviteAprovado);
-        usuarioRemetente.setConvitesEnviados(convitesRemetente);
-
-        usuarioService.save(usuarioRemetente);
-
-        //Agora excluimos o convite
+        amigoService.adicionarAmigo(usuarioRemetente, amigoDestinatario, conviteAprovado, "REMETENTE");
+        
         conviteService.deleteConvite(conviteAprovado);
     }
 
@@ -91,13 +75,14 @@ public class AmigoRestController {
     public void recusarConvite(Long id) {
 
         Convite conviteReprovado = conviteService.findById(id);
+        
         Usuario usuarioDestinatario = usuarioService.findByEmail(getUserSessao().getUsername());
+        Usuario usuarioRemetente = usuarioService.findByEmail(conviteReprovado.getPerfilRemetente().getEmail());
 
         List<Convite> convitesDestinatario = usuarioDestinatario.getConvitesRecebidos();
         convitesDestinatario.remove(conviteReprovado);
         usuarioDestinatario.setConvitesRecebidos(convitesDestinatario);
-
-        Usuario usuarioRemetente = usuarioService.findByEmail(conviteReprovado.getRemetente());
+        
         List<Convite> convitesRemetente = usuarioRemetente.getConvitesEnviados();
         convitesRemetente.remove(conviteReprovado);
         usuarioRemetente.setConvitesEnviados(convitesRemetente);
@@ -109,23 +94,18 @@ public class AmigoRestController {
 
     @RequestMapping(value = "/desfazerAmizade", method = RequestMethod.POST)
     public void desfazerAmizade(Long id) {
+        
         //Deletando relação de amizade na primeira extremidade.
-        Usuario usuario = usuarioService.findByEmail(getUserSessao().getUsername());
-        Amigo exAmigo = amigoService.findById(id);
+        Usuario usuarioSolicitante = usuarioService.findByEmail(getUserSessao().getUsername());
+        Amigo amigoSolicitado = amigoService.findById(id);
 
-        List<Amigo> amigosDoUsuario = usuario.getAmigos();
-        amigosDoUsuario.remove(exAmigo);
-        usuario.setAmigos(amigosDoUsuario);
-        usuarioService.save(usuario);
-
+        amigoService.removerAmigo(usuarioSolicitante, amigoSolicitado);
+        
         //Deletando relação de amizade na outra extremidade.
-        Usuario usuario2 = usuarioService.findByEmail(exAmigo.getEmail());
-        Amigo exAmigo2 = amigoService.findFirstByEmail(usuario.getEmail());
-
-        List<Amigo> amigosDoUsuario2 = usuario2.getAmigos();
-        amigosDoUsuario2.remove(exAmigo2);
-        usuario2.setAmigos(amigosDoUsuario2);
-        usuarioService.save(usuario2);
+        Usuario usuarioSolicitado = usuarioService.findByEmail(amigoSolicitado.getEmail());
+        Amigo amigoSolicitante = amigoService.findFirstByEmail(usuarioSolicitante.getEmail());
+        
+        amigoService.removerAmigo(usuarioSolicitado, amigoSolicitante);
     }
 
     @RequestMapping(value = "/atualizarNumAmigos", method = RequestMethod.GET)
@@ -136,21 +116,6 @@ public class AmigoRestController {
 
     private User getUserSessao() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    }
-
-    private void adicionarConviteUsuario(Usuario usuario, Convite convite, String extremidade) {
-
-        if (extremidade.equals("REMETENTE")) {
-            List<Convite> convites = usuario.getConvitesEnviados();
-            convites.add(convite);
-            usuario.setConvitesEnviados(convites);    
-        }
-        else if(extremidade.equals("DESTINATARIO")){
-            List<Convite> convites = usuario.getConvitesRecebidos();
-            convites.add(convite);
-            usuario.setConvitesRecebidos(convites);
-        }
-        usuarioService.save(usuario);
     }
 
 }

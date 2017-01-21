@@ -10,10 +10,10 @@
         </article>
         <article class="col-md-10" style="padding-left: 15px;">
             <div>
-                Email: <strong><spam th:text="${convite.remetente}">Remetente</spam></strong>
+                <strong><spam th:text="${convite.perfilRemetente.nome}">Remetente</spam></strong>
             </div>
             <div>
-                Data: <strong><spam th:text="${#dates.format(convite.data, 'dd/MM/yyyy hh:mm')}">Data</spam></strong>
+                <spam th:text="${#dates.format(convite.data, 'dd/MM/yyyy hh:mm')}" style="font-size: 10pt;">Data</spam>
             </div>
             
             <a th:href="'javascript:amigo.aceitarConvite('+${convite.id}+')'" class="btn btn-success btn-solicitacao">
