@@ -29,7 +29,7 @@ public class TelaUploadController {
     public String uploadImagem() {
         return "uploadImagem";
     }
-
+    
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<?> uploadFile(@RequestParam("uploadfile") MultipartFile uploadfile) {

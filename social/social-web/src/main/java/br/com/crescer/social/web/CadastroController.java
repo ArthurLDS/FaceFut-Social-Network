@@ -19,11 +19,15 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Paths;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -58,12 +62,15 @@ public class CadastroController {
     }
 
     @RequestMapping(value = "/cadastroForm", method = RequestMethod.POST)
-    public String save(@ModelAttribute Usuario usuario, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String save(@ModelAttribute Usuario usuario, MultipartFile uploadfile, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-        if (!bindingResult.hasErrors()) {
-
+        if (!bindingResult.hasErrors() && perfilService.salvarArquivo(uploadfile)) {
+            
+            Perfil perfil = perfilService.save(uploadfile);
+            
+            usuario.setPerfil(perfil);
             usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
-
+            
             service.save(usuario);
             //Este método save fará um Parse de Usuario para Amigo.
             amigoService.save(usuario);
@@ -74,5 +81,4 @@ public class CadastroController {
         }
         return "redirect:cadastro";
     }
-
 }
