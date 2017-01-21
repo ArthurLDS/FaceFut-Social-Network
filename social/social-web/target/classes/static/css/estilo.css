@@ -147,4 +147,15 @@ a:hover, a:focus {
     height: 97px;
 }
 
+/* Cadastro */
+.cadastro-label-file{
+    font-size: 12pt;
+    color: #FFF;
+    text-shadow: 0px 0px 7px #000;
+}
+.cadastro-input-file{
+    color: #FFF;
+    text-shadow: 1px 1px 10px #000;
+}
+
 

@@ -61,7 +61,7 @@ public class Convite implements Serializable{
     @Column(name = "DATA_CONVITE")
     private Date data;
     
-    @JoinColumn(name = "ID_PERFIL", nullable = false, foreignKey = @ForeignKey(name="FK_CONVITE_PERFIL"))
+    @JoinColumn(name = "ID_PERFIL", nullable = false, foreignKey = @ForeignKey(name="FK_CONVITE_PERFIL_REMETENTE"))
     @ManyToOne(targetEntity = Perfil.class)
     private Perfil perfilRemetente;
 

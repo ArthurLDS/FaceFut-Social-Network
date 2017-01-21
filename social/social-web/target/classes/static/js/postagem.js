@@ -10,9 +10,9 @@ $(function () {
     postagem.configurarForm();
     postagem.carregarPosts();
     
-    setInterval(function(){
-        postagem.carregarPosts();
-    }, 5000);
+    //setInterval(function(){
+    //    postagem.carregarPosts();
+    //}, 5000);
     
 });
 

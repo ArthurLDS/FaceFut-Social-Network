@@ -5,17 +5,17 @@ INSERT INTO TIME (ID_TIME, NM_TIME) VALUES(3, 'Brasil de Pelotas');
 INSERT INTO TIME (ID_TIME, NM_TIME) VALUES(4, 'Juventude');
 
 -- Perfis --
-INSERT INTO PERFIL(ID_PERFIL, IMAGEM_PERFIL)
-VALUES(1000, '/imgs/01-cnorris.png');
+INSERT INTO PERFIL(ID_PERFIL, NOME, EMAIL, ID_TIME,IMAGEM_PERFIL)
+VALUES(1000, 'Arthur Lima de Souza', 'arthurlds73@gmail.com', 1, '/imgs/01-cnorris.png');
 
-INSERT INTO PERFIL(ID_PERFIL, IMAGEM_PERFIL)
-VALUES(1001, '/imgs/chaves.jpg');
+INSERT INTO PERFIL(ID_PERFIL, NOME, EMAIL, ID_TIME,IMAGEM_PERFIL)
+VALUES(1001, 'Rafael de Souza', 'rafaeldesouza@gmail.com', 1, '/imgs/chaves.jpg');
 
-INSERT INTO PERFIL(ID_PERFIL, IMAGEM_PERFIL)
-VALUES(1002, '/imgs/donaflorinda.png');
+INSERT INTO PERFIL(ID_PERFIL, NOME, EMAIL, ID_TIME,IMAGEM_PERFIL)
+VALUES(1002, 'Mara Regina Lima de Souza', 'maralima@gmail.com', 1, '/imgs/donaflorinda.png');
 
-INSERT INTO PERFIL(ID_PERFIL, IMAGEM_PERFIL)
-VALUES(1003, '/imgs/seumadruga.jpg');
+INSERT INTO PERFIL(ID_PERFIL, NOME, EMAIL, ID_TIME,IMAGEM_PERFIL)
+VALUES(1003, 'Larri Angeli de Souza', 'larridesouza@gmail.com', 1, '/imgs/seumadruga.jpg');
 
 -- Usuários --
 INSERT INTO USUARIO (ID_USUARIO, EMAIL, NM_USUARIO, SENHA, ID_TIME, ID_PERFIL) 
