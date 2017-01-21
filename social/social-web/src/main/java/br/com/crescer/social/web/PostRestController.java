@@ -10,6 +10,7 @@ import br.com.crescer.social.entity.Usuario;
 import br.com.crescer.social.service.Service.PostService;
 import br.com.crescer.social.service.Service.UsuarioService;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
@@ -38,8 +39,13 @@ public class PostRestController {
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Usuario usuarioLogado = usuarioService.findByEmail(user.getUsername());
         
-        Post post = new Post(usuarioLogado.getEmail(), texto, new Date(), usuarioLogado.getTime().getNome(), usuarioLogado.getPerfil());
-        
+        Post post = new Post(texto, new Date(), usuarioLogado.getPerfil());
         postService.save(post);
+        
+        List<Post> postsUsuario = usuarioLogado.getPosts();
+        postsUsuario.add(post);
+        usuarioLogado.setPosts(postsUsuario);
+        
+        usuarioService.save(usuarioLogado);
     }
 }

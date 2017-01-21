@@ -44,20 +44,9 @@ public class PostController {
         Usuario usuarioLogado = usuarioService.findByEmail(user.getUsername());
         
         List<Post> posts = postService.findAllByOrderByIdDesc();
-        List<Post> postsFiltrados = filtrarPosts(usuarioLogado.getAmigos(), posts, usuarioLogado);
+        List<Post> postsFiltrados = postService.filtrarPosts(posts, usuarioLogado);
 
         model.addAttribute("posts", postsFiltrados);
         return "partialPostagem";
-    }
-    
-    private List<Post> filtrarPosts(List<Amigo> amigos, List<Post> posts, Usuario usuario) {
-        
-        List<String> emailAmigos = amigos.stream()
-                .map(a -> a.getEmail())
-                .collect(Collectors.toList());
-        
-        return posts.stream()
-                .filter (p -> emailAmigos.contains(p.getAutor()) || p.getAutor().equals(usuario.getEmail()))
-                .collect(Collectors.toList());
     }
 }

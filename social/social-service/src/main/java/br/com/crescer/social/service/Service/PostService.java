@@ -11,6 +11,7 @@ import br.com.crescer.social.entity.Usuario;
 import br.com.crescer.social.service.Repository.PostRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,5 +37,16 @@ public class PostService {
         return repository.findAllByOrderByIdDesc();
     }
     
+    public List<Post> filtrarPosts(List<Post> posts, Usuario usuario) {
+        
+        List<String> emailAmigos = usuario.getAmigos().stream()
+                .map(a -> a.getEmail())
+                .collect(Collectors.toList());
+        
+        return posts.stream()
+                .filter (p -> emailAmigos.contains(p.getPerfilAutor().getEmail()) 
+                      || p.getPerfilAutor().getEmail().equals(usuario.getEmail()))
+                .collect(Collectors.toList());
+    }
     
 }
