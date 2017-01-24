@@ -75,7 +75,7 @@ public class CadastroController {
             //Este método save fará um Parse de Usuario para Amigo.
             amigoService.save(usuario);
 
-            String nome = usuario.getNome().split(" ")[0];
+            String nome = usuario.getPerfil().getNome().split(" ")[0];
             redirectAttributes.addFlashAttribute("msg", nome + " foi salvo(a) com sucesso!");
             return "redirect:cadastro";
         }
