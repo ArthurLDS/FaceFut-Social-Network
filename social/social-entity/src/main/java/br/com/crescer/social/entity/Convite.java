@@ -47,16 +47,6 @@ public class Convite implements Serializable {
     @Column(name = "ID_CONVITE")
     private Long id;
 
-    /*@NotNull
-     @Basic(optional = false)
-     @Column(name = "REMETENTE")
-     private String remetente;
-    
-     @NotNull
-     @Basic(optional = false)
-     @Column(name = "DESTINATARIO")
-     private String destinatario;
-     */
     @NotNull
     @Basic(optional = false)
     @Column(name = "DATA_CONVITE")
@@ -73,14 +63,6 @@ public class Convite implements Serializable {
     public Long getId() {
         return id;
     }
-
-    /*public String getRemetente() {
-     return remetente;
-     }
-
-     public String getDestinatario() {
-     return destinatario;
-     }*/
     public Date getData() {
         return data;
     }
@@ -88,14 +70,7 @@ public class Convite implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
-    /*public void setRemetente(String remetente) {
-     this.remetente = remetente;
-     }
-
-     public void setDestinatario(String destinatario) {
-     this.destinatario = destinatario;
-     }*/
+    
     public void setData(Date data) {
         this.data = data;
     }
