@@ -40,7 +40,7 @@ public class PostService {
     public List<Post> filtrarPosts(List<Post> posts, Usuario usuario) {
         
         List<String> emailAmigos = usuario.getAmigos().stream()
-                .map(a -> a.getEmail())
+                .map(a -> a.getPerfil().getEmail())
                 .collect(Collectors.toList());
         
         return posts.stream()

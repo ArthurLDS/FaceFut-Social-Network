@@ -24,7 +24,15 @@ public class PerfilService {
 
     @Autowired
     PerfilRepository perfilRepository;
-
+    
+    public Perfil findById(Long id){
+        return perfilRepository.findOne(id);
+    }
+    
+    public Iterable<Perfil> findByNomeIgnoreCaseContaining(String nome){
+        return perfilRepository.findByNomeIgnoreCaseContaining(nome);
+    }
+        
     public void save(Perfil perfil) {
         perfilRepository.save(perfil);
     }
