@@ -7,9 +7,11 @@ package br.com.crescer.social.web;
 
 import br.com.crescer.social.entity.Amigo;
 import br.com.crescer.social.entity.Convite;
+import br.com.crescer.social.entity.Perfil;
 import br.com.crescer.social.entity.Usuario;
 import br.com.crescer.social.service.Service.AmigoService;
 import br.com.crescer.social.service.Service.UsuarioService;
+import br.com.crescer.social.service.Service.PerfilService;     
 import java.util.ArrayList;
 import org.springframework.security.core.userdetails.User;
 import java.util.List;
@@ -32,25 +34,29 @@ public class PesquisaAmigoController {
     AmigoService amigoService;
     @Autowired
     UsuarioService usuarioService;
-
+    @Autowired
+    PerfilService perfilService;
+    
     @RequestMapping(value = "pesquisarAmigo", method = RequestMethod.GET)
     public String pesquisarAmigo(Model model, String filtro) {
         User userSessao = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Usuario usuario = usuarioService.findByEmail(userSessao.getUsername());
         
-        List<Amigo> amigos = (List)amigoService.findByNomeIgnoreCaseContaining(filtro);
+        List<Perfil> perfis = (List)perfilService.findByNomeIgnoreCaseContaining(filtro);
         
-        model.addAttribute("amigos",amigos.stream()
-                                    .filter(a -> !a.getEmail().equals(usuario.getEmail()))
+        model.addAttribute("perfis",perfis.stream()
+                                    .filter(p -> !p.getEmail().equals(usuario.getEmail()))
                                     .collect(Collectors.toList()));
         
-        model.addAttribute("amigosUsuario", usuario.getAmigos());
+        model.addAttribute("perfisAmigosUsuario", usuario.getAmigos().stream()
+                                    .map(a -> a.getPerfil())
+                                    .collect(Collectors.toList()));
         
         List<String> convitesEnviados = usuario.getConvitesEnviados().stream()
-                .map(c -> c.getPerfilDestinatario().getEmail())
-                .collect(Collectors.toList());
-        
+                                    .map(c -> c.getPerfilDestinatario().getEmail())
+                                    .collect(Collectors.toList());
         model.addAttribute("convitesEnviados", convitesEnviados);
+        
         return "partialPesquisarAmigos";
     }
 }
