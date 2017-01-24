@@ -40,12 +40,6 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_USUARIO")
     private Long id;
-
-    @NotNull
-    @Size(min = 1, max = 255, message = "O mínimo de caracteres é 1 e o máximo é 255.")
-    @Basic(optional = false)
-    @Column(name = "NM_USUARIO")
-    private String nome;
     
     @NotNull
     @Size(min = 1, max = 255, message = "O mínimo de caracteres é 1 e o máximo é 255.")
@@ -58,11 +52,6 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "SENHA")
     private String senha;
-    
-    @NotNull
-    @JoinColumn(name = "ID_TIME", nullable = false, foreignKey = @ForeignKey(name="FK_USUARIO_TIME"))
-    @ManyToOne(targetEntity = Time.class)
-    private Time time;
     
     @ManyToMany
     private List<Amigo> amigos;
@@ -124,10 +113,6 @@ public class Usuario implements Serializable {
         return id;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -136,20 +121,8 @@ public class Usuario implements Serializable {
         return senha;
     }
 
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
-    }
-
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public void setEmail(String email) {
