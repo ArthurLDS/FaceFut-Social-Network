@@ -23,7 +23,7 @@
                             <img class="perfil-img perfil-img-med" th:src="${usuario.perfil.imagemPerfil}"/>
                         </article>
                         <article class="col-md-8 block-perfil block-info-perfil">
-                            <div class="block-perfil-nome"><strong><spam th:text="${usuario.nome}" ></spam></strong></div>
+                            <div class="block-perfil-nome"><strong><spam th:text="${usuario.perfil.nome}" ></spam></strong></div>
 
                             <div class="block-perfil-info-adc">
                                 <spam id="spam-num-amigos" class="badge"></spam> 
@@ -32,7 +32,7 @@
 
                             <div class="block-perfil-info-adc">
                                 <i class="fa fa-heart" style="font-size:18px;color:red"></i> 
-                                <spam th:text="${usuario.time.nome}"></spam>
+                                <spam th:text="${usuario.perfil.time.nome}"></spam>
                             </div>    
                         </article>
                     </article>
