@@ -66,15 +66,13 @@ public class CadastroController {
 
         if (!bindingResult.hasErrors() && perfilService.salvarArquivo(uploadfile)) {
             
-            Perfil perfil = perfilService.save(uploadfile);
+            Perfil perfil = perfilService.save(usuario, uploadfile);
             
             usuario.setPerfil(perfil);
             usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
             
             service.save(usuario);
-            //Este método save fará um Parse de Usuario para Amigo.
-            amigoService.save(usuario);
-
+            
             String nome = usuario.getPerfil().getNome().split(" ")[0];
             redirectAttributes.addFlashAttribute("msg", nome + " foi salvo(a) com sucesso!");
             return "redirect:cadastro";
