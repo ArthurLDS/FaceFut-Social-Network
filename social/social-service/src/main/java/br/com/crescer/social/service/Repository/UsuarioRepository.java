@@ -5,6 +5,7 @@
  */
 package br.com.crescer.social.service.Repository;
 
+import br.com.crescer.social.entity.Perfil;
 import br.com.crescer.social.entity.Usuario;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -15,4 +16,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, Long>{
     
     Usuario findByEmail(String email);
+    
+    Usuario findByPerfil(Perfil perfil);
 }

@@ -7,6 +7,7 @@ package br.com.crescer.social.service.Repository;
 
 import antlr.collections.List;
 import br.com.crescer.social.entity.Amigo;
+import br.com.crescer.social.entity.Perfil;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -16,12 +17,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface AmigoRepository extends PagingAndSortingRepository<Amigo, Long> {
 
-    public Iterable<Amigo> findByEmail(String email);
-    
-    public Iterable<Amigo> findByNome(String nome);
+    public Amigo findByPerfil(Perfil perfil);
     
     public Amigo findById(Long id);
-
-    public Iterable<Amigo> findByNomeIgnoreCaseContaining(String nome);
     
 }

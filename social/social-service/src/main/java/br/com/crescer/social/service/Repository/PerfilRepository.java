@@ -15,5 +15,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface PerfilRepository extends CrudRepository<Perfil, Long>{
     
-    
+    public Iterable<Perfil> findByNomeIgnoreCaseContaining(String nome);
 }
