@@ -6,6 +6,7 @@
 package br.com.crescer.social.service.Service;
 
 import br.com.crescer.social.entity.Perfil;
+import br.com.crescer.social.entity.Usuario;
 import br.com.crescer.social.service.Repository.PerfilRepository;
 import java.io.BufferedOutputStream;
 
@@ -37,8 +38,9 @@ public class PerfilService {
         perfilRepository.save(perfil);
     }
 
-    public Perfil save(MultipartFile multipartFile) {
-        Perfil perfil = new Perfil();
+    public Perfil save(Usuario usuario, MultipartFile multipartFile) {
+        Perfil perfil = usuario.getPerfil();
+        perfil.setEmail(usuario.getEmail());
         perfil.setImagemPerfil("/imgs/" + multipartFile.getOriginalFilename());
         
         return perfilRepository.save(perfil);
