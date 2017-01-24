@@ -3,17 +3,17 @@
 */
 
 body{
-    background: url(https://www.futbin.com/design/img/packs/packsbg.jpg?v=133333445) no-repeat center center fixed;
-    /*background-image: url( https://braziljs.org/styles/images/bg02.png), 
-                      url(https://braziljs.org/styles/images/bg03.png),
-                      url(https://braziljs.org/styles/images/bg01.png);
-    background-repeat: no-repeat;
-    background-image: url(https://raw.githubusercontent.com/ArthurLDS/FaceFut/master/bg-image.jpg);
-    background-repeat: no-repeat;
+    background-image: url(https://www.futbin.com/design/img/packs/packsbg.jpg?v=133333445);
+    background-position-x: center;
+    background-position-y: center;
     background-size: cover;
+    background-repeat-x: no-repeat;
+    background-repeat-y: no-repeat;
     background-attachment: fixed;
-    color: #fdfdfd;*/
-    color: #f9f9f9;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+    color: #FFF;
 }
 a {
     color: #1243ff;
@@ -87,6 +87,26 @@ a:hover, a:focus {
     margin-bottom: 0px;
     font-size: 16px;
 }
+/* Btns */
+.btn-post-refresh{
+    color: #FFF;
+    text-decoration: none;
+    -webkit-transition: -webkit-transform .8s ease-in-out;
+    transition:         transform .8s ease-in-out; 
+}
+.btn-amigo-refresh:hover{
+    color: #FFF;
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);;
+}
+.btn-post-refresh:link{
+    color: #FFF;
+    text-decoration: none; 
+}
+.btn-amigo-refresh:focus{
+    color: #FFF;
+}
+
 /* Home */
 .divisor{
     height: 80px;

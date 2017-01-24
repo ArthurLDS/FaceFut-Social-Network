@@ -39,5 +39,5 @@ postagem.carregarPosts = function () {
             .then(function (response) {
                 $('#box-posts').html(response);
             });
-}
+};
 
