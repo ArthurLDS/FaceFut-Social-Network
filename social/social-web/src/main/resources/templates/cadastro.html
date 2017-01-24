@@ -25,10 +25,10 @@ and open the template in the editor.
 
                     <form th:action="@{/cadastroForm}" id="upload-file-form" th:object="${usuario}" method="post" enctype="multipart/form-data">
 
-                        <article th:classappend="${#fields.hasErrors('nome')} ? has-error" class="form-group" >
+                        <article th:classappend="${#fields.hasErrors('perfil.nome')} ? has-error" class="form-group" >
 
-                            <input class="form-control" type="text" th:field="*{nome}" placeholder="Nome completo" required="required"/>
-                            <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="help-block"></span>
+                            <input class="form-control" type="text" th:field="*{perfil.nome}" placeholder="Nome completo" required="required"/>
+                            <span th:if="${#fields.hasErrors('perfil.nome')}" th:errors="*{perfil.nome}" class="help-block"></span>
 
                         </article>
 
@@ -38,7 +38,7 @@ and open the template in the editor.
 
                         <article class="form-group">
 
-                            <select class="form-control" th:field="*{time}" required="required">
+                            <select class="form-control" th:field="*{perfil.time}" required="required">
 
                                 <option th:each="time :${times}" th:value="${time.id}" th:text="${time.nome}">
                                 </option>
