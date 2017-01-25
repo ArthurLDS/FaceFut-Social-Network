@@ -33,6 +33,21 @@
                         </article>
 
                         <article class="form-group">
+                            <input class="form-control" type="text" th:field="*{perfil.dataNascimento}" placeholder="Data de Nascimento" required="required"/>
+                        </article>
+
+                        <!--<article class="form-group">
+                            <div>
+                                <input type="radio" th:field="*{perfil.sexo}" value="masculino"/>
+                                <label >Maculino</label>
+                            </div>
+                            <div>
+                                <input type="radio" th:field="*{perfil.sexo}" name="feminino" value="feminino"/>
+                                <label name="feminino">Feminino</label>
+                            </div>
+                        </article>-->
+
+                        <article class="form-group">
 
                             <select class="form-control" th:field="*{perfil.time}" required="required">
 
