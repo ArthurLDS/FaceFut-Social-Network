@@ -5,8 +5,8 @@
  */
 package br.com.crescer.social.service.Repository;
 
-import br.com.crescer.social.entity.Perfil;
-import br.com.crescer.social.entity.Post;
+import br.com.crescer.social.entity.entities.Perfil;
+import br.com.crescer.social.entity.entities.Post;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 

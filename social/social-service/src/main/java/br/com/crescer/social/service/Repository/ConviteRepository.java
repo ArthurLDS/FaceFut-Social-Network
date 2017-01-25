@@ -5,8 +5,8 @@
  */
 package br.com.crescer.social.service.Repository;
 
-import br.com.crescer.social.entity.Convite;
-import br.com.crescer.social.entity.Perfil;
+import br.com.crescer.social.entity.entities.Convite;
+import br.com.crescer.social.entity.entities.Perfil;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**

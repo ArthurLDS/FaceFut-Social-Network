@@ -5,7 +5,7 @@
  */
 package br.com.crescer.social.service.Service;
 
-import br.com.crescer.social.entity.Time;
+import br.com.crescer.social.entity.entities.Time;
 import br.com.crescer.social.service.Repository.TimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

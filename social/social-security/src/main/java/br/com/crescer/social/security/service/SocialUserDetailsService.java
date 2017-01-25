@@ -1,6 +1,6 @@
 package br.com.crescer.social.security.service;
 
-import br.com.crescer.social.entity.Usuario;
+import br.com.crescer.social.entity.entities.Usuario;
 import br.com.crescer.social.security.enumeration.SocialRoles;
 import br.com.crescer.social.service.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;

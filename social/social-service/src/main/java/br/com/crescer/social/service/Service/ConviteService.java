@@ -5,9 +5,9 @@
  */
 package br.com.crescer.social.service.Service;
 
-import br.com.crescer.social.entity.Convite;
-import br.com.crescer.social.entity.Perfil;
-import br.com.crescer.social.entity.Usuario;
+import br.com.crescer.social.entity.entities.Convite;
+import br.com.crescer.social.entity.entities.Perfil;
+import br.com.crescer.social.entity.entities.Usuario;
 import br.com.crescer.social.service.Repository.ConviteRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

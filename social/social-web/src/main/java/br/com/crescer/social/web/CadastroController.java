@@ -5,11 +5,11 @@
  */
 package br.com.crescer.social.web;
 
-import br.com.crescer.social.entity.Perfil;
-import br.com.crescer.social.entity.Time;
+import br.com.crescer.social.entity.entities.Perfil;
+import br.com.crescer.social.entity.entities.Time;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import br.com.crescer.social.entity.Usuario;
+import br.com.crescer.social.entity.entities.Usuario;
 import br.com.crescer.social.service.Service.AmigoService;
 import br.com.crescer.social.service.Service.PerfilService;
 import br.com.crescer.social.service.Service.TimeService;

@@ -5,9 +5,9 @@
  */
 package br.com.crescer.social.web;
 
-import br.com.crescer.social.entity.Amigo;
-import br.com.crescer.social.entity.Post;
-import br.com.crescer.social.entity.Usuario;
+import br.com.crescer.social.entity.entities.Amigo;
+import br.com.crescer.social.entity.entities.Post;
+import br.com.crescer.social.entity.entities.Usuario;
 import br.com.crescer.social.service.Service.AmigoService;
 import br.com.crescer.social.service.Service.PostService;
 import br.com.crescer.social.service.Service.UsuarioService;

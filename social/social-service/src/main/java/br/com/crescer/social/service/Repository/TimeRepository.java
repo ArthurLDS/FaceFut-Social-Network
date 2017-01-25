@@ -5,7 +5,7 @@
  */
 package br.com.crescer.social.service.Repository;
 
-import br.com.crescer.social.entity.Time;
+import br.com.crescer.social.entity.entities.Time;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 

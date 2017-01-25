@@ -1,7 +1,7 @@
     package br.com.crescer.social.web;
 
-import br.com.crescer.social.entity.Time;
-import br.com.crescer.social.entity.Usuario;
+import br.com.crescer.social.entity.entities.Time;
+import br.com.crescer.social.entity.entities.Usuario;
 import br.com.crescer.social.service.Service.TimeService;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
