@@ -5,9 +5,9 @@
  */
 package br.com.crescer.social.web;
 
-import br.com.crescer.social.entity.Perfil;
-import br.com.crescer.social.entity.Post;
-import br.com.crescer.social.entity.Usuario;
+import br.com.crescer.social.entity.entities.Perfil;
+import br.com.crescer.social.entity.entities.Post;
+import br.com.crescer.social.entity.entities.Usuario;
 import br.com.crescer.social.service.Service.PerfilService;
 import br.com.crescer.social.service.Service.PostService;
 import br.com.crescer.social.service.Service.UsuarioService;
@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -33,13 +34,11 @@ public class PerfilController {
     PostService postService;
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String carrgarView(Model model) {
-        Usuario usuario = usuarioService.findOne(1000l);
-        Perfil perfil = perfilService.findById(1000l);
-        List<Post> posts = usuario.getPosts();
+    public String carrgarView(Model model, @RequestParam(required = true) Long id) {
         
-        model.addAttribute("posts", posts);
-        model.addAttribute("perfil", perfil);
+        Usuario usuario = usuarioService.findByPerfil(perfilService.findById(id));
+        
+        model.addAttribute("usuario", usuario);
         return "perfil";
     }
 }
