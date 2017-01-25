@@ -52,3 +52,5 @@ bld/
 [Bb]uild[Ll]og.*
 /social/social-entity/target/
 /social/social-security/target/
+/social/social-web/target/
+/social/social-service/target/
