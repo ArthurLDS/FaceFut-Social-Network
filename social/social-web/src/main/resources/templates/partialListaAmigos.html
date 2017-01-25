@@ -10,7 +10,9 @@
         </article>
         <article class="col-md-10" style="padding-left: 20px;">
             <div>
-                <strong><spam th:text="${amigo.perfil.nome}">Remetente</spam></strong>
+                <a class="link-style" th:href="@{${'/profile'}(id=${amigo.perfil.id})}">
+                    <strong><spam th:text="${amigo.perfil.nome}">Remetente</spam></strong>
+                </a>
             </div>
             <div>   
                 <i class="fa fa-heart" style="font-size:14px;color:red"></i>

@@ -8,7 +8,10 @@
         <img class="perfil-img perfil-img-min" th:src="${post.perfilAutor.imagemPerfil}"/>
     </article>
     <article class="col-md-10" style="padding-left: 0px;">
-        <strong><p style="margin: 0px;" th:text="${post.perfilAutor.nome}">Autor</p></strong>
+        
+        <a class="link-style" th:href="@{${'/profile'}(id=${post.perfilAutor.id})}">
+            <strong><p style="margin: 0px;" th:text="${post.perfilAutor.nome}">Autor</p></strong>
+        </a>
         
         <i class="fa fa-futbol-o" style="font-size: 12px; color: #ddd;"></i>
         <spam class="post-time" th:text="${post.perfilAutor.time.nome}">Time</spam>

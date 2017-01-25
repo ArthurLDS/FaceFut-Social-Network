@@ -23,7 +23,11 @@
                             <img class="perfil-img perfil-img-med" th:src="${usuario.perfil.imagemPerfil}"/>
                         </article>
                         <article class="col-md-8 block-perfil block-info-perfil">
-                            <div class="block-perfil-nome"><strong><spam th:text="${usuario.perfil.nome}" ></spam></strong></div>
+                            <div class="block-perfil-nome">
+                                <a class="link-style" th:href="@{${'/profile'}(id=${usuario.perfil.id})}">
+                                    <strong><spam th:text="${usuario.perfil.nome}" ></spam></strong>
+                                </a>
+                            </div>
 
                             <div class="block-perfil-info-adc">
                                 <spam id="spam-num-amigos" class="badge"></spam> 
@@ -65,7 +69,7 @@
                     <section class="panel-body">
 
                         <article class="form-group">
-                            <textarea onKeyPress="return submitenter(this, event)" id="txt-post" required="required" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
+                            <textarea id="txt-post" required="required" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
                         </article>
                         <button id="btn-postar" class="btn btn-success pull-right" type="sumit" name="button">
                             Publicar
@@ -78,7 +82,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <i class="fa fa-commenting-o"></i> Posts
-                        <a class="btn-post-refresh" th:href="'javascript:postagem.carregarPosts()'"> 
+                        <a class="btn-post-refresh link-style" th:href="'javascript:postagem.carregarPosts()'"> 
                             <i class="pull-right fa fa-refresh" aria-hidden="true" style="font-size: 15pt;"></i>
                         </a>
                     </div>

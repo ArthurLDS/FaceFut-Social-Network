@@ -15,7 +15,10 @@
         </article>
         <article class="col-md-10" style="padding-left: 0px;">
             <div>
-                Nome: <strong><spam style="margin: 0px;" th:text="${perfil.nome}">Autor</spam></strong>
+                Nome: 
+                <a class="link-style" th:href="@{${'/profile'}(id=${perfil.id})}">
+                    <strong><spam style="margin: 0px;" th:text="${perfil.nome}">Autor</spam></strong>
+                </a>
             </div>
             <div>
                 Email: <strong><spam style="margin: 0px;" th:text="${perfil.email}">Email</spam></strong>
@@ -23,7 +26,7 @@
             <div>
                 Time: <strong><spam th:text="${perfil.time.nome}">Time</spam></strong>
             </div>  
-            
+
             <a th:if="${not #lists.contains(perfisAmigosUsuario, perfil)} and ${ not #lists.contains(convitesEnviados, perfil.email)}" th:id="'btn-adicionar-'+${perfil.id}" th:href="'javascript:amigo.enviarConvite('+${perfil.id}+')'" class="btn btn-primary btn-adicionar">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
                 Adicionar amigo
@@ -37,7 +40,7 @@
                 <i class="fa fa-check" aria-hidden="true"></i>
                 Convite enviado
             </a>
-            
+
         </article>
     </div>
 </article>

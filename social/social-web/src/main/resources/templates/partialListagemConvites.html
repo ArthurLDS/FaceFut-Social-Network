@@ -10,17 +10,19 @@
         </article>
         <article class="col-md-10" style="padding-left: 15px;">
             <div>
-                <strong><spam th:text="${convite.perfilRemetente.nome}">Remetente</spam></strong>
+                <a class="link-style" th:href="@{${'/profile'}(id=${convite.perfilRemetente.id})}">
+                    <strong><spam th:text="${convite.perfilRemetente.nome}">Remetente</spam></strong>
+                </a>
             </div>
             <div>
                 <spam th:text="${#dates.format(convite.data, 'dd/MM/yyyy hh:mm')}" style="font-size: 10pt;">Data</spam>
             </div>
-            
+
             <a th:href="'javascript:amigo.aceitarConvite('+${convite.id}+')'" class="btn btn-success btn-solicitacao">
                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 Aceitar
             </a>
-            
+
             <a th:href="'javascript:amigo.recusarConvite('+${convite.id}+')'" class="btn btn-danger btn-solicitacao">
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 Recusar
