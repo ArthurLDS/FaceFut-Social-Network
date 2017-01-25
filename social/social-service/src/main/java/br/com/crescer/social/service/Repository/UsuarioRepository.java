@@ -14,7 +14,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  * @author Arthur
  */
 public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, Long>{
-    
+   
     Usuario findByEmail(String email);
     
     Usuario findByPerfil(Perfil perfil);

@@ -6,6 +6,7 @@
 package br.com.crescer.social.service.Service;
 
 import br.com.crescer.social.entity.Amigo;
+import br.com.crescer.social.entity.Perfil;
 import br.com.crescer.social.entity.Post;
 import br.com.crescer.social.entity.Usuario;
 import br.com.crescer.social.service.Repository.PostRepository;

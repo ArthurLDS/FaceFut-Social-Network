@@ -27,7 +27,11 @@ public class UsuarioService {
     public Iterable<Usuario> listAll() {
         return repository.findAll();
     }
-
+    
+    public Usuario findOne(Long id){
+        return repository.findOne(id);
+    }
+    
     public Usuario findByPerfil(Perfil perfil) {
         return repository.findByPerfil(perfil);
     }

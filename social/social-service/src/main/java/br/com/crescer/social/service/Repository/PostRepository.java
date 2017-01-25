@@ -5,6 +5,7 @@
  */
 package br.com.crescer.social.service.Repository;
 
+import br.com.crescer.social.entity.Perfil;
 import br.com.crescer.social.entity.Post;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
@@ -15,5 +16,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface PostRepository extends CrudRepository<Post, Long>{
     
-    public List<Post> findAllByOrderByIdDesc(); 
+    public List<Post> findAllByOrderByIdDesc();
 }
