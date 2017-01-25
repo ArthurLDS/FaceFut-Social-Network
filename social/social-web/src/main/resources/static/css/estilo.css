@@ -15,6 +15,9 @@ body{
     background-color: initial;
     color: #FFF;
 }
+.badge{
+    padding: 3px 5px;
+}
 hr{
     margin-top: 10px;
     margin-bottom: 10px;
@@ -98,16 +101,19 @@ a:hover, a:focus {
     -webkit-transition: -webkit-transform .8s ease-in-out;
     transition:         transform .8s ease-in-out;
 }
-.btn-amigo-refresh:hover{
+.link-style{
+    color: #FFF;
+}
+.link-style:hover{
     color: #FFF;
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);;
 }
-.btn-post-refresh:link{
+.link-style:link{
     color: #FFF;
     text-decoration: none;
 }
-.btn-amigo-refresh:focus{
+.link-style:focus{
     color: #FFF;
 }
 
@@ -212,7 +218,6 @@ a:hover, a:focus {
 }
 .perfil-col-content{
     padding: 0;
-    margin: 10px 10px 0px 0px;
     background-color: #FFF;
     border: 2px solid #DDD;
     border-radius: 5px;
@@ -224,7 +229,25 @@ a:hover, a:focus {
 .perfil-posts .panel-body{
     padding: 15px;
 }
-
+.apresentacao-itens{
+    margin-bottom: 4px;
+}
+.apresentacao-itens i{
+    font-size: 12pt;
+}
+.apresentacao-itens .icon{ 
+    margin-right: 3px;
+}
+.perfil-posts{
+    margin-bottom: 10px;
+    padding: 0px 0px 0px 10px;
+}
+.perfil-content{
+    margin-top: 10px;
+}
+.post-info-perfil{
+    color: #777;
+}
 /* Cadastro */
 .cadastro-label-file{
     font-size: 12pt;
