@@ -1,5 +1,5 @@
-/* 
-    @Author Arthur Lima de Souza 
+/*
+    @Author Arthur Lima de Souza
 */
 
 body{
@@ -14,6 +14,10 @@ body{
     background-clip: initial;
     background-color: initial;
     color: #FFF;
+}
+hr{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 a {
     color: #1243ff;
@@ -54,7 +58,7 @@ a:hover, a:focus {
 /* Cadastro */
 .cadastro-panel{
     background-color: rgba(235,235,235, 0.7);
-    margin-top: 60px; 
+    margin-top: 60px;
 }
 
 /* Logo */
@@ -92,7 +96,7 @@ a:hover, a:focus {
     color: #FFF;
     text-decoration: none;
     -webkit-transition: -webkit-transform .8s ease-in-out;
-    transition:         transform .8s ease-in-out; 
+    transition:         transform .8s ease-in-out;
 }
 .btn-amigo-refresh:hover{
     color: #FFF;
@@ -101,7 +105,7 @@ a:hover, a:focus {
 }
 .btn-post-refresh:link{
     color: #FFF;
-    text-decoration: none; 
+    text-decoration: none;
 }
 .btn-amigo-refresh:focus{
     color: #FFF;
@@ -163,8 +167,62 @@ a:hover, a:focus {
     width: 50px;
 }
 .perfil-img-med{
-    width: 95px; 
+    width: 95px;
     height: 97px;
+}
+.perfil-img-lg{
+    border: 2px solid #18bc9c;
+    box-shadow: 0px 0px 15px #464646;
+    width: 150px;
+    height: 150px;
+}
+/* -- Tela de Perfil -- */
+.block-perfil-heading{
+    background-image: url(https://scontent-gru2-1.xx.fbcdn.net/v/t1.0-9/15578666_1302103556514343_6474261687287703631_n.jpg?oh=8119ce92561d660207d12bfde4cd059c&oe=591C4D4B);
+    background-position-x: center;
+    background-position-y: center;
+    height: 260px;
+}
+.divisor-perfil{
+    margin-top: 61px;
+}
+.perfil-tools-heading{
+    padding: 5px;
+    border: 2px solid #DDD;
+    border-top: 0px;
+    box-shadow: 1px 1px 8px #777;
+    border-radius: 0px 0px 5px 5px;
+    background-color: #FFF;
+}
+.perfil-tools-heading a{
+    color: #6d6d6d;
+}
+.perfil-tools-heading img{
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+}
+.perfil-tools-heading h3{
+    color: #FFF;
+    position: absolute;
+    bottom: 50px;
+    left: 179px;
+    font-weight: bolder;
+    text-shadow: 0px 0px 10px #000;
+}
+.perfil-col-content{
+    padding: 0;
+    margin: 10px 10px 0px 0px;
+    background-color: #FFF;
+    border: 2px solid #DDD;
+    border-radius: 5px;
+    box-shadow: 1px 1px 8px #777;
+}
+.perfil-apresentacao .panel-body{
+    padding-top: 0px;
+}
+.perfil-posts .panel-body{
+    padding: 15px;
 }
 
 /* Cadastro */
@@ -177,5 +235,3 @@ a:hover, a:focus {
     color: #FFF;
     text-shadow: 1px 1px 10px #000;
 }
-
-

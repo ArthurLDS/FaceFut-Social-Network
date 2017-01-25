@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html>
+    <head th:replace="fragments :: head('FaceFut - Profile')">
+
+    </head>
+    <body>
+        <style>
+            body{
+                color: #444;
+            }
+        </style>
+        <nav th:replace="fragments :: navbar">
+
+        </nav>
+
+        <div class="divisor-perfil"></div>
+
+        <section class="container">
+            <section class="col-md-10 block-perfil-heading">
+
+            </section>
+            <article class="col-md-10 perfil-tools-heading">
+                <img class="perfil-img perfil-img-lg" th:src="${perfil.imagemPerfil}"/>
+                <h3 th:text="${perfil.nome}"></h3>
+
+                <article style="padding-left: 155px;" class="hidden-xs">
+                    <ul class="nav nav-pills">
+                        <li role="presentation"><a href="#"><i class="fa fa-group"></i>
+                                <spam class="hidden-sm"> Amigos</spam></a>
+                        </li>
+                        <li role="presentation"><a href="#"><i class="fa fa-envelope-o"></i> 
+                                <spam class="hidden-sm"> Convites</spam></a>
+                        </li>
+                        <li role="presentation"><a href="#"><i class="fa fa-commenting-o"></i> 
+                                <spam class="hidden-sm"> Posts</spam></a>
+                        </li>
+                        <li role="presentation" class="pull-right"><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> 
+                                <spam class="hidden-sm">Configurações</spam></a>
+                        </li>
+                    </ul>
+                </article>
+            </article>
+
+        </section>
+
+        <section class="container perfil-content perfil-apresentacao">
+            <section class="col-md-3 perfil-col-content perfil-info">
+                <header class="panel-heading">
+                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    Apresentação
+                    <hr/>
+                </header>
+                <section class="panel-body">
+                    <spam id="spam-num-amigos" class="badge">9</spam> 
+                    Amigos
+                    <br/>
+                    <i class="fa fa-heart" style="font-size:18px;color:red"></i> 
+                    <spam>Internacional</spam>
+                </section>
+            </section>
+            <section class="col-md-7 ">
+                <div th:each="post :${posts}" class=" perfil-col-content perfil-posts" style="padding-right: 0px;">
+                    <div class="panel-body">
+                        <article class="col-md-2" style="padding-right: 0px;">
+                            <img class="perfil-img perfil-img-min" th:src="${post.perfilAutor.imagemPerfil}"/>
+                        </article>
+                        <article class="col-md-10" style="padding-left: 0px;">
+                            <strong><p style="margin: 0px;" th:text="${post.perfilAutor.nome}">Autor</p></strong>
+
+                            <i class="fa fa-futbol-o" style="font-size: 12px; color: #ddd;"></i>
+                            <spam class="post-time" th:text="${post.perfilAutor.time.nome}">Time</spam>
+                            &nbsp;·
+                            <spam class="post-data" 
+                                  th:text="${#dates.format(post.data, 'dd/MM/yyyy hh:mm')}" style="font-size: 12px;">
+                                Data
+                            </spam><br/>
+
+                            <p class="post-txt" th:text="${post.texto}">Texto</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+
+        <footer th:replace="fragments :: footer">
+
+        </footer>
+    </body>
+</html>

@@ -6,7 +6,7 @@ INSERT INTO TIME (ID_TIME, NM_TIME) VALUES(4, 'Juventude');
 
 -- Perfis --
 INSERT INTO PERFIL(ID_PERFIL, NOME, EMAIL, ID_TIME,IMAGEM_PERFIL)
-VALUES(1000, 'Arthur Lima de Souza', 'arthurlds73@gmail.com', 1, '/imgs/01-cnorris.png');
+VALUES(1000, 'Arthur Lima de Souza', 'arthurlds73@gmail.com', 1, '/imgs/arthur.jpg');
 
 INSERT INTO PERFIL(ID_PERFIL, NOME, EMAIL, ID_TIME,IMAGEM_PERFIL)
 VALUES(1001, 'Rafael de Souza', 'rafaeldesouza@gmail.com', 1, '/imgs/chaves.jpg');
