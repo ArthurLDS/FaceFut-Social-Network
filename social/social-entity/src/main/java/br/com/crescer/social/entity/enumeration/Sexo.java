@@ -11,12 +11,18 @@ package br.com.crescer.social.entity.enumeration;
  */
 public enum Sexo {
     
-    Feminino("Feminino"),
-    Masculino("Masculino");
+    FEMININO("Feminino"),
+    MASCULINO("Masculino");
     
-    private final String sexo;
+    private final String name;
     
     private Sexo(String s){
-        sexo = s;
+        name = s;
     }
+
+    public String getName() {
+        return name;
+    }
+    
+    
 }
