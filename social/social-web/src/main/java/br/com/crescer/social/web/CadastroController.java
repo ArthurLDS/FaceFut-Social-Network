@@ -10,6 +10,7 @@ import br.com.crescer.social.entity.entities.Time;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.crescer.social.entity.entities.Usuario;
+import br.com.crescer.social.entity.enumeration.Sexo;
 import br.com.crescer.social.service.Service.AmigoService;
 import br.com.crescer.social.service.Service.PerfilService;
 import br.com.crescer.social.service.Service.TimeService;
@@ -18,6 +19,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +55,12 @@ public class CadastroController {
 
     @RequestMapping(value = "/cadastro", method = RequestMethod.GET)
     String cadastro(Model model) {
-
+        
+        List<Sexo> generos = new ArrayList<>();
+        generos.add(Sexo.FEMININO);
+        generos.add(Sexo.MASCULINO);
+        model.addAttribute("generos", generos);
+        
         Usuario usuario = new Usuario();
         model.addAttribute("usuario", usuario);
         Iterable<Time> times = timeService.findAll();
