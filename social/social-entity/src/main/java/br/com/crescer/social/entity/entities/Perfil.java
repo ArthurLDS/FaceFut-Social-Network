@@ -29,6 +29,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -57,9 +58,10 @@ public class Perfil implements Serializable{
     @Column(name = "EMAIL", unique = true)
     private String email;
     
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.TIMESTAMP)
     @Basic(optional = false)
     @Column(name = "DATA_NASCIMENTO")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date dataNascimento;
     
     @Basic(optional = false)
