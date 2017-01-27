@@ -23,43 +23,41 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PostService {
-    
+
     @Autowired
     PostRepository repository;
-    
-    public Iterable<Post> findAll(){
+
+    public Iterable<Post> findAll() {
         return repository.findAll();
     }
-    
-    public void save(Post post){
+
+    public void save(Post post) {
         repository.save(post);
     }
-    
+
     public List<Post> findAllByOrderByIdDesc() {
         return repository.findAllByOrderByIdDesc();
     }
-    
+
     public List<Post> filtrarPosts(List<Post> posts, Usuario usuario) {
-        
+
         List<String> emailAmigos = usuario.getAmigos().stream()
                 .map(a -> a.getPerfil().getEmail())
                 .collect(Collectors.toList());
-        
+
         return posts.stream()
-                .filter (p -> emailAmigos.contains(p.getPerfilAutor().getEmail()) 
-                      || p.getPerfilAutor().getEmail().equals(usuario.getEmail()))
+                .filter(p -> emailAmigos.contains(p.getPerfilAutor().getEmail())
+                        || p.getPerfilAutor().getEmail().equals(usuario.getEmail()))
                 .collect(Collectors.toList());
     }
-    
-    public Post salvar(String caminhoImagem, String texto, Usuario usuario){
-        
-        Post post = null;
-        if(!caminhoImagem.isEmpty() && caminhoImagem != null){
-            post = new Post(texto, "/imgs/" + caminhoImagem, new Date(), usuario.getPerfil());
-            return post;
+
+    public Post salvar(String caminhoImagem, String texto, Usuario usuario) {
+
+        if (!caminhoImagem.isEmpty() && caminhoImagem != null) {
+            return new Post(texto, "/imgs/post/" + caminhoImagem, new Date(), usuario.getPerfil());
         }
-        return post = new Post(texto, new Date(), usuario.getPerfil());
-       
+        return new Post(texto, new Date(), usuario.getPerfil());
+
     }
-    
+
 }
