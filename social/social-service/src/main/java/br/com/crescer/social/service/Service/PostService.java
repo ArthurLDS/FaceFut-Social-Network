@@ -11,6 +11,7 @@ import br.com.crescer.social.entity.entities.Post;
 import br.com.crescer.social.entity.entities.Usuario;
 import br.com.crescer.social.service.Repository.PostRepository;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,17 @@ public class PostService {
                 .filter (p -> emailAmigos.contains(p.getPerfilAutor().getEmail()) 
                       || p.getPerfilAutor().getEmail().equals(usuario.getEmail()))
                 .collect(Collectors.toList());
+    }
+    
+    public Post salvar(String caminhoImagem, String texto, Usuario usuario){
+        
+        Post post = null;
+        if(!caminhoImagem.isEmpty() && caminhoImagem != null){
+            post = new Post(texto, "/imgs/" + caminhoImagem, new Date(), usuario.getPerfil());
+            return post;
+        }
+        return post = new Post(texto, new Date(), usuario.getPerfil());
+       
     }
     
 }

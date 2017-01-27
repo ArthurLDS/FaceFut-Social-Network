@@ -7,17 +7,19 @@ package br.com.crescer.social.web;
 
 import br.com.crescer.social.entity.entities.Post;
 import br.com.crescer.social.entity.entities.Usuario;
+import br.com.crescer.social.service.Enumetarion.TipoArquivo;
 import br.com.crescer.social.service.Service.PostService;
+import br.com.crescer.social.service.Utils.FileUtils;
 import br.com.crescer.social.service.Service.UsuarioService;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -34,12 +36,12 @@ public class PostRestController {
     UsuarioService usuarioService;
     
     @RequestMapping(value="postar", method = RequestMethod.POST)
-    public void postar(Model model, String texto){
+    public void postar(String caminhoImagem, String texto){
         
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Usuario usuarioLogado = usuarioService.findByEmail(user.getUsername());
         
-        Post post = new Post(texto, new Date(), usuarioLogado.getPerfil());
+        Post post = postService.salvar(caminhoImagem, texto, usuarioLogado);
         postService.save(post);
         
         List<Post> postsUsuario = usuarioLogado.getPosts();
@@ -47,5 +49,15 @@ public class PostRestController {
         usuarioLogado.setPosts(postsUsuario);
         
         usuarioService.save(usuarioLogado);
+        
+        
+    }
+    
+    @RequestMapping(value="uploadImagem", method = RequestMethod.POST)
+    public String uploadImagem(MultipartFile uploadfile){
+        FileUtils fileUtils = new FileUtils();
+        
+        return fileUtils.salvarArquivo(uploadfile, TipoArquivo.POST_IMG_FILE) 
+               ? uploadfile.getOriginalFilename() : null;
     }
 }
