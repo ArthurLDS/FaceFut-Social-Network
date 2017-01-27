@@ -45,22 +45,4 @@ public class PerfilService {
         
         return perfilRepository.save(perfil);
     }
-
-    public boolean salvarArquivo(MultipartFile arquivo) {
-        try {
-            String nomeArquivo = arquivo.getOriginalFilename();
-            String diretorioArquivo = "C:\\Users\\Arthur\\Documents\\GitHub\\FaceFut\\FaceFut\\social\\social-web\\src\\main\\resources\\static\\imgs";
-            String caminhoArquivo = Paths.get(diretorioArquivo, nomeArquivo).toString();
-
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(caminhoArquivo)));
-            stream.write(arquivo.getBytes());
-            stream.close();
-
-            return true;
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
 }
