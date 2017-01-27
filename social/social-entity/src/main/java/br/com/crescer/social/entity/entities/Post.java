@@ -41,7 +41,13 @@ public class Post implements Serializable {
         this.texto = texto;
         this.data = data;
         this.perfilAutor = perfilAutor;
-    }        
+    }   
+    public Post(String texto, String imagem, Date data, Perfil perfilAutor){
+        this.texto = texto;
+        this.imagem = imagem;
+        this.data = data;
+        this.perfilAutor = perfilAutor;
+    }
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_POST")
@@ -55,7 +61,11 @@ public class Post implements Serializable {
     @Basic(optional = false)
     @Column(name = "TEXTO")
     private String texto;
-
+    
+    @Basic(optional = true)
+    @Column(name = "IMAGEM")
+    private String imagem;
+            
     @NotNull
     @Basic(optional = false)
     @Column(name = "DATA_POST")
@@ -100,4 +110,12 @@ public class Post implements Serializable {
         this.texto = texto;
     }
 
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+    
 }
