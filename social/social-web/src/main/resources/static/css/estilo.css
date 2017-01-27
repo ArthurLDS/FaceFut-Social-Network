@@ -43,6 +43,14 @@ a:hover, a:focus {
     border-bottom: 2px solid #15a589;
 
 }
+// Ícones
+
+.post-reacoes .icon-amar{
+    color: #F00;
+}
+.post-reacoes .icon-curtir{
+    color: #00F;
+}
 // Botões
 .btn-danger:hover{
     background-color: #a90e0e;
@@ -79,21 +87,46 @@ a:hover, a:focus {
 }
 /*Posts*/
 .post-data{
+    font-size: 12px;
     margin-bottom: 2px;
     margin-top:4px;
     color: #ddd;
-    font-size: 13.5px;
 }
 .post-time{
     color: #ddd;
     font-size: 13.5px;
     margin-bottom: 10px;
+    margin-right: 2px
 }
 .post-txt{
     padding-top: 10px;
     margin-bottom: 0px;
     font-size: 16px;
 }
+.post-content-reacoes{
+    margin-top: 15px;
+}
+.post-reacoes{
+    margin-right: 10px;
+}
+.post-img{
+    width: 456px;
+}
+.post-content{
+    padding-right: 0px; 
+    border-bottom: 1px solid #888888;
+}
+header .post-autor-img{
+    padding: 0; width: 12.666667%;
+}
+header .post-autor-info{
+    padding: 0;
+    margin-top: 5px;
+}
+header .post-autor-nome{
+    font-size: 12pt;
+}
+
 /* Btns */
 .btn-post-refresh{
     color: #FFF;
@@ -172,6 +205,10 @@ a:hover, a:focus {
     height: 50px;
     width: 50px;
 }
+.perfil-img-sq-med{
+    height: 67px;
+    width: 67px;
+}
 .perfil-img-med{
     width: 95px;
     height: 97px;
@@ -206,13 +243,13 @@ a:hover, a:focus {
 .perfil-tools-heading img{
     position: absolute;
     bottom: 10px;
-    left: 15px;
+    left: 32px;
 }
 .perfil-tools-heading h3{
     color: #FFF;
     position: absolute;
     bottom: 50px;
-    left: 179px;
+    left: 194px;
     font-weight: bolder;
     text-shadow: 0px 0px 10px #000;
 }
@@ -222,6 +259,9 @@ a:hover, a:focus {
     border: 2px solid #DDD;
     border-radius: 5px;
     box-shadow: 1px 1px 8px #777;
+}
+.perfil-apresentacao{
+    margin-bottom: 10px;
 }
 .perfil-apresentacao .panel-body{
     padding-top: 0px;
@@ -240,7 +280,6 @@ a:hover, a:focus {
 }
 .perfil-posts{
     margin-bottom: 10px;
-    padding: 0px 0px 0px 10px;
 }
 .perfil-content{
     margin-top: 10px;
@@ -248,6 +287,21 @@ a:hover, a:focus {
 .post-info-perfil{
     color: #777;
 }
+.link-perfil{
+    color: #444;
+}
+.link-perfil:hover{
+    color: #000;
+}
+.perfil-amigos-list{
+    margin: 2px;
+    display: inline-block;
+}
+.perfil-count-amigos{
+    font-size: 10pt;
+    color: #989898;
+}
+
 /* Cadastro */
 .cadastro-label-file{
     font-size: 12pt;
@@ -257,4 +311,42 @@ a:hover, a:focus {
 .cadastro-input-file{
     color: #FFF;
     text-shadow: 1px 1px 10px #000;
+}
+
+/* Input File Style */
+.file-upload {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px !important;
+    border:none !important;
+    box-shadow: none !important;
+    text-shadow:none;
+    padding: 5px 10px !important;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.file-upload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+#fileuploadurl{
+    color: #FFF;
+    text-shadow: 0px 0px 5px #000;
+    display: inline-block;
+    border:none;
+    vertical-align: middle;
+    background: none;
+    box-shadow: none;
+    font-size: 13px;
+    padding-left: 0;
+    width:220px;
+    padding-right: 0;
 }
