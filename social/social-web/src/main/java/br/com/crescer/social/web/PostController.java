@@ -49,4 +49,9 @@ public class PostController {
         model.addAttribute("posts", postsFiltrados);
         return "partialPostagem";
     }
+    
+    @RequestMapping(value="carregarBtnUploadImagem", method = RequestMethod.GET)
+    public String carregarBtnUploadImagem(Model model){
+        return "partialBtnUploadImagemPost";
+    }
 }

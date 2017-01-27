@@ -9,7 +9,9 @@
 var postagem = {};
 
 $(function () {
+
     postagem.configurarForm();
+
     postagem.carregarPosts();
 
     //setInterval(function(){
@@ -22,6 +24,7 @@ postagem.configurarForm = function () {
     $txtPost = $('#txt-post');
     $btnPost = $('#btn-postar');
 
+    postagem.atualizarBtnUploadDeImagem();
     $btnPost.click(postagem.postar);
 };
 
@@ -48,13 +51,14 @@ postagem.postagemTexto = function (response) {
     $.post("/postagemRest/postar", {caminhoImagem: response, texto: $txtPost.val()})
             .done(function () {
                 $txtPost.val('');
+                postagem.atualizarBtnUploadDeImagem();
                 postagem.carregarPosts();
                 postagem.carregarPosts();
             })
             .fail(function () {
                 alert('ops!');
             });
-}
+};
 
 
 postagem.carregarPosts = function () {
@@ -65,3 +69,15 @@ postagem.carregarPosts = function () {
             });
 };
 
+
+postagem.atualizarBtnUploadDeImagem = function () {
+    
+    $.get("/postagem/carregarBtnUploadImagem")
+            .then(function (response) {
+                $('#upload-file-content').html(response);
+                document.getElementById("upload-file-input").onchange = function () {
+                    document.getElementById("fileuploadurl").value = this.value;
+                };
+            });
+
+};
