@@ -10,7 +10,7 @@
         }
     </style>
     <body>
-        <section class="col-md-6 col-md-offset-3 login-block">
+        <section class="col-md-6 col-md-offset-3">
             <article class="panel panel-default cadastro-panel">
 
                 <article class="login-panel-head panel-heading" style="background-color: rgba(255, 255, 255, 0.4);">
@@ -40,7 +40,7 @@
                             <select class="form-control" th:field="*{perfil.sexo}">
                                 <option th:each="genero : ${generos}" th:value="${genero}" th:text="${genero.name}"></option>
                             </select>
-                            
+
                         </article>
 
                         <article class="form-group">
@@ -55,8 +55,11 @@
                         </article>
 
                         <article class="form-group">
-                            <label class="cadastro-label-file" for="upload-file-input">Faça upload de sua imagem de perfil: </label>
-                            <input class="cadastro-input-file" id="upload-file-input" type="file" name="uploadfile" accept="*" />
+                            <div class="file-upload btn btn-warning">
+                                <span>Selecione sua foto de perfil</span>
+                                <input type="file" required="true" name="uploadfile" id="FileAttachment" class="upload" />
+                            </div>
+                            <input type="text" id="fileuploadurl" readonly="true" placeholder="Maximum file size is 1GB"/>
                         </article>
 
                         <article class="form-group">
@@ -80,7 +83,9 @@
         <script th:src="@{/js/cadastro.js}"></script>
 
         <script>
-
+            document.getElementById("FileAttachment").onchange = function () {
+                document.getElementById("fileuploadurl").value = this.value;
+            };
         </script>
     </body>
 </html>
