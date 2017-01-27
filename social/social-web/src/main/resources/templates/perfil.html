@@ -17,83 +17,108 @@
         <div class="divisor-perfil"></div>
 
         <section class="container">
-            <section class="col-md-10 block-perfil-heading">
+            <section class="col-md-10">
+                <section class="block-perfil-heading">
 
+                </section>
             </section>
-            <article class="col-md-10 perfil-tools-heading">
-                <img class="perfil-img perfil-img-lg" th:src="${usuario.perfil.imagemPerfil}"/>
-                <h3 th:text="${usuario.perfil.nome}"></h3>
 
-                <article style="padding-left: 155px;" class="hidden-xs">
-                    <ul class="nav nav-pills">
-                        <li role="presentation"><a href="#"><i class="fa fa-group"></i>
-                                <spam class="hidden-sm"> Amigos</spam></a>
-                        </li>
-                        <li role="presentation"><a href="#"><i class="fa fa-envelope-o"></i> 
-                                <spam class="hidden-sm"> Convites</spam></a>
-                        </li>
-                        <li role="presentation"><a href="#"><i class="fa fa-commenting-o"></i> 
-                                <spam class="hidden-sm"> Posts</spam></a>
-                        </li>
-                        <li role="presentation" class="pull-right"><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> 
-                                <spam class="hidden-sm">Configurações</spam></a>
-                        </li>
-                    </ul>
+            <nav class="col-md-10">
+                <article class="perfil-tools-heading">
+                    <img class="perfil-img perfil-img-lg" th:src="${usuario.perfil.imagemPerfil}"/>
+                    <h3 th:text="${usuario.perfil.nome}"></h3>
+
+                    <article style="padding-left: 155px;" class="hidden-xs">
+                        <ul class="nav nav-pills">
+                            <li role="presentation"><a href="#"><i class="fa fa-group"></i>
+                                    <spam class="hidden-sm"> Amigos</spam></a>
+                            </li>
+                            <li role="presentation"><a href="#"><i class="fa fa-envelope-o"></i> 
+                                    <spam class="hidden-sm"> Convites</spam></a>
+                            </li>
+                            <li role="presentation"><a href="#"><i class="fa fa-commenting-o"></i> 
+                                    <spam class="hidden-sm"> Posts</spam></a>
+                            </li>
+                            <li role="presentation" class="pull-right"><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> 
+                                    <spam class="hidden-sm">Configurações</spam></a>
+                            </li>
+                        </ul>
+                    </article>
                 </article>
-            </article>
+            </nav>
 
         </section>
 
         <section class="container perfil-content">
-            <section class="col-md-3 perfil-col-content perfil-apresentacao">
-                <header class="panel-heading">
-                    <i class="fa fa-globe" aria-hidden="true"></i>
-                    Apresentação
-                    <hr/>
-                </header>
-                <section class="panel-body">
-                    <article class="apresentacao-itens">
-                        <spam id="spam-num-amigos" class="badge icon" th:text="${usuario.amigos.size()}"></spam> 
-                        Amigos
-                    </article>
-                    <article class="apresentacao-itens">
-                        <i class="fa fa-heart icon"></i> 
-                        <spam th:text="${usuario.perfil.time.nome}"></spam>
-                    </article>
-                    <article class="apresentacao-itens">
-                        <i class="fa fa-birthday-cake icon" aria-hidden="true"></i>
-                        <spam th:text="${#dates.format(usuario.perfil.dataNascimento, 'dd/MM/yyyy')}"></spam>
-                    </article>
-                    <article class="apresentacao-itens">
-                        <i class="fa fa-venus-mars icon" aria-hidden="true"></i>
-                        <spam th:text="${usuario.perfil.sexo.name}"></spam>
-                    </article>
-                    
+            <section class="col-md-3">
+                <section class="perfil-col-content perfil-apresentacao">
+                    <header class="panel-heading">
+                        <i class="fa fa-globe" aria-hidden="true"></i>
+                        Apresentação
+                        <hr/>
+                    </header>
+                    <section class="panel-body">
+                        <article class="apresentacao-itens">
+                            <spam id="spam-num-amigos" class="badge icon" th:text="${usuario.amigos.size()}"></spam> 
+                            Amigos
+                        </article>
+                        <article class="apresentacao-itens">
+                            <i class="fa fa-heart icon"></i> 
+                            <spam th:text="${usuario.perfil.time.nome}"></spam>
+                        </article>
+                        <article class="apresentacao-itens">
+                            <i class="fa fa-birthday-cake icon" aria-hidden="true"></i>
+                            <spam th:text="${#dates.format(usuario.perfil.dataNascimento, 'dd/MM/yyyy')}"></spam>
+                        </article>
+                        <article class="apresentacao-itens">
+                            <i class="fa fa-venus-mars icon" aria-hidden="true"></i>
+                            <spam th:text="${usuario.perfil.sexo.name}"></spam>
+                        </article>
+
+                    </section>
+                </section>
+                <section class="perfil-col-content perfil-apresentacao">
+                    <header class="panel-heading">
+                        <i class="fa fa-group"></i>
+                        Amigos&nbsp;· <spam class="perfil-count-amigos" th:text="${usuario.amigos.size()}"></spam>
+                        <hr/>
+                    </header>
+                    <section class="panel-body">
+
+                        <article class="perfil-amigos-list" th:each="amigo :${usuario.amigos}">
+                            <a th:href="@{${'/profile'}(id=${amigo.perfil.id})}">
+                                <img class="perfil-img-sq-med" th:src="${amigo.perfil.imagemPerfil}" th:title="${amigo.perfil.nome}"/>
+                            </a>
+                        </article>
+
+                    </section>
                 </section>
             </section>
-            <section class="col-md-7 perfil-posts">
-                <div th:each="post :${usuario.posts}" class=" perfil-col-content perfil-posts" style="padding-right: 0px;">
-                    <div class="panel-body">
-                        <article class="col-md-2" style="padding-right: 0px;">
-                            <img class="perfil-img perfil-img-min" th:src="${post.perfilAutor.imagemPerfil}"/>
-                        </article>
-                        <article class="col-md-10" style="padding-left: 0px;">
-                            <strong><p style="margin: 0px;" th:text="${post.perfilAutor.nome}">Autor</p></strong>
+            <section class="col-md-7">
+                <section class="perfil-posts">
+                    <article th:each="post :${usuario.posts}" class=" perfil-col-content perfil-posts" style="padding-right: 0px;">
+                        <article class="panel-body">
+                            <article class="col-md-2" style="padding-right: 0px;">
+                                <img class="perfil-img perfil-img-min" th:src="${post.perfilAutor.imagemPerfil}"/>
+                            </article>
+                            <article class="col-md-10" style="padding-left: 0px;">
+                                <strong><p style="margin: 0px;" th:text="${post.perfilAutor.nome}">Autor</p></strong>
 
-                            <i class="fa fa-futbol-o" style="font-size: 12px; color: #777;"></i>
-                            <spam class="post-time post-info-perfil" th:text="${post.perfilAutor.time.nome}">Time</spam>
-                            &nbsp;·
-                            <spam class="post-data post-info-perfil" 
-                                  th:text="${#dates.format(post.data, 'dd/MM/yyyy hh:mm')}" style="font-size: 12px;">
-                                Data
-                            </spam><br/>
+                                <i class="fa fa-futbol-o" style="font-size: 12px; color: #777;"></i>
+                                <spam class="post-time post-info-perfil" th:text="${post.perfilAutor.time.nome}">Time</spam>
+                                &nbsp;·
+                                <spam class="post-data post-info-perfil" 
+                                      th:text="${#dates.format(post.data, 'dd/MM/yyyy hh:mm')}" style="font-size: 12px;">
+                                    Data
+                                </spam><br/>
 
-                            <p class="post-txt" th:text="${post.texto}">Texto</p>
+                                <p class="post-txt" th:text="${post.texto}">Texto</p>
+                            </article>
                         </article>
-                    </div>
-                </div>
+                    </article>
+                </section>
             </section>
-            
+
         </section>
 
         <footer th:replace="fragments :: footer">
