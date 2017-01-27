@@ -11,10 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.crescer.social.entity.entities.Usuario;
 import br.com.crescer.social.entity.enumeration.Sexo;
+import br.com.crescer.social.service.Enumetarion.TipoArquivo;
 import br.com.crescer.social.service.Service.AmigoService;
 import br.com.crescer.social.service.Service.PerfilService;
 import br.com.crescer.social.service.Service.TimeService;
 import br.com.crescer.social.service.Service.UsuarioService;
+import br.com.crescer.social.service.Utils.FileUtils;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -71,8 +73,9 @@ public class CadastroController {
 
     @RequestMapping(value = "/cadastroForm", method = RequestMethod.POST)
     public String save(@ModelAttribute Usuario usuario, MultipartFile uploadfile, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-
-        if (!bindingResult.hasErrors() && perfilService.salvarArquivo(uploadfile)) {
+        FileUtils fileUtils = new FileUtils();
+        
+        if (!bindingResult.hasErrors() && fileUtils.salvarArquivo(uploadfile, TipoArquivo.PERFIL_IMG_FILE)) {
             
             Perfil perfil = perfilService.save(usuario, uploadfile);
             
