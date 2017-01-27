@@ -67,47 +67,45 @@
             <section class="col-md-5">
                 <article class="panel panel-default">
                     <section class="panel-body">
+
                         <form id="upload-file-form">
                             <article class="form-group">
                                 <textarea id="txt-post" required="required" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
                             </article>
 
-                            <div class="file-upload btn btn-warning">
-                                <i class="fa fa-camera" aria-hidden="true"></i>
-                                <span> Selecionar foto</span>
-                                <input type="file" name="uploadfile" id="upload-file-input" class="upload" />
-                            </div>
-                            <input type="text" id="fileuploadurl" readonly="true"/>
+                            <spam id="upload-file-content">
+                                <!-- Aqui será renderizado o Btn para upload de imagem via JS/AJAX -->
+                            </spam>
 
                             <a id="btn-postar" class="btn btn-success pull-right" name="button">
-                                Publicar
                                 <i class="fa fa-paper-plane-o" style="font-size:18px"></i>
+                                Publicar
                             </a>
                         </form> 
 
                     </section>
                 </article>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
+                <section class="panel panel-default">
+                    <article class="panel-heading">
                         <i class="fa fa-commenting-o"></i> Posts
                         <a class="btn-post-refresh link-style" th:href="'javascript:postagem.carregarPosts()'"> 
                             <i class="pull-right fa fa-refresh" aria-hidden="true" style="font-size: 15pt;"></i>
                         </a>
-                    </div>
+                    </article>
 
-                    <section id="box-posts">
+                    <article id="box-posts">
                         <!-- Aqui será inserido os posts -->
-                    </section>
+                    </article>
 
-                </div>
+                </section>
             </section>
 
             <!-- Pesquisa de amigos -->
             <aside class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Pesquisar amigos</div>
-                    <div class="panel-body">
+                <article class="panel panel-default">
+                    <header class="panel-heading">Pesquisar amigos</header>
+                    <section class="panel-body">
 
                         <article class="form-group">         
                             <input id="txt-pesquisa-amigo" required="required" type="text" class="form-control txt-pesquisa"  placeholder="Pesquise aqui"/>
@@ -121,8 +119,8 @@
 
                         </article>
 
-                    </div>
-                </div>
+                    </section>
+                </article>
             </aside>
         </section>
 
@@ -133,9 +131,7 @@
         <script th:src="@{/js/postagem.js}"></script>
         <script th:src="@{/js/amigo.js}"></script>
         <script>
-            document.getElementById("upload-file-input").onchange = function () {
-                document.getElementById("fileuploadurl").value = this.value;
-            };
+            
         </script>
     </body>
 </html>
