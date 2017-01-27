@@ -2,26 +2,44 @@
     <i>Nenhuma postagem feita no momento, posta algo aí ;)</i>
 </article>
 
-<div th:each="post :${posts}" class="panel-body" style="padding-right: 0px;">
-    
-    <article class="col-md-2" style="padding-right: 0px;">
-        <img class="perfil-img perfil-img-min" th:src="${post.perfilAutor.imagemPerfil}"/>
+<section th:each="post :${posts}" class="panel-body post-content">
+
+    <header class="col-md-12">
+        <article class="col-md-2 post-autor-img">
+            <img class="perfil-img perfil-img-min" th:src="${post.perfilAutor.imagemPerfil}"/>
+        </article>
+
+        <article class="col-md-10 post-autor-info">
+            <a class="link-style" th:href="@{${'/profile'}(id=${post.perfilAutor.id})}">
+                <strong><spam class="post-autor-nome" th:text="${post.perfilAutor.nome}">Autor</spam></strong>
+            </a>
+            <br/>
+
+            <i class="fa fa-futbol-o" style="font-size: 12px; color: #ddd;"></i>
+            <spam class="post-time" th:text="${post.perfilAutor.time.nome}">Time</spam>
+            ·
+            <spam class="post-data" 
+                  th:text="${#dates.format(post.data, 'dd/MM/yyyy hh:mm')}">
+                Data
+            </spam>
+        </article>
+    </header>
+
+    <article class="col-md-12">
+        <p class="post-txt" th:text="${post.texto}">Post</p>
+        <br/>
+        <article th:if="${post.imagem}">
+            <img class="img-responsive post-img" th:src="${post.imagem}"/>
+        </article>
     </article>
-    <article class="col-md-10" style="padding-left: 0px;">
+    <article class="col-md-12 post-content-reacoes">
+        <spam class="post-reacoes">
+            <i class="fa fa-thumbs-up icon-curtir" aria-hidden="true"></i> Curti 
+        </spam>    
         
-        <a class="link-style" th:href="@{${'/profile'}(id=${post.perfilAutor.id})}">
-            <strong><p style="margin: 0px;" th:text="${post.perfilAutor.nome}">Autor</p></strong>
-        </a>
-        
-        <i class="fa fa-futbol-o" style="font-size: 12px; color: #ddd;"></i>
-        <spam class="post-time" th:text="${post.perfilAutor.time.nome}">Time</spam>
-        &nbsp;·
-        <spam class="post-data" 
-              th:text="${#dates.format(post.data, 'dd/MM/yyyy hh:mm')}" style="font-size: 12px;">
-            Data
-        </spam><br/>
-        
-        <p class="post-txt" th:text="${post.texto}">Texto</p>
+        <spam class="post-reacoes">
+            <i class="fa fa-heart icon-amar" aria-hidden="true" style="color:#F00;"></i> Adorei
+        </spam>
     </article>
-    
-</div>
+
+</section>

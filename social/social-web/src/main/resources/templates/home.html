@@ -67,14 +67,23 @@
             <section class="col-md-5">
                 <article class="panel panel-default">
                     <section class="panel-body">
+                        <form id="upload-file-form">
+                            <article class="form-group">
+                                <textarea id="txt-post" required="required" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
+                            </article>
 
-                        <article class="form-group">
-                            <textarea id="txt-post" required="required" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
-                        </article>
-                        <button id="btn-postar" class="btn btn-success pull-right" type="sumit" name="button">
-                            Publicar
-                            <i class="fa fa-paper-plane-o" style="font-size:18px"></i>
-                        </button>
+                            <div class="file-upload btn btn-warning">
+                                <i class="fa fa-camera" aria-hidden="true"></i>
+                                <span> Selecionar foto</span>
+                                <input type="file" name="uploadfile" id="upload-file-input" class="upload" />
+                            </div>
+                            <input type="text" id="fileuploadurl" readonly="true"/>
+
+                            <a id="btn-postar" class="btn btn-success pull-right" name="button">
+                                Publicar
+                                <i class="fa fa-paper-plane-o" style="font-size:18px"></i>
+                            </a>
+                        </form> 
 
                     </section>
                 </article>
@@ -123,6 +132,10 @@
         <script th:src="@{/js/pesquisa.js}"></script>
         <script th:src="@{/js/postagem.js}"></script>
         <script th:src="@{/js/amigo.js}"></script>
-
+        <script>
+            document.getElementById("upload-file-input").onchange = function () {
+                document.getElementById("fileuploadurl").value = this.value;
+            };
+        </script>
     </body>
 </html>
