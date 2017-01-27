@@ -41,7 +41,7 @@ public class PerfilService {
     public Perfil save(Usuario usuario, MultipartFile multipartFile) {
         Perfil perfil = usuario.getPerfil();
         perfil.setEmail(usuario.getEmail());
-        perfil.setImagemPerfil("/imgs/perfil" + multipartFile.getOriginalFilename());
+        perfil.setImagemPerfil("/imgs/perfil/" + multipartFile.getOriginalFilename());
         
         return perfilRepository.save(perfil);
     }
