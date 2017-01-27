@@ -23,10 +23,10 @@ public class FileUtils {
             String nomeArquivo = arquivo.getOriginalFilename();
             String diretorioArquivo = "";
             if(tipoArquivo == TipoArquivo.PERFIL_IMG_FILE){
-                diretorioArquivo = "C:\\Users\\Arthur\\Documents\\GitHub\\FaceFut\\FaceFut\\social\\social-web\\src\\main\\resources\\static\\imgs";
+                diretorioArquivo = "C:\\Users\\Arthur\\Documents\\GitHub\\FaceFut\\FaceFut\\social\\social-web\\src\\main\\resources\\static\\imgs\\perfil";
             }
             else if(tipoArquivo == TipoArquivo.POST_IMG_FILE){
-                diretorioArquivo = "C:\\Users\\Arthur\\Documents\\GitHub\\FaceFut\\FaceFut\\social\\social-web\\src\\main\\resources\\static\\imgs";
+                diretorioArquivo = "C:\\Users\\Arthur\\Documents\\GitHub\\FaceFut\\FaceFut\\social\\social-web\\src\\main\\resources\\static\\imgs\\post";
             }
             String caminhoArquivo = Paths.get(diretorioArquivo, nomeArquivo).toString();
 
