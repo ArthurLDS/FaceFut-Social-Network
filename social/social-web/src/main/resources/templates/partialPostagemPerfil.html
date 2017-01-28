@@ -1,0 +1,48 @@
+
+<section th:if="${posts.size() == 0}" class="perfil-col-content perfil-apresentacao">
+    <article class="panel-body perfil-msg-alerta" >
+        <i>Nenhuma postagem feita no momento...</i>
+    </article>
+</section>
+
+<section th:each="post :${posts}" class="panel-body post-content perfil-col-content perfil-posts">
+    <header class="col-md-12">
+        <article class="col-md-2 post-autor-img">
+            <img class="perfil-img perfil-img-min" th:src="${post.perfilAutor.imagemPerfil}"/>
+        </article>
+
+        <article class="col-md-10 post-autor-info">
+            <strong><spam class="post-autor-nome" th:text="${post.perfilAutor.nome}">Autor</spam></strong>
+
+            <br/>
+
+            <i class="fa fa-futbol-o" style="font-size: 12px; color: #777;"></i>
+            <spam class="post-time post-info-perfil" th:text="${post.perfilAutor.time.nome}">Time</spam>
+            ·
+            <spam class="post-data post-info-perfil" 
+                  th:text="${#dates.format(post.data, 'dd/MM/yyyy hh:mm')}">
+                Data
+            </spam>
+        </article>
+    </header>
+
+    <article class="col-md-12">
+        <p class="post-txt" th:text="${post.texto}">Post</p>
+        <br/>
+        <article th:if="${post.imagem}">
+            <img class="img-responsive post-img" th:src="${post.imagem}"/>
+        </article>
+    </article>
+    <article class="col-md-12 post-content-reacoes">
+        <a class="link-perfil" href="#">
+            <spam class="post-reacoes">
+                <i class="fa fa-thumbs-up icon-reacoes icon-curtir" aria-hidden="true"></i>Curti 
+            </spam>    
+        </a>
+        <a class="link-perfil" href="#">
+            <spam class="post-reacoes">
+                <i class="fa fa-heart icon-reacoes icon-amar" aria-hidden="true" style="color:#F00;"></i>Adorei
+            </spam>
+        </a>
+    </article>
+</section>
