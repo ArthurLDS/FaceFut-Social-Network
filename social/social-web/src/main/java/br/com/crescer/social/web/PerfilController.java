@@ -12,6 +12,9 @@ import br.com.crescer.social.service.Service.PerfilService;
 import br.com.crescer.social.service.Service.PostService;
 import br.com.crescer.social.service.Service.UsuarioService;
 import java.util.List;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.context.SecurityContextHolder;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +41,17 @@ public class PerfilController {
         
         Usuario usuario = usuarioService.findByPerfil(perfilService.findById(id));
         
+        usuario.setPosts(usuario.getPosts().stream()
+                        .sorted((p1, p2) -> p2.getId().compareTo(p1.getId()))
+                        .collect(Collectors.toList()));
+        
         model.addAttribute("usuario", usuario);
+        model.addAttribute("usuarioLogado", getUserSessao());
         return "perfil";
+    }
+    
+    private Usuario getUserSessao(){
+        User userSpringSecurity = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return usuarioService.findByEmail(userSpringSecurity.getUsername());
     }
 }
