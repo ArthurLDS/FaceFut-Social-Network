@@ -72,7 +72,7 @@ amigo.aceitarConvite = function(id){
                 amigo.carregarConvitesRecebidos();
                 amigo.carregarListaAmigos();
                 amigo.atualizarNumeroDeAmigos();
-                postagem.carregarPosts();
+                postagem.carregarPosts(postagem.idUsuario);
             });
 };
 
@@ -83,7 +83,7 @@ amigo.recusarConvite = function(id){
                amigo.carregarConvitesRecebidos();
                amigo.carregarListaAmigos();
                amigo.atualizarNumeroDeAmigos();
-               postagem.carregarPosts();
+               postagem.carregarPosts(postagem.idUsuario);
             });
 };
 
@@ -94,7 +94,7 @@ amigo.desfazerAmizade = function(id){
                 pesquisa.pesquisar();
                 amigo.carregarListaAmigos();
                 amigo.atualizarNumeroDeAmigos();
-                postagem.carregarPosts();
+                postagem.carregarPosts(postagem.idUsuario);
             });
 };
 
