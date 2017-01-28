@@ -9,13 +9,18 @@
             body{
                 color: #444;
             }
+            .post-img {
+                width: 571px;
+            }
         </style>
         <nav th:replace="fragments :: navbar">
 
         </nav>
 
         <div class="divisor-perfil"></div>
-
+        <!-- Id do usuario logado -->
+        <input type="hidden" th:value="${usuario.id}" id="id-usuario" />
+        
         <section class="container">
             <section class="col-md-10">
                 <section class="block-perfil-heading">
@@ -84,7 +89,8 @@
                         <hr/>
                     </header>
                     <section class="panel-body">
-
+                        <i th:if="${usuario.amigos.size() == 0}">Nenhum amigo para mostar :(</i>
+                        
                         <article class="perfil-amigos-list" th:each="amigo :${usuario.amigos}">
                             <a th:href="@{${'/profile'}(id=${amigo.perfil.id})}">
                                 <img class="perfil-img-sq-med" th:src="${amigo.perfil.imagemPerfil}" th:title="${amigo.perfil.nome}"/>
@@ -94,29 +100,35 @@
                     </section>
                 </section>
             </section>
+
             <section class="col-md-7">
-                <section class="perfil-posts">
-                    <article th:each="post :${usuario.posts}" class=" perfil-col-content perfil-posts" style="padding-right: 0px;">
-                        <article class="panel-body">
-                            <article class="col-md-2" style="padding-right: 0px;">
-                                <img class="perfil-img perfil-img-min" th:src="${post.perfilAutor.imagemPerfil}"/>
-                            </article>
-                            <article class="col-md-10" style="padding-left: 0px;">
-                                <strong><p style="margin: 0px;" th:text="${post.perfilAutor.nome}">Autor</p></strong>
 
-                                <i class="fa fa-futbol-o" style="font-size: 12px; color: #777;"></i>
-                                <spam class="post-time post-info-perfil" th:text="${post.perfilAutor.time.nome}">Time</spam>
-                                &nbsp;·
-                                <spam class="post-data post-info-perfil" 
-                                      th:text="${#dates.format(post.data, 'dd/MM/yyyy hh:mm')}" style="font-size: 12px;">
-                                    Data
-                                </spam><br/>
+                <article th:if="${usuario== usuarioLogado}" class="panel perfil-col-content">
+                    <section class="panel-body">
 
-                                <p class="post-txt" th:text="${post.texto}">Texto</p>
+                        <form id="upload-file-form">
+                            <article class="form-group">
+                                <textarea id="txt-post" required="required" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
                             </article>
-                        </article>
-                    </article>
+
+                            <spam id="upload-file-content">
+                                <!-- Aqui será renderizado o Btn para upload de imagem via JS/AJAX -->
+                            </spam>
+
+                            <a id="btn-postar" class="btn btn-success pull-right" name="button">
+                                <i class="fa fa-paper-plane-o" style="font-size:18px"></i>
+                                Publicar
+                            </a>
+                        </form> 
+                    </section>
+                    
+                </article>
+
+
+                <section id="box-posts">
+                    <!-- Aqui os posts serão renderizados -->
                 </section>
+
             </section>
 
         </section>
@@ -124,5 +136,6 @@
         <footer th:replace="fragments :: footer">
 
         </footer>
+        <script th:src="@{/js/postagem.js}"></script>
     </body>
 </html>
