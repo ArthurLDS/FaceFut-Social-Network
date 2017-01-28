@@ -10,7 +10,9 @@
 
         </nav>
         <div class="divisor"></div>
-
+        <!-- Id do usuario logado -->
+        <input type="hidden" th:value="${usuario.id}" id="id-usuario" />
+        
         <section class="container-fluid">
 
             <section class="col-md-3">
@@ -89,7 +91,7 @@
                 <section class="panel panel-default">
                     <article class="panel-heading">
                         <i class="fa fa-commenting-o"></i> Posts
-                        <a class="btn-post-refresh link-style" th:href="'javascript:postagem.carregarPosts()'"> 
+                        <a class="btn-post-refresh link-style" th:href="'javascript:postagem.carregarPosts('+${usuario.id}+')'"> 
                             <i class="pull-right fa fa-refresh" aria-hidden="true" style="font-size: 15pt;"></i>
                         </a>
                     </article>
@@ -130,8 +132,6 @@
         <script th:src="@{/js/pesquisa.js}"></script>
         <script th:src="@{/js/postagem.js}"></script>
         <script th:src="@{/js/amigo.js}"></script>
-        <script>
-            
-        </script>
+        
     </body>
 </html>
