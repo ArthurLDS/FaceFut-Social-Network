@@ -44,7 +44,9 @@ a:hover, a:focus {
 
 }
 // Ícones
-
+.icon-reacoes{
+    margin-right: 15px;
+}
 .post-reacoes .icon-amar{
     color: #F00;
 }
@@ -128,11 +130,19 @@ header .post-autor-nome{
 }
 
 /* Btns */
-.btn-post-refresh{
+.btn-post-refresh {
     color: #FFF;
     text-decoration: none;
-    -webkit-transition: -webkit-transform .8s ease-in-out;
-    transition:         transform .8s ease-in-out;
+}
+.btn-post-refresh i{
+    transition: 0.8s;
+}
+.btn-post-refresh i:hover{
+    color: #ccc;
+    transform: rotate(360deg);
+}
+.btn-post-refresh i:active{
+    color: #aaa;
 }
 .link-style{
     color: #FFF;
@@ -254,7 +264,6 @@ header .post-autor-nome{
     text-shadow: 0px 0px 10px #000;
 }
 .perfil-col-content{
-    padding: 0;
     background-color: #FFF;
     border: 2px solid #DDD;
     border-radius: 5px;
@@ -300,6 +309,9 @@ header .post-autor-nome{
 .perfil-count-amigos{
     font-size: 10pt;
     color: #989898;
+}
+.perfil-msg-alerta{
+    margin-top: 15px;
 }
 
 /* Cadastro */
