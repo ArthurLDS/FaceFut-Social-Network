@@ -28,30 +28,42 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author Arthur
  */
 @Controller
-@RequestMapping(value="postagem")
+@RequestMapping(value = "postagem")
 public class PostController {
-    
+
     @Autowired
     PostService postService;
     @Autowired
     AmigoService amigoService;
     @Autowired
     UsuarioService usuarioService;
-    
-    @RequestMapping(value="carregarPosts", method = RequestMethod.GET)
-    public String carregarPosts(Model model){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Usuario usuarioLogado = usuarioService.findByEmail(user.getUsername());
-        
-        List<Post> posts = postService.findAllByOrderByIdDesc();
-        List<Post> postsFiltrados = postService.filtrarPosts(posts, usuarioLogado);
 
-        model.addAttribute("posts", postsFiltrados);
-        return "partialPostagem";
+    @RequestMapping(value = "carregarPosts", method = RequestMethod.GET)
+    public String carregarPosts(Model model, Long id, String arquivo) {
+        Usuario usuario = usuarioService.findOne(id);
+
+        String view = "";
+        List<Post> posts = new ArrayList<>();
+        
+        if (arquivo.equals("HOME")) {
+            posts = postService.filtrarPosts(postService.findAllByOrderByIdDesc(), usuario);
+            view = "partialPostagem";
+            
+        } else if (arquivo.equals("PERFIL")) {
+            posts = posts = usuario.getPosts().stream()
+                    .sorted((p1, p2) -> p2.getId().compareTo(p1.getId()))
+                    .collect(Collectors.toList());
+            view = "partialPostagemPerfil";
+            
+        }
+
+        model.addAttribute("posts", posts);
+        return view;
     }
-    
-    @RequestMapping(value="carregarBtnUploadImagem", method = RequestMethod.GET)
-    public String carregarBtnUploadImagem(Model model){
+
+    @RequestMapping(value = "carregarBtnUploadImagem", method = RequestMethod.GET)
+    public String carregarBtnUploadImagem(Model model) {
         return "partialBtnUploadImagemPost";
     }
+    
 }

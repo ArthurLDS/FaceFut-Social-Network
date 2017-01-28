@@ -41,10 +41,6 @@ public class PerfilController {
         
         Usuario usuario = usuarioService.findByPerfil(perfilService.findById(id));
         
-        usuario.setPosts(usuario.getPosts().stream()
-                        .sorted((p1, p2) -> p2.getId().compareTo(p1.getId()))
-                        .collect(Collectors.toList()));
-        
         model.addAttribute("usuario", usuario);
         model.addAttribute("usuarioLogado", getUserSessao());
         return "perfil";
