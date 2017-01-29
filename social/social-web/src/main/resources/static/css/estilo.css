@@ -359,6 +359,17 @@ header .post-autor-nome{
     box-shadow: none;
     font-size: 13px;
     padding-left: 0;
-    width:220px;
+    width: 180px;
     padding-right: 0;
 }
+
+
+/* Loading */
+
+.loading-icon{
+    font-size: 14pt;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { 100% { transform:rotate(360deg);  } }
+
+
