@@ -9,15 +9,35 @@
 var postagem = {};
 
 $(function () {
-    postagem.idUsuario = $('#id-usuario').val();
-    postagem.iniciar(postagem.idUsuario);
-
+    postagem.iniciar();
+    
 });
+postagem.desabilitarBtnLoading = function(opt){
+    var $txtButton = $("#txt-button");
+    var $btnLoading = $('#btn-postar');
+    
+    if(opt){
+        $txtButton.hide();
+        $btnLoading.attr("disabled", true);
+    } 
+    else{
+        $txtButton.show();
+        $btnLoading.attr("disabled", false);
+    }
+}
+
+
+postagem.esconderLoading = function(opt){
+    var loadingIcon = $("#loading-icon"); 
+    opt ? loadingIcon.hide() : loadingIcon.show();
+}
+
 
 postagem.iniciar = function (id) {
-    
+    postagem.esconderLoading(true);
+    postagem.idUsuario = $('#id-usuario').val();
     postagem.configurarForm();
-    postagem.carregarPosts(id);
+    postagem.carregarPosts(postagem.idUsuario);
 
     //setInterval(function(){
     //    postagem.carregarPosts();
@@ -35,7 +55,9 @@ postagem.configurarForm = function () {
 
 postagem.postar = function () {
     let file = new FormData($("#upload-file-form")[0]);
-
+    postagem.esconderLoading(false);
+    postagem.desabilitarBtnLoading(true);
+    
     $.ajax({
         url: "/postagemRest/uploadImagem",
         type: "POST",
@@ -44,7 +66,10 @@ postagem.postar = function () {
         contentType: false,
         cache: false,
         success: function (response) {
-            postagem.postagemTexto(response);
+            //setTimeOut TEMPORARIO PARA SIMULAR LENTIDÃO NO SERVIDOR!
+            setTimeout(function(){
+                postagem.postagemTexto(response);
+            }, 1600);
         },
         error: function () {
             alert("Erroo!");
@@ -59,6 +84,9 @@ postagem.postagemTexto = function (response) {
                 postagem.atualizarBtnUploadDeImagem();
                 postagem.carregarPosts(postagem.idUsuario);
                 postagem.carregarPosts(postagem.idUsuario);
+                
+                postagem.esconderLoading(true);
+                postagem.desabilitarBtnLoading(false);
             })
             .fail(function () {
                 alert('ops!');
