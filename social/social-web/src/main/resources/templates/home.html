@@ -12,7 +12,7 @@
         <div class="divisor"></div>
         <!-- Id do usuario logado -->
         <input type="hidden" th:value="${usuario.id}" id="id-usuario" />
-        
+
         <section class="container-fluid">
 
             <section class="col-md-3">
@@ -79,9 +79,15 @@
                                 <!-- Aqui será renderizado o Btn para upload de imagem via JS/AJAX -->
                             </spam>
 
-                            <a id="btn-postar" class="btn btn-success pull-right" name="button">
-                                <i class="fa fa-paper-plane-o" style="font-size:18px"></i>
-                                Publicar
+                            <a id="btn-postar" disableed="false" class="btn btn-success pull-right btn-active-loading" name="button">
+                                <spam id="loading-icon">
+                                    <i class="fa fa-spinner loading-icon" aria-hidden="true"></i>
+                                    Publicando...
+                                </spam>
+                                <spam id="txt-button">
+                                    <i class="fa fa-paper-plane-o" style="font-size:18px"></i>
+                                    Publicar
+                                </spam>
                             </a>
                         </form> 
 
@@ -132,6 +138,6 @@
         <script th:src="@{/js/pesquisa.js}"></script>
         <script th:src="@{/js/postagem.js}"></script>
         <script th:src="@{/js/amigo.js}"></script>
-        
+
     </body>
 </html>
