@@ -36,19 +36,20 @@ public class Post implements Serializable {
 
     public Post() {
     }
-    
-    public Post(String texto, Date data, Perfil perfilAutor){
+
+    public Post(String texto, Date data, Perfil perfilAutor) {
         this.texto = texto;
         this.data = data;
         this.perfilAutor = perfilAutor;
-    }   
-    public Post(String texto, String imagem, Date data, Perfil perfilAutor){
+    }
+
+    public Post(String texto, String imagem, Date data, Perfil perfilAutor) {
         this.texto = texto;
         this.imagem = imagem;
         this.data = data;
         this.perfilAutor = perfilAutor;
     }
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_POST")
     @SequenceGenerator(name = "SEQ_POST", sequenceName = "SEQ_POST", allocationSize = 1)
@@ -61,21 +62,32 @@ public class Post implements Serializable {
     @Basic(optional = false)
     @Column(name = "TEXTO")
     private String texto;
-    
+
     @Basic(optional = true)
     @Column(name = "IMAGEM")
     private String imagem;
-            
+
     @NotNull
     @Basic(optional = false)
     @Column(name = "DATA_POST")
     @Temporal(TemporalType.TIMESTAMP)
     private Date data;
-    
-    @JoinColumn(name = "ID_PERFIL", nullable = false, foreignKey = @ForeignKey(name="FK_POST_PERFIL"))
+
+    @JoinColumn(name = "ID_PERFIL", nullable = false, foreignKey = @ForeignKey(name = "FK_POST_PERFIL"))
     @ManyToOne(targetEntity = Perfil.class)
     private Perfil perfilAutor;
+    
+    @OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_REACAO", nullable = true)
+    private Reacao reacao;
 
+    public Reacao getReacao() {
+        return reacao;
+    }
+
+    public void setReacao(Reacao reacao) {
+        this.reacao = reacao;
+    }
     
     public Perfil getPerfilAutor() {
         return perfilAutor;
@@ -84,7 +96,7 @@ public class Post implements Serializable {
     public void setPerfilAutor(Perfil perfilAutor) {
         this.perfilAutor = perfilAutor;
     }
-    
+
     public Date getData() {
         return data;
     }
@@ -105,7 +117,6 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-
     public void setTexto(String texto) {
         this.texto = texto;
     }
@@ -117,5 +128,5 @@ public class Post implements Serializable {
     public void setImagem(String imagem) {
         this.imagem = imagem;
     }
-    
+
 }
