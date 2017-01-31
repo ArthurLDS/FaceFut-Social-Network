@@ -6,11 +6,14 @@
 package br.com.crescer.social.web;
 
 import br.com.crescer.social.entity.entities.Amigo;
+import br.com.crescer.social.entity.entities.Perfil;
 import br.com.crescer.social.entity.entities.Post;
+import br.com.crescer.social.entity.entities.Reacao;
 import br.com.crescer.social.entity.entities.Usuario;
 import br.com.crescer.social.service.Service.AmigoService;
 import br.com.crescer.social.service.Service.PostService;
 import br.com.crescer.social.service.Service.UsuarioService;
+import br.com.crescer.social.service.Utils.UsuarioUtils;
 import java.util.ArrayList;
 import org.springframework.security.core.userdetails.User;
 import java.util.Date;
@@ -37,6 +40,8 @@ public class PostController {
     AmigoService amigoService;
     @Autowired
     UsuarioService usuarioService;
+    @Autowired
+    UsuarioUtils usuarioUtils;
 
     @RequestMapping(value = "carregarPosts", method = RequestMethod.GET)
     public String carregarPosts(Model model, Long id, String arquivo) {
@@ -56,7 +61,7 @@ public class PostController {
             view = "partialPostagemPerfil";
             
         }
-
+        model.addAttribute("usuario", usuario);
         model.addAttribute("posts", posts);
         return view;
     }
@@ -66,4 +71,25 @@ public class PostController {
         return "partialBtnUploadImagemPost";
     }
     
+    
+    @RequestMapping(value = "carregarReacaoPorId", method = RequestMethod.GET)
+    public String carregarReacaoPorId(Model model, Long idUsuario, Long idPost){
+        Post post = postService.findOne(idPost);
+        Reacao reacao = post.getReacao();
+        
+        List<Perfil> perfis =  reacao.getPerfisCurtidas();
+        Usuario usuario = usuarioUtils.getUsuarioLogado(); 
+        perfis.add(usuario.getPerfil());
+        
+        reacao.setNumCutidas(reacao.getNumCutidas()+1);
+        reacao.setPerfisCurtidas(perfis);
+        
+        post.setReacao(reacao);
+        postService.save(post);
+        
+        model.addAttribute("post", post);
+        model.addAttribute("usuario", usuario);
+        
+        return "partialReacoesPostagem";
+    }
 }
