@@ -26,7 +26,11 @@ public class PostService {
 
     @Autowired
     PostRepository repository;
-
+    
+    public Post findOne(Long id){
+        return repository.findOne(id);
+    }
+    
     public Iterable<Post> findAll() {
         return repository.findAll();
     }
