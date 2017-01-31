@@ -115,3 +115,16 @@ postagem.atualizarBtnUploadDeImagem = function () {
             });
 
 };
+
+
+postagem.curtir = function(idPost){
+    
+    $.get("/postagem/carregarReacaoPorId", {id:postagem.idUsuario, idPost})
+            .done(function(response){
+                $('#reacao-content-' + idPost).html(response);
+            })
+            .fail(function(){
+                alert("Deu ruim ao carregar reação");
+            });
+      
+};
