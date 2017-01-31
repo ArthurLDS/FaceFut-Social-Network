@@ -32,12 +32,20 @@
             <img class="img-responsive post-img" th:src="${post.imagem}"/>
         </article>
     </article>
-    <article class="col-md-12 post-content-reacoes">
-        <a class="link-style" href="#">
-            <spam class="post-reacoes">
-                <i class="fa fa-thumbs-up icon-curtir" aria-hidden="true"></i> Curti 
+    <article th:id="'reacao-content-'+${post.id}" class="col-md-12 post-content-reacoes">
+        <a th:if="${not #lists.contains(post.reacao.perfisCurtidas, usuario.perfil)}" class="link-style" th:href="'javascript:postagem.curtir('+${post.id}+')'">
+            <spam class="post-reacoes" style="color: #ddd;">
+                <i class="fa fa-thumbs-up icon-curtir" aria-hidden="true" ></i> Curti ·
+                <spam th:id="'num-curtidas-'+${post.id}" th:text="${post.reacao.numCutidas}"></spam>
             </spam>    
         </a>
+        <a th:if="${#lists.contains(post.reacao.perfisCurtidas, usuario.perfil)}" class="link-style" th:href="'javascript:postagem.curtir('+${post.id}+')'">
+            <spam class="post-reacoes" style="color: #00f;">
+                <i class="fa fa-thumbs-up icon-curtir" aria-hidden="true"></i> Descurtir·
+                <spam th:id="'num-curtidas-'+${post.id}" th:text="${post.reacao.numCutidas}"></spam>
+            </spam>    
+        </a>
+        
         <a class="link-style" href="#">
             <spam class="post-reacoes">
                 <i class="fa fa-heart icon-amar" aria-hidden="true" style="color:#F00;"></i> Adorei
