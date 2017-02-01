@@ -119,7 +119,7 @@ postagem.atualizarBtnUploadDeImagem = function () {
 
 postagem.curtir = function(idPost){
     
-    $.get("/postagem/carregarReacaoPorId", {id:postagem.idUsuario, idPost})
+    $.get("/postagem/curtir", {id:postagem.idUsuario, idPost, curtir: true})
             .done(function(response){
                 $('#reacao-content-' + idPost).html(response);
             })
@@ -127,4 +127,14 @@ postagem.curtir = function(idPost){
                 alert("Deu ruim ao carregar reação");
             });
       
+};
+
+postagem.descurtir = function(idPost){
+    $.get("/postagem/curtir", {id:postagem.idUsuario, idPost, curtir: false})
+            .done(function(response){
+                $('#reacao-content-' + idPost).html(response);
+            })
+            .fail(function(){
+                alert("Deu ruim ao carregar reação");
+            });
 };
