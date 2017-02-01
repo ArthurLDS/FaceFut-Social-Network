@@ -1,25 +1,24 @@
+<article class="panel-body" th:if="${posts.size()} == 0">
+    <i>Nenhuma postagem feita no momento, posta algo aí ;)</i>
+</article>
 
-<section th:if="${posts.size() == 0}" class="perfil-col-content perfil-apresentacao">
-    <article class="panel-body perfil-msg-alerta" >
-        <i>Nenhuma postagem feita no momento...</i>
-    </article>
-</section>
+<section th:each="post :${posts}" class="panel-body post-content">
 
-<section th:each="post :${posts}" class="panel-body post-content perfil-col-content perfil-posts">
     <header class="col-md-12">
         <article class="col-md-2 post-autor-img">
             <img class="perfil-img perfil-img-min" th:src="${post.perfilAutor.imagemPerfil}"/>
         </article>
 
         <article class="col-md-10 post-autor-info">
-            <strong><spam class="post-autor-nome" th:text="${post.perfilAutor.nome}">Autor</spam></strong>
-
+            <a class="link-style" th:href="@{${'/profile'}(id=${post.perfilAutor.id})}">
+                <strong><spam class="post-autor-nome" th:text="${post.perfilAutor.nome}">Autor</spam></strong>
+            </a>
             <br/>
 
-            <i class="fa fa-futbol-o" style="font-size: 12px; color: #777;"></i>
-            <spam class="post-time post-info-perfil" th:text="${post.perfilAutor.time.nome}">Time</spam>
+            <i class="fa fa-futbol-o" style="font-size: 12px; color: #ddd;"></i>
+            <spam class="post-time" th:text="${post.perfilAutor.time.nome}">Time</spam>
             ·
-            <spam class="post-data post-info-perfil" 
+            <spam class="post-data" 
                   th:text="${#dates.format(post.data, 'dd/MM/yyyy hh:mm')}">
                 Data
             </spam>
@@ -33,16 +32,31 @@
             <img class="img-responsive post-img" th:src="${post.imagem}"/>
         </article>
     </article>
-    <article class="col-md-12 post-content-reacoes">
-        <a class="link-perfil" href="#">
-            <spam class="post-reacoes">
-                <i class="fa fa-thumbs-up icon-reacoes icon-curtir" aria-hidden="true"></i>Curti 
+    <article th:id="'reacao-content-'+${post.id}" class="col-md-12 post-content-reacoes">
+        <a th:if="${not #lists.contains(post.reacao.perfisCurtidas, usuario.perfil)}" class="link-style" th:href="'javascript:postagem.curtir('+${post.id}+')'">
+            <spam class="post-reacoes curtir">
+                <strong>
+                    <i class="fa fa-thumbs-o-up icon-curtir" aria-hidden="true"></i> Curti ·
+                    <spam th:id="'num-curtidas-'+${post.id}" th:text="${post.reacao.numCutidas}"></spam>
+                </strong>
             </spam>    
         </a>
-        <a class="link-perfil" href="#">
-            <spam class="post-reacoes">
-                <i class="fa fa-heart icon-reacoes icon-amar" aria-hidden="true" style="color:#F00;"></i>Adorei
-            </spam>
+        <a th:if="${#lists.contains(post.reacao.perfisCurtidas, usuario.perfil)}" class="link-style btn-dislike" th:href="'javascript:postagem.descurtir('+${post.id}+')'">
+            <strong>
+                <spam class="post-reacoes descurtir">
+                    <i class="fa fa-thumbs-up icon-descurtir" aria-hidden="true"></i> Descurtir·
+                    <spam th:id="'num-curtidas-'+${post.id}" th:text="${post.reacao.numCutidas}"></spam>
+                </spam>    
+            </strong>
         </a>
+
+        <!--<a class="link-style" href="#">
+            <strong>
+                <spam class="post-reacoes">
+                    <i class="fa fa-heart icon-amar" aria-hidden="true" style="color:#F00;"></i> Adorei
+                </spam>
+            </strong>
+        </a>-->
     </article>
+
 </section>
