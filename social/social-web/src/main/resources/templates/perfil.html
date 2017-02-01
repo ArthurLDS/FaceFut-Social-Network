@@ -7,7 +7,7 @@
     <body>
         <style>
             body{
-                color: #444;
+                color: #eee;
             }
             .post-img {
                 width: 571px;
@@ -20,7 +20,7 @@
         <div class="divisor-perfil"></div>
         <!-- Id do usuario logado -->
         <input type="hidden" th:value="${usuario.id}" id="id-usuario" />
-        
+
         <section class="container">
             <section class="col-md-10">
                 <section class="block-perfil-heading">
@@ -35,17 +35,25 @@
 
                     <article style="padding-left: 155px;" class="hidden-xs">
                         <ul class="nav nav-pills">
-                            <li role="presentation"><a href="#"><i class="fa fa-group"></i>
-                                    <spam class="hidden-sm"> Amigos</spam></a>
+                            <li role="presentation">
+                                <a href="#" class="link-style"><i class="fa fa-group"></i>
+                                    <spam class="hidden-sm"> Amigos</spam>
+                                </a>
                             </li>
-                            <li role="presentation"><a href="#"><i class="fa fa-envelope-o"></i> 
-                                    <spam class="hidden-sm"> Convites</spam></a>
+                            <li role="presentation">
+                                <a href="#" class="link-style"><i class="fa fa-envelope-o"></i> 
+                                    <spam class="hidden-sm"> Convites</spam>
+                                </a>
                             </li>
-                            <li role="presentation"><a href="#"><i class="fa fa-commenting-o"></i> 
-                                    <spam class="hidden-sm"> Posts</spam></a>
+                            <li role="presentation">
+                                <a href="#" class="link-style"><i class="fa fa-commenting-o"></i> 
+                                    <spam class="hidden-sm"> Posts</spam>
+                                </a>
                             </li>
-                            <li role="presentation" class="pull-right"><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> 
-                                    <spam class="hidden-sm">Configurações</spam></a>
+                            <li role="presentation" class="pull-right">
+                                <a href="#" class="link-style"><i class="fa fa-cog" aria-hidden="true"></i> 
+                                    <spam class="hidden-sm">Configurações</spam>
+                                </a>
                             </li>
                         </ul>
                     </article>
@@ -56,11 +64,10 @@
 
         <section class="container perfil-content">
             <section class="col-md-3">
-                <section class="perfil-col-content perfil-apresentacao">
+                <section class="panel panel-default perfil-apresentacao">
                     <header class="panel-heading">
                         <i class="fa fa-globe" aria-hidden="true"></i>
                         Apresentação
-                        <hr/>
                     </header>
                     <section class="panel-body">
                         <article class="apresentacao-itens">
@@ -82,15 +89,14 @@
 
                     </section>
                 </section>
-                <section class="perfil-col-content perfil-apresentacao">
+                <section class="panel panel-default perfil-apresentacao">
                     <header class="panel-heading">
                         <i class="fa fa-group"></i>
-                        Amigos&nbsp;· <spam class="perfil-count-amigos" th:text="${usuario.amigos.size()}"></spam>
-                        <hr/>
+                        Amigos&nbsp;· <spam th:text="${usuario.amigos.size()}"></spam>
                     </header>
                     <section class="panel-body">
                         <i th:if="${usuario.amigos.size() == 0}">Nenhum amigo para mostar :(</i>
-                        
+
                         <article class="perfil-amigos-list" th:each="amigo :${usuario.amigos}">
                             <a th:href="@{${'/profile'}(id=${amigo.perfil.id})}">
                                 <img class="perfil-img-sq-med" th:src="${amigo.perfil.imagemPerfil}" th:title="${amigo.perfil.nome}"/>
@@ -103,7 +109,7 @@
 
             <section class="col-md-7">
 
-                <article th:if="${usuario== usuarioLogado}" class="panel perfil-col-content">
+                <article th:if="${usuario== usuarioLogado}" class="panel panel-default">
                     <section class="panel-body">
 
                         <form id="upload-file-form">
@@ -115,18 +121,34 @@
                                 <!-- Aqui será renderizado o Btn para upload de imagem via JS/AJAX -->
                             </spam>
 
-                            <a id="btn-postar" class="btn btn-success pull-right" name="button">
-                                <i class="fa fa-paper-plane-o" style="font-size:18px"></i>
-                                Publicar
+                            <a id="btn-postar" disableed="false" class="btn btn-success pull-right btn-active-loading" name="button">
+                                <spam id="loading-icon">
+                                    <i class="fa fa-spinner loading-icon" aria-hidden="true"></i>
+                                    Publicando...
+                                </spam>
+                                <spam id="txt-button">
+                                    <i class="fa fa-paper-plane-o" style="font-size:18px"></i>
+                                    Publicar
+                                </spam>
                             </a>
                         </form> 
+
                     </section>
-                    
                 </article>
 
 
-                <section id="box-posts">
-                    <!-- Aqui os posts serão renderizados -->
+                <section class="panel panel-default">
+                    <article class="panel-heading">
+                        <i class="fa fa-commenting-o"></i> Posts
+                        <a class="btn-post-refresh link-style" th:href="'javascript:postagem.carregarPosts('+${usuario.id}+')'"> 
+                            <i class="pull-right fa fa-refresh" aria-hidden="true" style="font-size: 15pt;"></i>
+                        </a>
+                    </article>
+
+                    <article id="box-posts">
+                        <!-- Aqui será inserido os posts -->
+                    </article>
+
                 </section>
 
             </section>

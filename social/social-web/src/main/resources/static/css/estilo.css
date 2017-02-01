@@ -15,6 +15,14 @@ body{
     background-color: initial;
     color: #FFF;
 }
+.nav-pills>li>a{
+    border-bottom: 1px solid rgba(52, 53, 53, 0);
+}
+.nav-pills>li>a:hover, .nav-pills>li>a:focus {
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid #18bc9c;
+}
 .badge{
     padding: 3px 5px;
 }
@@ -50,9 +58,7 @@ a:hover, a:focus {
 .post-reacoes .icon-amar{
     color: #F00;
 }
-.post-reacoes .icon-curtir{
-    color: #00F;
-}
+
 // Botões
 .btn-danger:hover{
     background-color: #a90e0e;
@@ -128,6 +134,23 @@ header .post-autor-info{
 header .post-autor-nome{
     font-size: 12pt;
 }
+.btn-dislike:hover{
+    color: #5890ff; 
+}
+.curtir{
+    color: #fff; 
+    text-shadow: 0px 0px 15px #505050;
+}
+.curtir:hover{
+    color: #bbb; 
+}
+.descurtir i{
+    color: #002e8a; 
+    text-shadow: 0px 0px 1px #f5f5f5;
+}
+.descurtir:hover{
+    color: #ddd;
+}
 
 /* Btns */
 .btn-post-refresh {
@@ -159,6 +182,7 @@ header .post-autor-nome{
 .link-style:focus{
     color: #FFF;
 }
+
 
 /* Home */
 .divisor{
@@ -240,15 +264,13 @@ header .post-autor-nome{
     margin-top: 61px;
 }
 .perfil-tools-heading{
+    color: #eee;
     padding: 5px;
-    border: 2px solid #DDD;
+    /* border: 2px solid #DDD; */
     border-top: 0px;
-    box-shadow: 1px 1px 8px #777;
+    /* box-shadow: 1px 1px 8px #777; */
     border-radius: 0px 0px 5px 5px;
-    background-color: #FFF;
-}
-.perfil-tools-heading a{
-    color: #6d6d6d;
+    background-color: rgba(43, 43, 43, 0.5);
 }
 .perfil-tools-heading img{
     position: absolute;
@@ -262,18 +284,6 @@ header .post-autor-nome{
     left: 194px;
     font-weight: bolder;
     text-shadow: 0px 0px 10px #000;
-}
-.perfil-col-content{
-    background-color: #FFF;
-    border: 2px solid #DDD;
-    border-radius: 5px;
-    box-shadow: 1px 1px 8px #777;
-}
-.perfil-apresentacao{
-    margin-bottom: 10px;
-}
-.perfil-apresentacao .panel-body{
-    padding-top: 0px;
 }
 .perfil-posts .panel-body{
     padding: 15px;
@@ -305,10 +315,6 @@ header .post-autor-nome{
 .perfil-amigos-list{
     margin: 2px;
     display: inline-block;
-}
-.perfil-count-amigos{
-    font-size: 10pt;
-    color: #989898;
 }
 .perfil-msg-alerta{
     margin-top: 15px;
