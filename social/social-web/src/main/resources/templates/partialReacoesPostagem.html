@@ -1,18 +1,24 @@
 <a th:if="${not #lists.contains(post.reacao.perfisCurtidas, usuario.perfil)}" class="link-style" th:href="'javascript:postagem.curtir('+${post.id}+')'">
-    <spam class="post-reacoes" style="color: #ddd;">
-        <i class="fa fa-thumbs-up icon-curtir" aria-hidden="true" ></i> Curti ·
-        <spam th:id="'num-curtidas-'+${post.id}" th:text="${post.reacao.numCutidas}"></spam>
+    <spam class="post-reacoes curtir">
+        <strong>
+            <i class="fa fa-thumbs-o-up icon-curtir" aria-hidden="true"></i> Curti ·
+            <spam th:id="'num-curtidas-'+${post.id}" th:text="${post.reacao.numCutidas}"></spam>
+        </strong>
     </spam>    
 </a>
-<a th:if="${#lists.contains(post.reacao.perfisCurtidas, usuario.perfil)}" class="link-style" th:href="'javascript:postagem.curtir('+${post.id}+')'">
-    <spam class="post-reacoes" style="color: #00f;">
-        <i class="fa fa-thumbs-up icon-curtir" aria-hidden="true"></i> Descurtir·
-        <spam th:id="'num-curtidas-'+${post.id}" th:text="${post.reacao.numCutidas}"></spam>
-    </spam>    
+<a th:if="${#lists.contains(post.reacao.perfisCurtidas, usuario.perfil)}" class="link-style btn-dislike" th:href="'javascript:postagem.descurtir('+${post.id}+')'">
+    <strong>
+        <spam class="post-reacoes descurtir">
+            <i class="fa fa-thumbs-up icon-descurtir" aria-hidden="true"></i> Descurtir·
+            <spam th:id="'num-curtidas-'+${post.id}" th:text="${post.reacao.numCutidas}"></spam>
+        </spam>  
+    </strong>
 </a>
 
-<a class="link-style" href="#">
-    <spam class="post-reacoes">
-        <i class="fa fa-heart icon-amar" aria-hidden="true" style="color:#F00;"></i> Adorei
-    </spam>
-</a>
+<!--<a class="link-style" href="#">
+    <strong>
+        <spam class="post-reacoes">
+            <i class="fa fa-heart icon-amar" aria-hidden="true" style="color:#F00;"></i> Adorei
+        </spam>
+    </strong>
+</a>-->
