@@ -47,49 +47,51 @@ public class PostController {
     public String carregarPosts(Model model, Long id, String arquivo) {
         Usuario usuario = usuarioService.findOne(id);
 
-        String view = "";
         List<Post> posts = new ArrayList<>();
-        
+
         if (arquivo.equals("HOME")) {
             posts = postService.filtrarPosts(postService.findAllByOrderByIdDesc(), usuario);
-            view = "partialPostagem";
-            
+
         } else if (arquivo.equals("PERFIL")) {
             posts = posts = usuario.getPosts().stream()
                     .sorted((p1, p2) -> p2.getId().compareTo(p1.getId()))
                     .collect(Collectors.toList());
-            view = "partialPostagemPerfil";
-            
+
         }
         model.addAttribute("usuario", usuario);
         model.addAttribute("posts", posts);
-        return view;
+        return "partialPostagem";
     }
 
     @RequestMapping(value = "carregarBtnUploadImagem", method = RequestMethod.GET)
     public String carregarBtnUploadImagem(Model model) {
         return "partialBtnUploadImagemPost";
     }
-    
-    
-    @RequestMapping(value = "carregarReacaoPorId", method = RequestMethod.GET)
-    public String carregarReacaoPorId(Model model, Long idUsuario, Long idPost){
+
+    @RequestMapping(value = "curtir", method = RequestMethod.GET)
+    public String curtir(Model model, Long idUsuario, Long idPost, boolean curtir) {
         Post post = postService.findOne(idPost);
         Reacao reacao = post.getReacao();
+
+        List<Perfil> perfis = reacao.getPerfisCurtidas();
+        Usuario usuario = usuarioUtils.getUsuarioLogado();
+
+        if (curtir) {
+            perfis.add(usuario.getPerfil());
+            reacao.setNumCutidas(reacao.getNumCutidas() + 1);
+        } else {
+            perfis.remove(usuario.getPerfil());
+            reacao.setNumCutidas(reacao.getNumCutidas() - 1);
+        }
         
-        List<Perfil> perfis =  reacao.getPerfisCurtidas();
-        Usuario usuario = usuarioUtils.getUsuarioLogado(); 
-        perfis.add(usuario.getPerfil());
-        
-        reacao.setNumCutidas(reacao.getNumCutidas()+1);
         reacao.setPerfisCurtidas(perfis);
-        
+
         post.setReacao(reacao);
         postService.save(post);
-        
+
         model.addAttribute("post", post);
         model.addAttribute("usuario", usuario);
-        
+
         return "partialReacoesPostagem";
     }
 }
