@@ -68,21 +68,4 @@ public class PostRestController {
                ? uploadfile.getOriginalFilename() : null;
     }
     
-    /*@RequestMapping(value="curtir", method = RequestMethod.POST)
-    public Integer curtirPost(Long id){
-        Post post = postService.findOne(id);
-        Reacao reacao = post.getReacao();
-        
-        List<Perfil> perfis =  reacao.getPerfisCurtidas();
-        Usuario usuario = usuarioUtils.getUsuarioLogado(); 
-        perfis.add(usuario.getPerfil());
-        
-        reacao.setNumCutidas(reacao.getNumCutidas()+1);
-        reacao.setPerfisCurtidas(perfis);
-        
-        post.setReacao(reacao);
-        postService.save(post);
-        
-        return post.getReacao().getNumCutidas();
-    }*/
 }
