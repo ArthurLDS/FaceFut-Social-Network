@@ -10,11 +10,14 @@ import br.com.crescer.social.entity.entities.Perfil;
 import br.com.crescer.social.entity.entities.Post;
 import br.com.crescer.social.entity.entities.Usuario;
 import br.com.crescer.social.service.Repository.PostRepository;
+import org.springframework.data.domain.Pageable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -42,6 +45,10 @@ public class PostService {
     public List<Post> findAllByOrderByIdDesc() {
         return repository.findAllByOrderByIdDesc();
     }
+    
+    public Page<Post> findAllByOrderByIdDesc(Pageable p){
+        return repository.findAllByOrderByIdDesc(p);
+    }
 
     public List<Post> filtrarPosts(List<Post> posts, Usuario usuario) {
 
@@ -54,6 +61,20 @@ public class PostService {
                         || p.getPerfilAutor().getEmail().equals(usuario.getEmail()))
                 .collect(Collectors.toList());
     }
+    
+    public Page<Post> filtrarPosts(Page<Post> posts, Usuario usuario, Pageable pageable) {
+        
+        List<String> emailAmigos = usuario.getAmigos().stream()
+                .map(a -> a.getPerfil().getEmail())
+                .collect(Collectors.toList());
+        
+        List<Post> postsList = posts.getContent().stream()
+                .filter(p -> emailAmigos.contains(p.getPerfilAutor().getEmail())
+                        || p.getPerfilAutor().getEmail().equals(usuario.getEmail()))
+                .collect(Collectors.toList());
+        
+        return new PageImpl<>(postsList, pageable, posts.getTotalElements());
+    }
 
     public Post salvar(String caminhoImagem, String texto, Usuario usuario) {
 
@@ -63,5 +84,8 @@ public class PostService {
         return new Post(texto, new Date(), usuario.getPerfil());
 
     }
-
+    
+    public Page<Post> findAllByPerfilAutor(Perfil perfil, Pageable pageable){
+        return repository.findAllByPerfilAutor(perfil, pageable);
+    }
 }
