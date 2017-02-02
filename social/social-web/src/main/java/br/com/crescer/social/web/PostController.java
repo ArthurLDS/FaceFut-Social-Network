@@ -14,12 +14,15 @@ import br.com.crescer.social.service.Service.AmigoService;
 import br.com.crescer.social.service.Service.PostService;
 import br.com.crescer.social.service.Service.UsuarioService;
 import br.com.crescer.social.service.Utils.UsuarioUtils;
+import org.springframework.data.domain.Pageable;
 import java.util.ArrayList;
 import org.springframework.security.core.userdetails.User;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,22 +47,25 @@ public class PostController {
     UsuarioUtils usuarioUtils;
 
     @RequestMapping(value = "carregarPosts", method = RequestMethod.GET)
-    public String carregarPosts(Model model, Long id, String arquivo) {
+    public String carregarPosts(Model model, Long id, String arquivo, Pageable pageable) {
         Usuario usuario = usuarioService.findOne(id);
 
-        List<Post> posts = new ArrayList<>();
+        Page<Post> posts = null;
 
         if (arquivo.equals("HOME")) {
-            posts = postService.filtrarPosts(postService.findAllByOrderByIdDesc(), usuario);
+            Page<Post> pages = postService.findAllByOrderByIdDesc(pageable);
+            posts = postService.filtrarPosts(pages, usuario, pageable);
 
         } else if (arquivo.equals("PERFIL")) {
-            posts = posts = usuario.getPosts().stream()
-                    .sorted((p1, p2) -> p2.getId().compareTo(p1.getId()))
-                    .collect(Collectors.toList());
+            posts = new PageImpl(postService.findAllByPerfilAutor(usuario.getPerfil(), pageable).getContent()
+                    .stream().sorted((p1, p2) -> p2.getId().compareTo(p1.getId()))
+                    .collect(Collectors.toList()), 
+                    pageable, usuario.getPosts().size());
 
         }
         model.addAttribute("usuario", usuario);
         model.addAttribute("posts", posts);
+        
         return "partialPostagem";
     }
 
