@@ -1,4 +1,4 @@
-<article class="panel-body" th:if="${posts.size()} == 0">
+<article class="panel-body" th:if="${posts.content.size()} == 0">
     <i>Nenhuma postagem feita no momento, posta algo aí ;)</i>
 </article>
 
@@ -58,5 +58,39 @@
             </strong>
         </a>-->
     </article>
-
 </section>
+
+<nav aria-label="...">
+    <ul class="pagination">
+        <li th:class="${posts.number eq 0} ? 'disabled' : ''">
+            <a th:if="${posts.number eq 0}">
+                <span>&laquo;</span>
+            </a>
+            <a th:if=" not ${posts.number eq 0}"
+               th:href="'javascript:postagem.carregarPosts('+ ${usuario.id} + ', 0)'">
+                <span>&laquo;</span>
+            </a>
+        </li>
+        
+        <li th:each="i : ${#numbers.sequence(0, posts.totalPages-1)}" th:class="${posts.number eq i} ? 'active' : ''">
+            <a th:if="${posts.number eq i}">
+                <span th:text="${i+1}"></span>
+            </a>
+            <a th:if="not ${posts.number eq i}" 
+               th:href="'javascript:postagem.carregarPosts('+ ${usuario.id} + ',' + ${i} + ')'">
+                <span th:text="${i+1}"></span>
+            </a>
+        </li>
+        
+        <li th:class="${posts.number eq posts.totalPages - 1} ? 'disabled' : ''">
+            <a th:if="${posts.number eq posts.totalPages - 1}" >
+                <span>&raquo;</span>
+            </a>
+            
+            <a th:if="not ${posts.number eq posts.totalPages - 1}" 
+               th:href="'javascript:postagem.carregarPosts('+ ${usuario.id} + ',' + ${posts.totalPages - 1} + ')'">
+                <span>&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>

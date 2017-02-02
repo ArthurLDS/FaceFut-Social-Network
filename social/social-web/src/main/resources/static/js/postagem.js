@@ -94,10 +94,14 @@ postagem.postagemTexto = function (response) {
 };
 
 
-postagem.carregarPosts = function (id) {
+postagem.carregarPosts = function (id, page) {
     var viewCurrent = window.location.href.includes("home") ? "HOME" : "PERFIL";
+    
+    if(page == null || page == 'undefined'){
+        page = 0;
+    }
 
-    $.get("/postagem/carregarPosts", {id, arquivo: viewCurrent})
+    $.get("/postagem/carregarPosts", {id, arquivo: viewCurrent, page, size : 3})
             .then(function (response) {
                 $('#box-posts').html(response);
             });
