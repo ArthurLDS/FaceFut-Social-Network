@@ -1,7 +1,6 @@
 /*
     @Author Arthur Lima de Souza
 */
-
 body{
     background-image: url(https://www.futbin.com/design/img/packs/packsbg.jpg?v=133333445);
     background-position-x: center;
@@ -15,6 +14,7 @@ body{
     background-color: initial;
     color: #FFF;
 }
+
 .nav-pills>li>a{
     border-bottom: 1px solid rgba(52, 53, 53, 0);
 }
@@ -38,6 +38,9 @@ a:hover, a:focus {
     color: #00129c;
     text-decoration: underline;
 }
+.cursor-pointer{
+    cursor: pointer;
+}
 .panel{
     background-color: rgba(53, 53, 53, 0.5);
     border: 0px solid #4c4c4c;
@@ -49,7 +52,10 @@ a:hover, a:focus {
 }
 .navbar{
     border-bottom: 2px solid #15a589;
-
+}
+.centered{
+    margin: 0 auto !important;
+    float: none !important;
 }
 // Ícones
 .icon-reacoes{
@@ -122,7 +128,7 @@ a:hover, a:focus {
 }
 .post-content{
     padding-right: 0px; 
-    border-bottom: 1px solid #888888;
+    border-bottom: 1px solid rgba(24, 188, 156, 0.4);
 }
 header .post-autor-img{
     padding: 0; width: 12.666667%;
@@ -151,13 +157,17 @@ header .post-autor-nome{
 .descurtir:hover{
     color: #ddd;
 }
-
+.btn-load-more-posts-content{
+    margin: 0 auto;
+    width: 50%; /* Altere para o valor da largura desejada. */
+}
 /* Btns */
 .btn-post-refresh {
     color: #FFF;
     text-decoration: none;
 }
 .btn-post-refresh i{
+    font-size: 15pt;
     transition: 0.8s;
 }
 .btn-post-refresh i:hover{
@@ -166,6 +176,10 @@ header .post-autor-nome{
 }
 .btn-post-refresh i:active{
     color: #aaa;
+}
+.btn-load-more-posts{
+    width: 100%;
+    margin: 5px 0px 5px 0px;
 }
 .link-style{
     color: #FFF;
