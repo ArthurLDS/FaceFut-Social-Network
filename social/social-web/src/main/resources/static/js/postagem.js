@@ -39,18 +39,18 @@ postagem.iniciar = function (id) {
     postagem.configurarForm();
     postagem.carregarPosts(postagem.idUsuario);
 
-    //setInterval(function(){
-    //    postagem.carregarPosts();
-    //}, 5000);
-
 }
 
 postagem.configurarForm = function () {
     $txtPost = $('#txt-post');
     $btnPost = $('#btn-postar');
-
+    
+    postagem.boxPosts = $('#box-posts');
+    postagem.btnRefreshPosts = $('#btn-refresh-posts');
+    
     postagem.atualizarBtnUploadDeImagem();
     $btnPost.click(postagem.postar);
+    postagem.btnRefreshPosts.click(postagem.atualizarPosts);
 };
 
 postagem.postar = function () {
@@ -82,8 +82,7 @@ postagem.postagemTexto = function (response) {
             .done(function () {
                 $txtPost.val('');
                 postagem.atualizarBtnUploadDeImagem();
-                postagem.carregarPosts(postagem.idUsuario);
-                postagem.carregarPosts(postagem.idUsuario);
+                postagem.atualizarPosts();
                 
                 postagem.esconderLoading(true);
                 postagem.desabilitarBtnLoading(false);
@@ -93,17 +92,23 @@ postagem.postagemTexto = function (response) {
             });
 };
 
+postagem.atualizarPosts = function(){
+    postagem.boxPosts.html("");
+    postagem.carregarPosts(postagem.idUsuario, 0);
+}
 
 postagem.carregarPosts = function (id, page) {
     var viewCurrent = window.location.href.includes("home") ? "HOME" : "PERFIL";
-    
+    var pagina = page - 1;
     if(page == null || page == 'undefined'){
         page = 0;
     }
 
     $.get("/postagem/carregarPosts", {id, arquivo: viewCurrent, page, size : 3})
             .then(function (response) {
-                $('#box-posts').html(response);
+                
+                $('#btn-load-more-posts-' + pagina).hide();
+                postagem.boxPosts.append(response);
             });
 };
 
