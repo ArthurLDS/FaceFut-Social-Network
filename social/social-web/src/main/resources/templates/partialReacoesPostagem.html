@@ -1,7 +1,7 @@
 <a th:if="${not #lists.contains(post.reacao.perfisCurtidas, usuario.perfil)}" class="link-style" th:href="'javascript:postagem.curtir('+${post.id}+')'">
     <spam class="post-reacoes curtir">
         <strong>
-            <i class="fa fa-thumbs-o-up icon-curtir" aria-hidden="true"></i> Curti ·
+            <i class="fa fa-thumbs-o-up icon-curtir" aria-hidden="true"></i> Curtir ·
             <spam th:id="'num-curtidas-'+${post.id}" th:text="${post.reacao.numCutidas}"></spam>
         </strong>
     </spam>    
