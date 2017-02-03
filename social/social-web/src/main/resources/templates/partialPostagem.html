@@ -49,7 +49,6 @@
                 </spam>    
             </strong>
         </a>
-
         <!--<a class="link-style" href="#">
             <strong>
                 <spam class="post-reacoes">
@@ -60,37 +59,13 @@
     </article>
 </section>
 
-<nav aria-label="...">
-    <ul class="pagination">
-        <li th:class="${posts.number eq 0} ? 'disabled' : ''">
-            <a th:if="${posts.number eq 0}">
-                <span>&laquo;</span>
-            </a>
-            <a th:if=" not ${posts.number eq 0}"
-               th:href="'javascript:postagem.carregarPosts('+ ${usuario.id} + ', 0)'">
-                <span>&laquo;</span>
-            </a>
-        </li>
+<div class="col-md-5 col-sm-8 col-xs-8 centered">
+    <a class="btn btn-info btn-load-more-posts"
+       th:if="not ${posts.number eq posts.totalPages - 1} and not ${posts.content.size() eq 0}"
+       th:id="'btn-load-more-posts-'+ ${posts.number}" 
+       th:href="'javascript:postagem.carregarPosts('+ ${usuario.id} + ',' + ${posts.number+1} + ')'">
         
-        <li th:each="i : ${#numbers.sequence(0, posts.totalPages-1)}" th:class="${posts.number eq i} ? 'active' : ''">
-            <a th:if="${posts.number eq i}">
-                <span th:text="${i+1}"></span>
-            </a>
-            <a th:if="not ${posts.number eq i}" 
-               th:href="'javascript:postagem.carregarPosts('+ ${usuario.id} + ',' + ${i} + ')'">
-                <span th:text="${i+1}"></span>
-            </a>
-        </li>
-        
-        <li th:class="${posts.number eq posts.totalPages - 1} ? 'disabled' : ''">
-            <a th:if="${posts.number eq posts.totalPages - 1}" >
-                <span>&raquo;</span>
-            </a>
-            
-            <a th:if="not ${posts.number eq posts.totalPages - 1}" 
-               th:href="'javascript:postagem.carregarPosts('+ ${usuario.id} + ',' + ${posts.totalPages - 1} + ')'">
-                <span>&raquo;</span>
-            </a>
-        </li>
-    </ul>
-</nav>
+        <span>Mostrar mais posts</span>
+    </a>
+</div>
+
