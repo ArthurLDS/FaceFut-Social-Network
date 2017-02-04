@@ -33,7 +33,10 @@ public class Time implements Serializable{
     @Basic(optional = false)
     @Column(name = "NM_TIME")
     private String nome;
-
+    
+    @Basic(optional = false)
+    @Column(name = "ESCUDO_TIME")
+    private String escudo;
     
     public Long getId() {
         return id;
@@ -49,6 +52,14 @@ public class Time implements Serializable{
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getEscudo() {
+        return escudo;
+    }
+
+    public void setEscudo(String escudo) {
+        this.escudo = escudo;
     }
     
     
