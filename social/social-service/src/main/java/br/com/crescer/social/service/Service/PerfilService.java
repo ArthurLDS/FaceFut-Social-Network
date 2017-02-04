@@ -38,10 +38,12 @@ public class PerfilService {
         perfilRepository.save(perfil);
     }
 
-    public Perfil save(Usuario usuario, MultipartFile multipartFile) {
+    public Perfil save(Usuario usuario, MultipartFile imgPerfil, MultipartFile capaPerfil) {
         Perfil perfil = usuario.getPerfil();
         perfil.setEmail(usuario.getEmail());
-        perfil.setImagemPerfil("/imgs/perfil/" + multipartFile.getOriginalFilename());
+        
+        perfil.setImagemPerfil("/imgs/perfil/" + imgPerfil.getOriginalFilename());
+        perfil.setCapaPerfil("/imgs/capa/" + capaPerfil.getOriginalFilename());
         
         return perfilRepository.save(perfil);
     }
