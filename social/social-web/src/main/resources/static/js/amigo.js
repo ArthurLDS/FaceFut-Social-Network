@@ -20,7 +20,7 @@ amigo.desabilitarBtnAdicionar = function(id){
     $btnAdicionar = $('#btn-adicionar-' + id);
     
     $btnAdicionar.attr('disabled','disabled');
-    $btnAdicionar.removeClass('btn-primary');
+    $btnAdicionar.removeClass('btn-info');
     $btnAdicionar.addClass('btn-success');
     $btnAdicionar.html('<i class="fa fa-check" aria-hidden="true"></i> Convite enviado');
 }
@@ -72,7 +72,7 @@ amigo.aceitarConvite = function(id){
                 amigo.carregarConvitesRecebidos();
                 amigo.carregarListaAmigos();
                 amigo.atualizarNumeroDeAmigos();
-                postagem.carregarPosts(postagem.idUsuario);
+                postagem.atualizarPosts();
             });
 };
 
