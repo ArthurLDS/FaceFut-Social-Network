@@ -5,17 +5,17 @@ INSERT INTO TIME (ID_TIME, NM_TIME) VALUES(3, 'Brasil de Pelotas');
 INSERT INTO TIME (ID_TIME, NM_TIME) VALUES(4, 'Juventude');
 
 -- Perfis --
-INSERT INTO PERFIL(ID_PERFIL, NOME, EMAIL, DATA_NASCIMENTO, SEXO, ID_TIME,IMAGEM_PERFIL)
-VALUES(1000, 'Arthur Lima de Souza', 'arthurlds73@gmail.com','27/11/98 14:55:00','MASCULINO', 1, '/imgs/perfil/arthur.jpg');
+INSERT INTO PERFIL(ID_PERFIL, NOME, EMAIL, DATA_NASCIMENTO, SEXO, ID_TIME,IMAGEM_PERFIL, CAPA_PERFIL)
+VALUES(1000, 'Arthur Lima de Souza', 'arthurlds73@gmail.com','27/11/98 14:55:00','MASCULINO', 1, '/imgs/perfil/arthur.jpg', '/imgs/capa/capaArthur.jpg');
 
-INSERT INTO PERFIL(ID_PERFIL, NOME, EMAIL, DATA_NASCIMENTO, SEXO, ID_TIME,IMAGEM_PERFIL)
-VALUES(1001, 'Rafael de Souza', 'rafaeldesouza@gmail.com','06/04/88 14:55:00','MASCULINO', 1, '/imgs/perfil/chaves.jpg');
+INSERT INTO PERFIL(ID_PERFIL, NOME, EMAIL, DATA_NASCIMENTO, SEXO, ID_TIME,IMAGEM_PERFIL, CAPA_PERFIL)
+VALUES(1001, 'Rafael de Souza', 'rafaeldesouza@gmail.com','06/04/88 14:55:00','MASCULINO', 1, '/imgs/perfil/chaves.jpg', '/imgs/capa/fernandao_taca.jpg');
 
-INSERT INTO PERFIL(ID_PERFIL, NOME, EMAIL, DATA_NASCIMENTO, SEXO, ID_TIME,IMAGEM_PERFIL)
-VALUES(1002, 'Mara Regina Lima de Souza', 'maralima@gmail.com','17/01/54 14:55:00','FEMININO', 1, '/imgs/perfil/donaflorinda.png');
+INSERT INTO PERFIL(ID_PERFIL, NOME, EMAIL, DATA_NASCIMENTO, SEXO, ID_TIME,IMAGEM_PERFIL, CAPA_PERFIL)
+VALUES(1002, 'Mara Regina Lima de Souza', 'maralima@gmail.com','17/01/54 14:55:00','FEMININO', 1, '/imgs/perfil/donaflorinda.png', '/imgs/capa/fernandao_taca.jpg');
 
-INSERT INTO PERFIL(ID_PERFIL, NOME, EMAIL, DATA_NASCIMENTO, SEXO, ID_TIME,IMAGEM_PERFIL)
-VALUES(1003, 'Larri Angeli de Souza', 'larridesouza@gmail.com','06/06/54 14:55:00','MASCULINO', 1, '/imgs/perfil/seumadruga.jpg');
+INSERT INTO PERFIL(ID_PERFIL, NOME, EMAIL, DATA_NASCIMENTO, SEXO, ID_TIME,IMAGEM_PERFIL, CAPA_PERFIL)
+VALUES(1003, 'Larri Angeli de Souza', 'larridesouza@gmail.com','06/06/54 14:55:00','MASCULINO', 1, '/imgs/perfil/seumadruga.jpg', '/imgs/capa/capaArthur.jpg');
 
 -- Usuários --
 INSERT INTO USUARIO (ID_USUARIO, EMAIL, SENHA, ID_PERFIL) 
