@@ -27,7 +27,9 @@
                 Time: <strong><spam th:text="${perfil.time.nome}">Time</spam></strong>
             </div>  
 
-            <a th:if="${not #lists.contains(perfisAmigosUsuario, perfil)} and ${ not #lists.contains(convitesEnviados, perfil.email)}" th:id="'btn-adicionar-'+${perfil.id}" th:href="'javascript:amigo.enviarConvite('+${perfil.id}+')'" class="btn btn-primary btn-adicionar">
+            <a th:if="${not #lists.contains(perfisAmigosUsuario, perfil)} and ${ not #lists.contains(convitesEnviados, perfil.email)}"
+               th:id="'btn-adicionar-'+${perfil.id}" th:href="'javascript:amigo.enviarConvite('+${perfil.id}+')'" 
+               class="btn btn-info btn-adicionar">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
                 Adicionar amigo
             </a>
@@ -36,7 +38,8 @@
                 <i class="fa fa-user-times" aria-hidden="true"></i>
                 Desfazer amizade
             </a>
-            <a disabled="true" th:if="${#lists.contains(convitesEnviados, perfil.email)} and ${not #lists.contains(perfisAmigosUsuario, perfil)}" class="btn btn-success btn-adicionar">
+            <a disabled="true" th:if="${#lists.contains(convitesEnviados, perfil.email)} and ${not #lists.contains(perfisAmigosUsuario, perfil)}" 
+               class="btn btn-success btn-adicionar">
                 <i class="fa fa-check" aria-hidden="true"></i>
                 Convite enviado
             </a>
