@@ -9,6 +9,10 @@
             body{
                 color: #eee;
             }
+            header .post-autor-img {
+                padding: 0;
+                width: 10.3%;
+            }
             .post-img {
                 width: 571px;
             }
@@ -23,9 +27,12 @@
 
         <section class="container">
             <section class="col-md-10">
-                <section class="block-perfil-heading">
+                <section class="block-perfil-heading" th:style="'background-image: url('+${usuario.perfil.capaPerfil}+');'">
 
                 </section>
+                <script>
+                    
+                </script>
             </section>
 
             <nav class="col-md-10">
@@ -75,8 +82,12 @@
                             Amigos
                         </article>
                         <article class="apresentacao-itens">
-                            <i class="fa fa-heart icon"></i> 
+                            <i class="fa fa-heart icon icon-time"></i> 
                             <spam th:text="${usuario.perfil.time.nome}"></spam>
+                        </article>
+                        <article class="apresentacao-itens">
+                            <i class="fa fa-at icon icon-arroba" aria-hidden="true"></i> 
+                            <spam th:text="${usuario.perfil.email}"></spam>
                         </article>
                         <article class="apresentacao-itens">
                             <i class="fa fa-birthday-cake icon" aria-hidden="true"></i>
