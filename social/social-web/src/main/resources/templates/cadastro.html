@@ -57,9 +57,17 @@
                         <article class="form-group">
                             <div class="file-upload btn btn-warning">
                                 <span>Selecione sua foto de perfil</span>
-                                <input type="file" required="true" name="uploadfile" id="FileAttachment" class="upload" />
+                                <input type="file" required="true" name="imgPerfil" id="fileImgPerfil" class="upload" />
                             </div>
-                            <input type="text" id="fileuploadurl" readonly="true" placeholder="Maximum file size is 1GB"/>
+                            <input type="text" id="urlImgPerfil" class="fileuploadurl" readonly="true" placeholder="Maximum file size is 1GB"/>
+                        </article>
+                        
+                        <article class="form-group">
+                            <div class="file-upload btn btn-warning">
+                                <span>Selecione uma foto para capa de perfil</span>
+                                <input type="file" required="true" name="capaPerfil" id="fileCapaPerfil" class="upload" />
+                            </div>
+                            <input type="text" id="urlCapaPerfil" class="fileuploadurl" readonly="true" placeholder="Maximum file size is 1GB"/>
                         </article>
 
                         <article class="form-group">
@@ -83,8 +91,11 @@
         <script th:src="@{/js/cadastro.js}"></script>
 
         <script>
-            document.getElementById("FileAttachment").onchange = function () {
-                document.getElementById("fileuploadurl").value = this.value;
+            document.getElementById("fileImgPerfil").onchange = function () {
+                document.getElementById("urlImgPerfil").value = this.value;
+            };
+            document.getElementById("fileCapaPerfil").onchange = function () {
+                document.getElementById("urlCapaPerfil").value = this.value;
             };
         </script>
     </body>
