@@ -72,12 +72,14 @@ public class CadastroController {
     }
 
     @RequestMapping(value = "/cadastroForm", method = RequestMethod.POST)
-    public String save(@ModelAttribute Usuario usuario, MultipartFile uploadfile, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String save(@ModelAttribute Usuario usuario, MultipartFile imgPerfil, MultipartFile capaPerfil, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         FileUtils fileUtils = new FileUtils();
         
-        if (!bindingResult.hasErrors() && fileUtils.salvarArquivo(uploadfile, TipoArquivo.PERFIL_IMG_FILE)) {
+        if (!bindingResult.hasErrors() && 
+            fileUtils.salvarArquivo(imgPerfil, TipoArquivo.PERFIL_IMG_FILE) && 
+            fileUtils.salvarArquivo(capaPerfil, TipoArquivo.PERFIL_CAPA_FILE)){
             
-            Perfil perfil = perfilService.save(usuario, uploadfile);
+            Perfil perfil = perfilService.save(usuario, imgPerfil, capaPerfil);
             
             usuario.setPerfil(perfil);
             usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
