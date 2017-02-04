@@ -64,6 +64,12 @@ a:hover, a:focus {
 .post-reacoes .icon-amar{
     color: #F00;
 }
+.icon-time{
+    color: #F00;
+}
+.icon-arroba{
+    width: 16px;
+}
 
 // Botões
 .btn-danger:hover{
@@ -269,9 +275,10 @@ header .post-autor-nome{
 }
 /* -- Tela de Perfil -- */
 .block-perfil-heading{
-    background-image: url(https://scontent-gru2-1.xx.fbcdn.net/v/t1.0-9/15578666_1302103556514343_6474261687287703631_n.jpg?oh=8119ce92561d660207d12bfde4cd059c&oe=591C4D4B);
+    //background-image: url(https://scontent-gru2-1.xx.fbcdn.net/v/t1.0-9/15578666_1302103556514343_6474261687287703631_n.jpg?oh=8119ce92561d660207d12bfde4cd059c&oe=591C4D4B);
     background-position-x: center;
     background-position-y: center;
+    background-size: cover;
     height: 260px;
 }
 .divisor-perfil{
@@ -369,7 +376,7 @@ header .post-autor-nome{
     opacity: 0;
     filter: alpha(opacity=0);
 }
-#fileuploadurl{
+.fileuploadurl{
     color: #FFF;
     text-shadow: 0px 0px 5px #000;
     display: inline-block;
