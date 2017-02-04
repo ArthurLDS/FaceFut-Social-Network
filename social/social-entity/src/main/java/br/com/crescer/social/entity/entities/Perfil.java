@@ -77,7 +77,20 @@ public class Perfil implements Serializable{
     @Basic(optional = false)
     @Column(name="IMAGEM_PERFIL")
     private String imagemPerfil;
+    
+    @Size(min = 1, max = 255, message = "O mínimo de caracteres é 1 e o máximo é 255.")
+    @Basic(optional = false)
+    @Column(name="CAPA_PERFIL")
+    private String capaPerfil;
 
+    public String getCapaPerfil() {
+        return capaPerfil;
+    }
+
+    public void setCapaPerfil(String capaPerfil) {
+        this.capaPerfil = capaPerfil;
+    }
+    
     public void setId(Long id) {
         this.id = id;
     }
