@@ -12,7 +12,8 @@ package br.com.crescer.social.service.Enumetarion;
 public enum TipoArquivo {
     
     POST_IMG_FILE("Post_img_file"),
-    PERFIL_IMG_FILE("Perfil_img_file");
+    PERFIL_IMG_FILE("Perfil_img_file"),
+    PERFIL_CAPA_FILE("Perfil_capa_file");
     
     private final String nome;
     
