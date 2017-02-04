@@ -28,6 +28,9 @@ public class FileUtils {
             else if(tipoArquivo == TipoArquivo.POST_IMG_FILE){
                 diretorioArquivo = "C:\\Users\\Arthur\\Documents\\GitHub\\FaceFut\\FaceFut\\social\\social-web\\src\\main\\resources\\static\\imgs\\post";
             }
+            else if(tipoArquivo == TipoArquivo.PERFIL_CAPA_FILE){
+                diretorioArquivo = "C:\\Users\\Arthur\\Documents\\GitHub\\FaceFut\\FaceFut\\social\\social-web\\src\\main\\resources\\static\\imgs\\capa";
+            }
             String caminhoArquivo = Paths.get(diretorioArquivo, nomeArquivo).toString();
 
             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(caminhoArquivo)));
