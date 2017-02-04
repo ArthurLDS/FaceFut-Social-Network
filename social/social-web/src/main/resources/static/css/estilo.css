@@ -58,6 +58,17 @@ a:hover, a:focus {
     float: none !important;
 }
 // Ícones
+.icon-club-min{
+    width: 16px;
+    height: 16px;
+    margin-bottom: 2px;
+}
+.icon-club-med{
+    width: 18px; 
+    height: 18px; 
+    margin-bottom: 2px;
+}
+
 .icon-reacoes{
     margin-right: 15px;
 }
