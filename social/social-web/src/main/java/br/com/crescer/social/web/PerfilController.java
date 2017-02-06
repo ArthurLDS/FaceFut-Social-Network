@@ -38,16 +38,33 @@ public class PerfilController {
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String carrgarView(Model model, @RequestParam(required = true) Long id) {
-        
+
         Usuario usuario = usuarioService.findByPerfil(perfilService.findById(id));
-        
+        Usuario usuarioLogado = getUserSessao();
+
         model.addAttribute("usuario", usuario);
-        model.addAttribute("usuarioLogado", getUserSessao());
+        model.addAttribute("usuarioLogado", usuarioLogado);
         return "perfil";
     }
-    
-    private Usuario getUserSessao(){
-        User userSpringSecurity = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+    @RequestMapping(value = "/carregarBtnAmizade", method = RequestMethod.GET)
+    public String carregarBtnAmizade(Model model, Long id) {
+        Usuario usuario = usuarioService.findByPerfil(perfilService.findById(id));
+        Usuario usuarioLogado = getUserSessao();
+
+        model.addAttribute("convitesEnviados", usuarioLogado.getConvitesEnviados().stream()
+                .map(c -> c.getPerfilDestinatario())
+                .collect(Collectors.toList()));
+        model.addAttribute("perfisAmigosUsuario", usuarioLogado.getAmigos().stream()
+                .map(a -> a.getPerfil())
+                .collect(Collectors.toList()));
+        model.addAttribute("usuario", usuario);
+
+        return "partialBtnsAmizade";
+    }
+
+    private Usuario getUserSessao() {
+        User userSpringSecurity = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return usuarioService.findByEmail(userSpringSecurity.getUsername());
     }
 }
