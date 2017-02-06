@@ -249,6 +249,9 @@ header .post-autor-nome{
     padding: 4px 5px 4px 5px;
 }
 /*Perfil*/
+.perfil-btn-amizade-content{
+    margin-top: 210px;
+}
 .block-perfil{
     padding: 0px;
 }
