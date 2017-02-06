@@ -5,6 +5,11 @@
 var amigo = {};
 
 $(function(){
+    amigo.iniciar();
+});
+
+amigo.iniciar = function(){
+    amigo.carregarBtnAmizade($('#id-usuario').val());
     amigo.carregarListaAmigos();
     amigo.atualizarNumeroDeAmigos();
     amigo.carregarConvitesRecebidos();
@@ -14,17 +19,15 @@ $(function(){
             amigo.atualizarNumeroDeAmigos();
             amigo.carregarConvitesRecebidos();
         }, 5000);
-});
+}
 
 amigo.desabilitarBtnAdicionar = function(id){
     $btnAdicionar = $('#btn-adicionar-' + id);
-    
     $btnAdicionar.attr('disabled','disabled');
     $btnAdicionar.removeClass('btn-info');
     $btnAdicionar.addClass('btn-success');
     $btnAdicionar.html('<i class="fa fa-check" aria-hidden="true"></i> Convite enviado');
 }
-
 
 amigo.carregarListaAmigos = function(){
     
@@ -50,11 +53,6 @@ amigo.carregarConvitesRecebidos = function(){
             });
 };
 amigo.enviarConvite = function(id){
-    
-  /*$.get('/amigoRest/enviarConvite', {id})
-          .then(function(){
-              amigo.desabilitarBtnAdicionar(id);
-          });*/
     $.ajax({
        url: '/amigoRest/enviarConvite',
        type: 'PUT',
@@ -87,14 +85,26 @@ amigo.recusarConvite = function(id){
             });
 };
 
+amigo.carregarBtnAmizade = function(id){
+    $.get("/carregarBtnAmizade", {id})
+        .then(function(response){
+            $('#content-btn-amizade').html(response);
+    });
+}
+
 amigo.desfazerAmizade = function(id){
     
     $.post("/amigoRest/desfazerAmizade", {id})
             .then(function(){
-                pesquisa.pesquisar();
-                amigo.carregarListaAmigos();
-                amigo.atualizarNumeroDeAmigos();
-                postagem.carregarPosts(postagem.idUsuario);
+                if(window.location.href.includes("home")) { 
+                    postagem.carregarPosts(postagem.idUsuario);
+                    pesquisa.pesquisar();
+                    amigo.carregarListaAmigos();
+                    amigo.atualizarNumeroDeAmigos();
+                }else{
+                    amigo.carregarBtnAmizade(id);
+                }
+               
             });
 };
 
