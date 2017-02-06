@@ -41,7 +41,11 @@ public class PostService {
     public void save(Post post) {
         repository.save(post);
     }
-
+    
+    public Page<Post> findByPerfisAutor(List<Perfil> perfis, Pageable p){
+        return repository.findByPerfilAutorIn(perfis, p);
+    }
+    
     public List<Post> findAllByOrderByIdDesc() {
         return repository.findAllByOrderByIdDesc();
     }
@@ -62,19 +66,19 @@ public class PostService {
                 .collect(Collectors.toList());
     }
     
-    public Page<Post> filtrarPosts(Page<Post> posts, Usuario usuario, Pageable pageable) {
+    /*public Page<Post> filtrarPosts(List<Post> posts, Usuario usuario, Pageable pageable) {
         
         List<String> emailAmigos = usuario.getAmigos().stream()
                 .map(a -> a.getPerfil().getEmail())
                 .collect(Collectors.toList());
         
-        List<Post> postsList = posts.getContent().stream()
+        List<Post> postsList = posts.stream()
                 .filter(p -> emailAmigos.contains(p.getPerfilAutor().getEmail())
                         || p.getPerfilAutor().getEmail().equals(usuario.getEmail()))
                 .collect(Collectors.toList());
         
-        return new PageImpl<>(postsList, pageable, posts.getTotalElements());
-    }
+        return new PageImpl<>(postsList, pageable, postsList.size());
+    }*/
 
     public Post salvar(String caminhoImagem, String texto, Usuario usuario) {
 

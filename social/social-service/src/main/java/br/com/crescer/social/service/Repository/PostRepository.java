@@ -23,5 +23,7 @@ public interface PostRepository extends PagingAndSortingRepository<Post, Long>{
     
     public Page<Post> findAllByOrderByIdDesc(Pageable pgbl);
     
-    public Page<Post> findAllByPerfilAutor(Perfil perfilAutor,Pageable pgbl);
+    public Page<Post> findAllByPerfilAutor(Perfil perfilAutor, Pageable pgbl);
+    
+    public Page<Post> findByPerfilAutorIn(List<Perfil> perfilAutor, Pageable pgbl);
 }
