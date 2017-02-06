@@ -104,12 +104,12 @@ postagem.carregarPosts = function (id, page) {
         page = 0;
     }
 
-    $.get("/postagem/carregarPosts", {id, arquivo: viewCurrent, page, size : 3})
-            .then(function (response) {
+    $.get("/postagem/carregarPosts", {id, arquivo: viewCurrent, page, size : 3, sort: 'id,desc'})
+        .then(function (response) {
                 
-                $('#btn-load-more-posts-' + pagina).hide();
-                postagem.boxPosts.append(response);
-            });
+            $('#btn-load-more-posts-' + pagina).hide();
+            postagem.boxPosts.append(response);
+        });
 };
 
 
