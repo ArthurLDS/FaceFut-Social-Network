@@ -44,18 +44,12 @@
         <a th:if="${#lists.contains(post.reacao.perfisCurtidas, usuario.perfil)}" class="link-style btn-dislike" th:href="'javascript:postagem.descurtir('+${post.id}+')'">
             <strong>
                 <spam class="post-reacoes descurtir">
-                    <i class="fa fa-thumbs-up icon-descurtir" aria-hidden="true"></i> Descurtir·
+                    <i class="fa fa-thumbs-up icon-descurtir" aria-hidden="true"></i> Descurtir ·
                     <spam th:id="'num-curtidas-'+${post.id}" th:text="${post.reacao.numCutidas}"></spam>
                 </spam>    
             </strong>
         </a>
-        <!--<a class="link-style" href="#">
-            <strong>
-                <spam class="post-reacoes">
-                    <i class="fa fa-heart icon-amar" aria-hidden="true" style="color:#F00;"></i> Adorei
-                </spam>
-            </strong>
-        </a>-->
+        
     </article>
 </section>
 
