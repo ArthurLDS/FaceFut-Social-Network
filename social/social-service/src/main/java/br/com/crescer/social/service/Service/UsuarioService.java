@@ -43,7 +43,11 @@ public class UsuarioService {
     public void save(Usuario usuario) {
         repository.save(usuario);
     }
-
+    
+    public List<Usuario> findAllByPerfil (List<Perfil> perfis){
+        return repository.findAllByPerfil(perfis);
+    }
+    
     public void removerAmigo(Usuario usuario, Amigo exAmigo) {
         List<Amigo> amigosDoUsuario = usuario.getAmigos();
         amigosDoUsuario.remove(exAmigo);
