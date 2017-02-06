@@ -53,19 +53,23 @@ public class PostController {
         Page<Post> posts = null;
 
         if (arquivo.equals("HOME")) {
-            Page<Post> pages = postService.findAllByOrderByIdDesc(pageable);
-            posts = postService.filtrarPosts(pages, usuario, pageable);
+            List<Perfil> perfisConsulta = usuario.getAmigos().stream()
+                    .map(a -> a.getPerfil())
+                    .collect(Collectors.toList());
+            perfisConsulta.add(usuario.getPerfil());
+            
+            posts = postService.findByPerfisAutor(perfisConsulta, pageable);
 
         } else if (arquivo.equals("PERFIL")) {
             posts = new PageImpl(postService.findAllByPerfilAutor(usuario.getPerfil(), pageable).getContent()
                     .stream().sorted((p1, p2) -> p2.getId().compareTo(p1.getId()))
-                    .collect(Collectors.toList()), 
+                    .collect(Collectors.toList()),
                     pageable, usuario.getPosts().size());
 
         }
         model.addAttribute("usuario", usuario);
         model.addAttribute("posts", posts);
-        
+
         return "partialPostagem";
     }
 
@@ -89,7 +93,7 @@ public class PostController {
             perfis.remove(usuario.getPerfil());
             reacao.setNumCutidas(reacao.getNumCutidas() - 1);
         }
-        
+
         reacao.setPerfisCurtidas(perfis);
 
         post.setReacao(reacao);
