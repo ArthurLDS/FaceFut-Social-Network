@@ -1,0 +1,25 @@
+<a th:if="${not #lists.contains(perfisAmigosUsuario, usuario.perfil)} and ${ not #lists.contains(convitesEnviados, usuario.perfil)}"
+   th:id="'btn-adicionar-'+${usuario.perfil.id}" th:href="'javascript:amigo.enviarConvite('+${usuario.perfil.id}+')'" 
+   class="btn btn-info btn-adicionar pull-right">
+    <i class="fa fa-user-plus" aria-hidden="true"></i>
+    <spam class="hidden-sm hidden-xs">
+        Adicionar amigo
+    </spam>
+</a>
+
+<a th:if="${#lists.contains(perfisAmigosUsuario, usuario.perfil)}" 
+   th:href="'javascript:amigo.desfazerAmizade('+ ${usuario.perfil.id} +')'" 
+   id="btn-desfazer-amizade"
+   class="btn btn-warning btn-adicionar pull-right">
+    <i class="fa fa-user-times" aria-hidden="true"></i>
+    <spam class="hidden-sm hidden-xs">
+        Desfazer amizade
+    </spam>
+</a>
+<a disabled="true" th:if="${#lists.contains(convitesEnviados, usuario.perfil)} and ${not #lists.contains(perfisAmigosUsuario, usuario.perfil)}" 
+   class="btn btn-success btn-adicionar pull-right">
+    <i class="fa fa-check" aria-hidden="true"></i>
+    <spam class="hidden-sm hidden-xs">
+        Convite enviado
+    </spam>
+</a>
