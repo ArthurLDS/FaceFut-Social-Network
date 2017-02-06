@@ -29,9 +29,14 @@
             <section class="col-md-10">
                 <section class="block-perfil-heading" th:style="'background-image: url('+${usuario.perfil.capaPerfil}+');'">
 
+                    <article id="content-btn-amizade" th:if=" not ${usuario eq usuarioLogado}" 
+                             class="col-md-3 pull-right perfil-btn-amizade-content">
+                        <!-- Btns amizade serão renderizados aqui-->
+                    </article>
+                    
                 </section>
                 <script>
-                    
+
                 </script>
             </section>
 
@@ -126,7 +131,7 @@
 
                         <form id="upload-file-form">
                             <article class="form-group">
-                                <textarea id="txt-post" required="required" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
+                                <textarea id="txt-post" maxlength="254" required="required" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
                             </article>
 
                             <spam id="upload-file-content">
@@ -170,6 +175,8 @@
         <footer th:replace="fragments :: footer">
 
         </footer>
+        <script th:src="@{/js/pesquisa.js}"></script>
         <script th:src="@{/js/postagem.js}"></script>
+        <script th:src="@{/js/amigo.js}"></script>
     </body>
 </html>
