@@ -50,7 +50,8 @@ bld/
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
-/social/social-entity/target/
+
 /social/social-security/target/
-/social/social-web/target/
+/social/social-entity/target/
 /social/social-service/target/
+/social/social-web/target/
