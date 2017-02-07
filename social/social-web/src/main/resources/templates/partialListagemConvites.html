@@ -3,12 +3,12 @@
 </article>
 
 <article>
-    <div th:each="convite :${convites}" class="panel-body col-md-12">
+    <div th:each="convite :${convites}" class="panel-body">
 
-        <article class="col-md-2" style="padding: 0px;">
+        <article class="col-md-2 col-xs-2 col-sm-1 no-padding">
             <img class="perfil-img perfil-img-min" th:src="${convite.perfilRemetente.imagemPerfil}"/>
         </article>
-        <article class="col-md-10" style="padding-left: 15px;">
+        <article class="col-md-10 col-xs-10 col-sm-11 list-convites-info">
             <div>
                 <a class="link-style" th:href="@{${'/profile'}(id=${convite.perfilRemetente.id})}">
                     <strong><spam th:text="${convite.perfilRemetente.nome}">Remetente</spam></strong>
