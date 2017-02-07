@@ -3,12 +3,12 @@
 </article>
 
 <article>
-    <div th:each="amigo :${amigos}" class="panel-body list-amigo-content">
+    <div th:each="amigo :${amigos}" class="panel-body list-amigo-content"> 
 
-        <article class="col-md-2 col-sm-1 col-xs-2 no-padding">
+        <article class="col-md-2 col-sm-1 col-xs-2 no-padding"> 
             <img class="perfil-img perfil-img-min" th:src="${amigo.perfil.imagemPerfil}"/>
         </article>
-        <article class="col-md-10 col-sm-11 col-xs-10 list-amigo-info">
+        <article class="col-md-10 col-sm-11 col-xs-10 list-amigo-info"> 
             <div>
                 <a class="link-style" th:href="@{${'/profile'}(id=${amigo.perfil.id})}">
                     <strong><spam th:text="${amigo.perfil.nome}">Remetente</spam></strong>
