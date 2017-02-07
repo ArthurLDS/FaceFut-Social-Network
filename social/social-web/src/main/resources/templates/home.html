@@ -18,14 +18,14 @@
             <section class="col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        
+
                         <i class="fa fa-user-circle"></i> Perfil
                     </div>
                     <article class="panel-body">
-                        <article class="col-md-4 block-perfil">
+                        <article class="col-md-4 hidden-xs col-sm-2 block-perfil">
                             <img class="perfil-img perfil-img-med" th:src="${usuario.perfil.imagemPerfil}"/>
                         </article>
-                        <article class="col-md-8 block-perfil block-info-perfil">
+                        <article class="col-md-8 col-xs-8  col-sm-8 block-perfil block-info-perfil">
                             <div class="block-perfil-nome">
                                 <a class="link-style" th:href="@{${'/profile'}(id=${usuario.perfil.id})}">
                                     <strong><spam th:text="${usuario.perfil.nome}" ></spam></strong>
@@ -76,7 +76,7 @@
                                 <textarea id="txt-post" maxlength="254" required="required" class="form-control post-campo" rows="3" cols="40" placeholder="No que você está pensando?"></textarea>
                             </article>
 
-                            <spam id="upload-file-content">
+                            <spam id="upload-file-content" class="col-md-4 col-xs-4 no-padding">
                                 <!-- Aqui será renderizado o Btn para upload de imagem via JS/AJAX -->
                             </spam>
 
@@ -116,11 +116,15 @@
                     <header class="panel-heading">Pesquisar amigos</header>
                     <section class="panel-body">
 
-                        <article class="form-group">         
-                            <input id="txt-pesquisa-amigo" required="required" type="text" class="form-control txt-pesquisa"  placeholder="Pesquise aqui"/>
-                            <button id="btn-pesquisar-amigo" class="btn btn-primary pull-right" type="submit" name="button">
-                                <i class="fa fa-search" style="font-size: 18px"></i>
-                            </button>
+                        <article class="form-group"> 
+                            <div class="col-md-10_5 col-xs-10 col-sm-11 no-padding-left">
+                                <input id="txt-pesquisa-amigo" required="required" type="text" class="form-control txt-pesquisa"  placeholder="Pesquise aqui"/>
+                            </div>
+                            <div class="col-xs-2 col-md-1_5 col-sm-1 no-padding">
+                                <button id="btn-pesquisar-amigo" class="btn btn-primary pull-right" type="submit" name="button">
+                                    <i class="fa fa-search" style="font-size: 18px"></i>
+                                </button>
+                            </div>
                         </article>
 
                         <!-- Aqui será renderizada a pesquisa -->
