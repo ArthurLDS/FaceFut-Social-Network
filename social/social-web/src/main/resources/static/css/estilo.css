@@ -14,7 +14,15 @@ body{
     background-color: initial;
     color: #FFF;
 }
-
+.no-padding{
+    padding: 0;
+}
+.no-padding-left{
+    padding-left: 0;
+}
+.no-padding-right{
+    padding-right: 0;
+}
 .nav-pills>li>a{
     border-bottom: 1px solid rgba(52, 53, 53, 0);
 }
@@ -216,6 +224,9 @@ header .post-autor-nome{
 
 
 /* Home */
+.list-amigo-info{
+    padding-left: 20px;
+}
 .divisor{
     height: 80px;
 }
@@ -223,9 +234,10 @@ header .post-autor-nome{
     resize: none;
 }
 /*Amigo busca*/
-.amigo-busca{
+.alert-amigo-busca{
     padding: 11px;
     display: inline-block;
+    margin: 10px 0px 15px 0px;
 }
 .btn-adicionar{
     margin-top: 6px;
@@ -240,7 +252,7 @@ header .post-autor-nome{
 }
 .txt-pesquisa{
     display: inline-block;
-    width: 85%;
+    width: 100%;
 }
 /* Solicitações de amizade */
 .btn-solicitacao{
@@ -403,7 +415,10 @@ header .post-autor-nome{
     width: 180px;
     padding-right: 0;
 }
-
+/* Convites amizade */
+.list-convites-info{
+    padding-left: 17px;
+}
 
 /* Loading */
 
@@ -412,5 +427,19 @@ header .post-autor-nome{
     animation: spin 1s linear infinite;
 }
 @keyframes spin { 100% { transform:rotate(360deg);  } }
+
+
+@media (min-width: 992px){
+    .col-md-1_5 {
+        width: 13.00666667%;
+    }
+    .col-md-10_5 {
+        width: 86.666667%;
+    }
+    .list-convites-info {
+        padding-left: 15px;
+    }
+
+}
 
 
