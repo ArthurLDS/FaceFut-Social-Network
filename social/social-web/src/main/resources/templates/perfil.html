@@ -33,49 +33,43 @@
                              class="col-md-3 pull-right perfil-btn-amizade-content">
                         <!-- Btns amizade serão renderizados aqui-->
                     </article>
-                    
-                </section>
-                <script>
 
-                </script>
+                </section>
+
+                <nav>
+                    <article class="perfil-tools-heading">
+                        <img class="perfil-img perfil-img-lg" th:src="${usuario.perfil.imagemPerfil}"/>
+                        <h3 th:text="${usuario.perfil.nome}"></h3>
+
+                        <article style="padding-left: 155px;" class="hidden-xs">
+                            <ul class="nav nav-pills">
+                                <li role="presentation">
+                                    <a href="#" class="link-style"><i class="fa fa-group"></i>
+                                        <spam class="hidden-sm"> Amigos</spam>
+                                    </a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#" class="link-style"><i class="fa fa-envelope-o"></i> 
+                                        <spam class="hidden-sm"> Convites</spam>
+                                    </a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#" class="link-style"><i class="fa fa-commenting-o"></i> 
+                                        <spam class="hidden-sm"> Posts</spam>
+                                    </a>
+                                </li>
+                                <li role="presentation" class="pull-right">
+                                    <a href="#" class="link-style"><i class="fa fa-cog" aria-hidden="true"></i> 
+                                        <spam class="hidden-sm">Configurações</spam>
+                                    </a>
+                                </li>
+                            </ul>
+                        </article>
+                    </article>
+                </nav>
             </section>
 
-            <nav class="col-md-10">
-                <article class="perfil-tools-heading">
-                    <img class="perfil-img perfil-img-lg" th:src="${usuario.perfil.imagemPerfil}"/>
-                    <h3 th:text="${usuario.perfil.nome}"></h3>
-
-                    <article style="padding-left: 155px;" class="hidden-xs">
-                        <ul class="nav nav-pills">
-                            <li role="presentation">
-                                <a href="#" class="link-style"><i class="fa fa-group"></i>
-                                    <spam class="hidden-sm"> Amigos</spam>
-                                </a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#" class="link-style"><i class="fa fa-envelope-o"></i> 
-                                    <spam class="hidden-sm"> Convites</spam>
-                                </a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#" class="link-style"><i class="fa fa-commenting-o"></i> 
-                                    <spam class="hidden-sm"> Posts</spam>
-                                </a>
-                            </li>
-                            <li role="presentation" class="pull-right">
-                                <a href="#" class="link-style"><i class="fa fa-cog" aria-hidden="true"></i> 
-                                    <spam class="hidden-sm">Configurações</spam>
-                                </a>
-                            </li>
-                        </ul>
-                    </article>
-                </article>
-            </nav>
-
-        </section>
-
-        <section class="container perfil-content">
-            <section class="col-md-3">
+            <section class="col-md-3 perfil-content">
                 <section class="panel panel-default perfil-apresentacao">
                     <header class="panel-heading">
                         <i class="fa fa-globe" aria-hidden="true"></i>
@@ -124,7 +118,7 @@
                 </section>
             </section>
 
-            <section class="col-md-7">
+            <section class="col-md-7 perfil-content">
 
                 <article th:if="${usuario== usuarioLogado}" class="panel panel-default">
                     <section class="panel-body">
@@ -171,6 +165,8 @@
             </section>
 
         </section>
+
+
 
         <footer th:replace="fragments :: footer">
 
