@@ -18,10 +18,12 @@ jogos.carregarPlacares = function () {
 };
 
 jogos.renderizarJogosPorData = function(rounds) {
+    let agora = new Date();
     
     for (var i = 0; i < rounds.length; i++) {
         for (var j = 0; j < rounds[i].length; j++) {
-            if(rounds[i][j].date.includes("2017-02-11"))
+            let mesRodada = rounds[i][j].date.split("-")[1];
+            if(mesRodada ==  eval(agora.getMonth() + 1))
                 jogos.jogosContent.append(rounds[i][j].team1.code + " x " + rounds[i][j].team2.code + "<br/>Data: " + rounds[i][j].date + "<br/><br/>");
         }
     }
