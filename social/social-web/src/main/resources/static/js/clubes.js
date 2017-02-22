@@ -29,7 +29,9 @@ jogos.renderizarJogosPorData = function(rounds) {
     }
 };
 
-
+jogos.separarJogosPorData = function(){
+    
+};
 
 var a = [
     [{nome: "Arthur"}],
