@@ -80,7 +80,7 @@
                                 <!-- Aqui será renderizado o Btn para upload de imagem via JS/AJAX -->
                             </spam>
 
-                            <a id="btn-postar" disableed="false" class="btn btn-success pull-right btn-active-loading" name="button">
+                            <button type="submit" id="btn-postar" disableed="false" class="btn btn-success pull-right btn-active-loading" name="button">
                                 <spam id="loading-icon">
                                     <i class="fa fa-spinner loading-icon" aria-hidden="true"></i>
                                     Publicando...
@@ -89,7 +89,7 @@
                                     <i class="fa fa-paper-plane-o" style="font-size:18px"></i>
                                     Publicar
                                 </spam>
-                            </a>
+                            </button>
                         </form> 
 
                     </section>
@@ -117,15 +117,18 @@
                     <header class="panel-heading">Pesquisar amigos</header>
                     <section class="panel-body">
 
+
                         <article class="form-group"> 
-                            <div class="col-md-10_5 col-xs-10 col-sm-11 no-padding-left">
-                                <input id="txt-pesquisa-amigo" required="required" type="text" class="form-control txt-pesquisa"  placeholder="Pesquise aqui"/>
-                            </div>
-                            <div class="col-xs-2 col-md-1_5 col-sm-1 no-padding">
-                                <button id="btn-pesquisar-amigo" class="btn btn-primary pull-right" type="submit" name="button">
-                                    <i class="fa fa-search" style="font-size: 18px"></i>
-                                </button>
-                            </div>
+                            <form>
+                                <div class="col-md-10_5 col-xs-10 col-sm-11 no-padding-left">
+                                    <input id="txt-pesquisa-amigo" required="required" type="text" class="form-control txt-pesquisa"  placeholder="Pesquise aqui"/>
+                                </div>
+                                <div class="col-xs-2 col-md-1_5 col-sm-1 no-padding">
+                                    <button id="btn-pesquisar-amigo" class="btn btn-primary pull-right" type="submit" name="button">
+                                        <i class="fa fa-search" style="font-size: 18px"></i>
+                                    </button>
+                                </div>
+                            </form>
                         </article>
 
                         <!-- Aqui será renderizada a pesquisa -->
@@ -138,7 +141,7 @@
                 <section class="panel panel-default">
                     <article class="panel-heading">
                         <i class="fa fa-futbol-o" aria-hidden="true"></i> 
-                         Jogos por aí
+                        Jogos por aí
 
                     </article>
 
@@ -149,7 +152,7 @@
                     </section>
 
                 </section>
-                
+
             </aside>
         </section>
 
