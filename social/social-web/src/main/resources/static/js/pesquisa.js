@@ -11,7 +11,11 @@ $(function(){
 
 pesquisa.configurarBotoes = function(){
     pesquisa.$btnPesquisar =  $('#btn-pesquisar-amigo');
-    pesquisa.$btnPesquisar.click(pesquisa.pesquisar);
+    pesquisa.$btnPesquisar.click(function(event){
+            pesquisa.pesquisar();
+            event.preventDefault();
+        }
+    );
 };
 
 pesquisa.pesquisar = function(){
