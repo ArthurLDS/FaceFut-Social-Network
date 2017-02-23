@@ -12,8 +12,8 @@ clube.carregarElementos = function () {
 
 clube.carregarPlacares = function () {
     $.getJSON('https://raw.githubusercontent.com/opendatajson/football.json/master/2016-17/en.1.json', function (json) {
-        let rounds = json.rounds.map(r => r.matches);
-        clube.renderizarJogosPorData(rounds);
+        clube.rounds = json;
+        clube.renderizarJogosPorData(json.rounds.map(r => r.matches));
     });
 };
 
@@ -30,7 +30,7 @@ clube.renderizarJogosPorData = function(rounds) {
 };
 
 clube.separarJogosPorData = function(){
-    
+    clube.rounds;
 };
 
 var a = [
