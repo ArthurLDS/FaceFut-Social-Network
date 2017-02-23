@@ -49,7 +49,10 @@ postagem.configurarForm = function () {
     postagem.btnRefreshPosts = $('#btn-refresh-posts');
     
     postagem.atualizarBtnUploadDeImagem();
-    $btnPost.click(postagem.postar);
+    $btnPost.click(function(event){
+        postagem.postar();
+        event.preventDefault();
+    });
     postagem.btnRefreshPosts.click(postagem.atualizarPosts);
 };
 
