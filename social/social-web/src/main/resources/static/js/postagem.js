@@ -38,7 +38,6 @@ postagem.iniciar = function (id) {
     postagem.idUsuario = $('#id-usuario').val();
     postagem.configurarForm();
     postagem.carregarPosts(postagem.idUsuario);
-
 }
 
 postagem.configurarForm = function () {
