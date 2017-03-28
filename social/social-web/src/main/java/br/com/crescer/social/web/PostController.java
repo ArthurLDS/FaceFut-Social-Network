@@ -10,6 +10,7 @@ import br.com.crescer.social.entity.entities.Perfil;
 import br.com.crescer.social.entity.entities.Post;
 import br.com.crescer.social.entity.entities.Reacao;
 import br.com.crescer.social.entity.entities.Usuario;
+import br.com.crescer.social.service.Exceptions.NoneexistentViewException;
 import br.com.crescer.social.service.Service.AmigoService;
 import br.com.crescer.social.service.Service.PostService;
 import br.com.crescer.social.service.Service.UsuarioService;
@@ -47,7 +48,7 @@ public class PostController {
     UsuarioUtils usuarioUtils;
 
     @RequestMapping(value = "carregarPosts", method = RequestMethod.GET)
-    public String carregarPosts(Model model, Long id, String arquivo, Pageable pageable) {
+    public String carregarPosts(Model model, Long id, String arquivo, Pageable pageable){
         Usuario usuario = usuarioService.findOne(id);
 
         Page<Post> posts = null;
@@ -57,7 +58,7 @@ public class PostController {
                     .map(a -> a.getPerfil())
                     .collect(Collectors.toList());
             perfisConsulta.add(usuario.getPerfil());
-            
+
             posts = postService.findByPerfisAutor(perfisConsulta, pageable);
 
         } else if (arquivo.equals("PERFIL")) {
@@ -65,7 +66,9 @@ public class PostController {
                     .stream().sorted((p1, p2) -> p2.getId().compareTo(p1.getId()))
                     .collect(Collectors.toList()),
                     pageable, usuario.getPosts().size());
-
+        } 
+        else{
+            throw new NoneexistentViewException("View inexistente!");
         }
         model.addAttribute("usuario", usuario);
         model.addAttribute("posts", posts);
@@ -97,6 +100,7 @@ public class PostController {
         reacao.setPerfisCurtidas(perfis);
 
         post.setReacao(reacao);
+
         postService.save(post);
 
         model.addAttribute("post", post);
