@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  *
@@ -40,7 +41,7 @@ public class AmigoRestController {
     PerfilService perfilService;
 
     @RequestMapping(value = "/enviarConvite", method = RequestMethod.PUT)
-    public void enviarConvite(Long id) {
+    public void enviarConvite(@RequestBody Long id) {
         Perfil perfilDestinatario = perfilService.findById(id);
 
         Usuario usuarioRemetente = usuarioService.findByEmail(getUserSessao().getUsername());
