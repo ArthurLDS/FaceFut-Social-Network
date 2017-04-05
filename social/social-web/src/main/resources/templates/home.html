@@ -111,7 +111,7 @@
             </section>
 
             <!-- Pesquisa de amigos -->
-            <aside class="col-md-4">
+            <aside class="col-md-4" ng-controller="pesquisaCtrl">
 
                 <article class="panel panel-default">
                     <header class="panel-heading">Pesquisar amigos</header>
@@ -121,12 +121,16 @@
                         <article class="form-group"> 
                             <form>
                                 <div class="col-md-10_5 col-xs-10 col-sm-11 no-padding-left">
-                                    <input id="txt-pesquisa-amigo" required="required" type="text" class="form-control txt-pesquisa"  placeholder="Pesquise aqui"/>
+                                    <input id="txt-pesquisa-amigo" required="required" ng-model="pesquisa.filtro" type="text" class="form-control txt-pesquisa"  placeholder="Pesquise aqui"/>
                                 </div>
                                 <div class="col-xs-2 col-md-1_5 col-sm-1 no-padding">
-                                    <button id="btn-pesquisar-amigo" class="btn btn-primary pull-right" type="submit" name="button">
+                                    <button ng-click="pesquisar(pesquisa)" id="btn-pesquisar-amigo" class="btn btn-primary pull-right" type="submit" name="button">
                                         <i class="fa fa-search" style="font-size: 18px"></i>
                                     </button>
+
+                                </div>
+                                <div>
+                                    <div ng-include="'view/listagemAmigos.html'"></div>
                                 </div>
                             </form>
                         </article>
@@ -163,6 +167,6 @@
         <script th:src="@{/js/postagem.js}"></script>
         <script th:src="@{/js/clubes.js}"></script>
         <script th:src="@{/js/amigo.js}"></script>
-
+        <script th:src="@{/js/controllers/pesquisaCtrl.js}"></script>
     </body>
 </html>
