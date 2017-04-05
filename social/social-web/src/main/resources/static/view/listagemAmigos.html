@@ -1,0 +1,50 @@
+<section> 
+    <!--<div class="alert alert-info alert-amigo-busca amigo-alert-basic" th:if="${perfis.size()} > 0">
+        <strong><span th:text="${perfis.size()}"></span> resultado(s) encontrado(s)</strong>
+    </div>
+
+    <div class="alert alert-warning alert-amigo-busca" th:if="${perfis.size()} == 0">
+        <strong><span th:text="${perfis.size()}"></span> resultado(s) encontrado(s)</strong>
+    </div>-->
+
+    <article ng-repeat="resultado in resultados| filter:pesquisa.filtro">
+
+        <div class="panel-body col-md-12" style="padding-right: 0px;">
+
+            <article class="col-md-2" style="padding: 0px;">
+                <img class="perfil-img perfil-img-min" src="{{resultado.imagemPerfil}}"/>
+            </article>
+            <article class="col-md-10" style="padding-left: 0px;">
+                <div>
+                    <a class="link-style" href="/profile?id={{resultado.id}}">
+                        <strong><spam style="margin: 0px;">{{resultado.nome}}</spam></strong>
+                    </a>
+                </div>
+                <div>
+                    <strong><spam style="margin: 0px;">{{resultado.email}}</spam></strong>
+                </div>
+                <div>
+                    <strong><spam>{{resultado.time.nome}}</spam></strong>
+                </div>  
+
+                <a id="btn-adicionar-{{resultado.id}}" ng-click="enviarConvite(resultado.id)" 
+                   class="btn btn-info btn-adicionar">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    Adicionar amigo
+                </a>
+                <!--
+                <a th:if="${#lists.contains(perfisAmigosUsuario, perfil)}" 
+                   th:href="'javascript:amigo.desfazerAmizade('+ ${perfil.id} +')'" class="btn btn-warning btn-adicionar">
+                    <i class="fa fa-user-times" aria-hidden="true"></i>
+                    Desfazer amizade
+                </a>
+                <a disabled="true" th:if="${#lists.contains(convitesEnviados, perfil.email)} and ${not #lists.contains(perfisAmigosUsuario, perfil)}" 
+                   class="btn btn-success btn-adicionar">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    Convite enviado
+                </a>-->
+
+            </article>
+        </div>
+    </article>
+</section>
