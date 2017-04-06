@@ -10,7 +10,8 @@
 			<li>AngularJS 1.6</li>
 			<li>JQuery 1.11.3</li>
 			<li>Bootstrap (Bootswatch theme flatly)</li>
-	</ul>
+		</ul>
+	</li>
 	<li>
 		<strong>Back-End</strong>
 		<ul>
@@ -25,11 +26,10 @@
 			<li>Oracle</li>
 		</ul>	
    </li>
-   </li>
 </ul>
 
 <h4><strong>Samples:</strong></h4>
-Index View
+<p>Index View</p>
 
 <img src="https://raw.githubusercontent.com/ArthurLDS/FaceFut/master/Originals/facefut-home.png"/>
 
