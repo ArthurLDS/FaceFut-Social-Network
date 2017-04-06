@@ -19,6 +19,7 @@
 			<li>Spring Security</li>
 			<li>Spring Data</li>
 			<li>JPA</li>
+		</ul>	
    </li>
    <li>
 		<strong>Database</strong>
