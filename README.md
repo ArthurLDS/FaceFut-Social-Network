@@ -1,9 +1,42 @@
-<h1>FaceFut.com </h1>
-<p>The social network for the soccer lovers.</p>
-<p style="font-size: 8pt; "><strong>Index View: </strong></p>
+<h1>FaceFut Social Network</h1>
+<p>The FaceFut is a social network about soccer, where you can like and share posts from your friends. The FaceFut is completely written in Java and uses the Spring Boot Framework.</p>
+
+
+<h3>Tols and frameworks used</h3>
+<ul>
+	<li>
+		<strong>Front-End</strong>
+		<ul>
+			<li>AngularJS 1.6</li>
+			<li>JQuery 1.11.3</li>
+			<li>Bootstrap (Bootswatch theme flatly)</li>
+	</ul>
+	<li>
+		<strong>Back-End</strong>
+		<ul>
+			<li>Spring Boot</li>
+			<li>Spring Security</li>
+			<li>Spring Data</li>
+			<li>JPA</li>
+   </li>
+   <li>
+		<strong>Database</strong>
+		<ul>
+			<li>Oracle</li>
+   </li>
+   </li>
+</ul>
+
+<h4><strong>Samples:</strong></h4>
+Index View
+
 <img src="https://raw.githubusercontent.com/ArthurLDS/FaceFut/master/Originals/facefut-home.png"/>
 
-<p style="font-size: 8pt; "><strong>Profile View: </strong></p>
+<p>Profile View:</p>
 <img src="https://raw.githubusercontent.com/ArthurLDS/FaceFut/master/Originals/facefut-profile.png"/>
 <br>
-<i>Developed by: Arthur Lima de Souza</i>
+
+
+<i>Contact: arthurlds73@gmail.com</i>
+
+Have fun!
