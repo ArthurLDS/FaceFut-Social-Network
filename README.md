@@ -2,7 +2,7 @@
 <p>The FaceFut is a social network about soccer, where you can like and share posts from your friends. The FaceFut is completely written in Java and uses the Spring Boot Framework.</p>
 
 
-<h3>Tols and frameworks used</h3>
+<h3>Tools and frameworks used</h3>
 <ul>
 	<li>
 		<strong>Front-End</strong>
