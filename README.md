@@ -29,7 +29,7 @@
    </li>
 </ul>
 
-<h4><strong>Samples:</strong></h4>
+<h4><strong>Some samples:</strong></h4>
 <p>Index View</p>
 
 <img src="https://raw.githubusercontent.com/ArthurLDS/FaceFut/master/Originals/facefut-home.png"/>
