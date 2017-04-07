@@ -5,14 +5,26 @@
 
     </head>
 
-    <body>
+    <body >
         <nav th:replace="fragments :: navbar">
 
         </nav>
+
+        <div ng-show="loading">
+            <div class="loading-screen">
+
+            </div>
+            <div class="loader col-md-12 col-sm-12 col-xs-12">
+                <h1>LOADING</h1>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
         <div class="divisor"></div>
         <!-- Id do usuario logado -->
-        <input type="hidden" th:value="${usuario.id}" id="id-usuario" />
-
+        <input type="hidden" th:value="${usuario.id}" ng-model="usuario.id" id="id-usuario" />
         <section class="container-fluid">
 
             <section class="col-md-3">
@@ -117,11 +129,10 @@
                     <header class="panel-heading">Pesquisar amigos</header>
                     <section class="panel-body">
 
-
                         <article class="form-group"> 
-                            <form>
+                            <form name="pesquisa-form">
                                 <div class="col-md-10_5 col-xs-10 col-sm-11 no-padding-left">
-                                    <input id="txt-pesquisa-amigo" required="required" ng-model="pesquisa.filtro" type="text" class="form-control txt-pesquisa"  placeholder="Pesquise aqui"/>
+                                    <input ng-keyup="pesquisar(pesquisa)" name="filtro" id="txt-pesquisa-amigo" required="required" ng-model="pesquisa.filtro" type="text" class="form-control txt-pesquisa"  placeholder="Pesquise aqui"/>
                                 </div>
                                 <div class="col-xs-2 col-md-1_5 col-sm-1 no-padding">
                                     <button ng-click="pesquisar(pesquisa)" id="btn-pesquisar-amigo" class="btn btn-primary pull-right" type="submit" name="button">
@@ -130,6 +141,7 @@
 
                                 </div>
                                 <div>
+                                    <!-- Listagem dos resultados da pesquisa -->
                                     <div ng-include="'view/listagemAmigos.html'"></div>
                                 </div>
                             </form>
@@ -163,10 +175,13 @@
         <footer th:replace="fragments :: footer">
 
         </footer>
-        <script th:src="@{/js/pesquisa.js}"></script>
         <script th:src="@{/js/postagem.js}"></script>
         <script th:src="@{/js/clubes.js}"></script>
         <script th:src="@{/js/amigo.js}"></script>
         <script th:src="@{/js/controllers/pesquisaCtrl.js}"></script>
+        <script th:src="@{/js/services/usuarioAPI.js}"></script>
+        <script th:src="@{/js/services/amigoAPI.js}"></script>
+        <script th:src="@{/js/interceptors/loadingInterceptor.js}"></script>
+        <script th:src="@{/js/config/interceptorConfig.js}"></script>
     </body>
 </html>
