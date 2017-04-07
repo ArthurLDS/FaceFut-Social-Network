@@ -1,48 +1,45 @@
 <section> 
-    <!--<div class="alert alert-info alert-amigo-busca amigo-alert-basic" th:if="${perfis.size()} > 0">
-        <strong><span th:text="${perfis.size()}"></span> resultado(s) encontrado(s)</strong>
+    <div class="alert alert-warning alert-amigo-busca" ng-if="pesquisaAmigos.resultados.length<=0 && pesquisa-form.filtro.$touched">
+        <strong>0 resultados encontrados</strong>
     </div>
-
-    <div class="alert alert-warning alert-amigo-busca" th:if="${perfis.size()} == 0">
-        <strong><span th:text="${perfis.size()}"></span> resultado(s) encontrado(s)</strong>
-    </div>-->
-
-    <article ng-repeat="resultado in resultados| filter:pesquisa.filtro">
+    
+    <article ng-repeat="perfil in pesquisaAmigos.resultados">
 
         <div class="panel-body col-md-12" style="padding-right: 0px;">
 
             <article class="col-md-2" style="padding: 0px;">
-                <img class="perfil-img perfil-img-min" src="{{resultado.imagemPerfil}}"/>
+                <img class="perfil-img perfil-img-min" src="{{perfil.imagemPerfil}}"/>
             </article>
             <article class="col-md-10" style="padding-left: 0px;">
                 <div>
-                    <a class="link-style" href="/profile?id={{resultado.id}}">
-                        <strong><spam style="margin: 0px;">{{resultado.nome}}</spam></strong>
+                    <a class="link-style" href="/profile?id={{perfil.id}}">
+                        <strong><spam style="margin: 0px;">{{perfil.nome}}</spam></strong>
                     </a>
                 </div>
                 <div>
-                    <strong><spam style="margin: 0px;">{{resultado.email}}</spam></strong>
+                    <strong><spam style="margin: 0px;">{{perfil.email}}</spam></strong>
                 </div>
                 <div>
-                    <strong><spam>{{resultado.time.nome}}</spam></strong>
+                    <strong><spam>{{perfil.time.nome}}</spam></strong>
                 </div>  
 
-                <a id="btn-adicionar-{{resultado.id}}" ng-click="enviarConvite(resultado.id)" 
+                <a ng-if="!usuario.emailConvitesEnviados.includes(perfil.email) && !usuario.perfilAmigos.includes(perfil.email)"
+                   id="btn-adicionar-{{perfil.id}}" ng-click="enviarConvite(perfil.id)" 
                    class="btn btn-info btn-adicionar">
                     <i class="fa fa-user-plus" aria-hidden="true"></i>
                     Adicionar amigo
                 </a>
-                <!--
-                <a th:if="${#lists.contains(perfisAmigosUsuario, perfil)}" 
-                   th:href="'javascript:amigo.desfazerAmizade('+ ${perfil.id} +')'" class="btn btn-warning btn-adicionar">
+                
+                <a ng-if="usuario.perfilAmigos.includes(perfil.email)" 
+                   ng-click="desfazerAmizade(perfil.id)" class="btn btn-warning btn-adicionar"
+                   id="btn-adicionar-{{perfil.id}}" >
                     <i class="fa fa-user-times" aria-hidden="true"></i>
                     Desfazer amizade
                 </a>
-                <a disabled="true" th:if="${#lists.contains(convitesEnviados, perfil.email)} and ${not #lists.contains(perfisAmigosUsuario, perfil)}" 
-                   class="btn btn-success btn-adicionar">
+                <a disabled="true" ng-if="usuario.emailConvitesEnviados.includes(perfil.email)" class="btn btn-success btn-adicionar">
                     <i class="fa fa-check" aria-hidden="true"></i>
                     Convite enviado
-                </a>-->
+                </a>
 
             </article>
         </div>
