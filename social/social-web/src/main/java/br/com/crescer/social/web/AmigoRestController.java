@@ -40,25 +40,18 @@ public class AmigoRestController {
     @Autowired
     PerfilService perfilService;
 
+    @RequestMapping(value = "/enviarConviteReqBody", method = RequestMethod.PUT)
+    public void enviarConviteReqBody(@RequestBody Long id) {
+        enviarConvite(id);
+    }
+    
     @RequestMapping(value = "/enviarConvite", method = RequestMethod.PUT)
-    public void enviarConvite(@RequestBody Long id) {
-        Perfil perfilDestinatario = perfilService.findById(id);
-
-        Usuario usuarioRemetente = usuarioService.findByEmail(getUserSessao().getUsername());
-        Usuario usuarioDestinatario = usuarioService.findByPerfil(perfilDestinatario);
-
-        Convite convite = new Convite(new Date(), usuarioRemetente.getPerfil(), usuarioDestinatario.getPerfil());
-        conviteService.save(convite);
-
-        //Adicionando convite no usuario Destinatario
-        conviteService.adicionarConviteUsuario(usuarioDestinatario, convite, "DESTINATARIO");
-        //Adicionando convite no usuario rementente
-        conviteService.adicionarConviteUsuario(usuarioRemetente, convite, "REMETENTE");
+    public void enviarConviteSemReqBody(Long id) {
+        enviarConvite(id);
     }
 
     @RequestMapping(value = "/aceitarConvite", method = RequestMethod.POST)
     public void aceitarConvite(Long id) {
-
         Convite conviteAprovado = conviteService.findById(id);
 
         //Aceitando e adicionando amigo no Usuario atual
@@ -76,7 +69,6 @@ public class AmigoRestController {
 
     @RequestMapping(value = "/recusarConvite", method = RequestMethod.POST)
     public void recusarConvite(Long id) {
-
         Convite conviteReprovado = conviteService.findById(id);
 
         Usuario usuarioDestinatario = usuarioService.findByEmail(getUserSessao().getUsername());
@@ -95,9 +87,23 @@ public class AmigoRestController {
         usuarioService.save(usuarioRemetente);
     }
 
+    @RequestMapping(value = "/desfazerAmizadeReqBody", method = RequestMethod.POST)
+    public void desfazerAmizadeReqBody(@RequestBody Long id) {
+        desfazerAmizade(id);
+    }
+    
     @RequestMapping(value = "/desfazerAmizade", method = RequestMethod.POST)
-    public void desfazerAmizade(Long id) {
+    public void desfazerAmizadeSemReqBody(Long id) {
+        desfazerAmizade(id);
+    }
 
+    @RequestMapping(value = "/atualizarNumAmigos", method = RequestMethod.GET)
+    public Integer atualizarNumAmigos() {
+        Usuario usuario = usuarioService.findByEmail(getUserSessao().getUsername());
+        return usuario.getAmigos().size();
+    }
+    
+    private void desfazerAmizade(Long id){
         //Deletando relação de amizade na primeira extremidade.
         Usuario usuarioSolicitante = usuarioService.findByEmail(getUserSessao().getUsername());
         Amigo amigoSolicitado = amigoService.findByPerfil(perfilService.findById(id));
@@ -108,13 +114,22 @@ public class AmigoRestController {
         Amigo amigoSolicitante = amigoService.findByPerfil(usuarioSolicitante.getPerfil());
         usuarioService.removerAmigo(usuarioSolicitado, amigoSolicitante);
     }
+    
+    private void enviarConvite(Long id){
+        Perfil perfilDestinatario = perfilService.findById(id);
 
-    @RequestMapping(value = "/atualizarNumAmigos", method = RequestMethod.GET)
-    public Integer atualizarNumAmigos() {
-        Usuario usuario = usuarioService.findByEmail(getUserSessao().getUsername());
-        return usuario.getAmigos().size();
+        Usuario usuarioRemetente = usuarioService.findByEmail(getUserSessao().getUsername());
+        Usuario usuarioDestinatario = usuarioService.findByPerfil(perfilDestinatario);
+
+        Convite convite = new Convite(new Date(), usuarioRemetente.getPerfil(), usuarioDestinatario.getPerfil());
+        conviteService.save(convite);
+
+        //Adicionando convite no usuario Destinatario
+        conviteService.adicionarConviteUsuario(usuarioDestinatario, convite, "DESTINATARIO");
+        //Adicionando convite no usuario rementente
+        conviteService.adicionarConviteUsuario(usuarioRemetente, convite, "REMETENTE");
     }
-
+    
     private User getUserSessao() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }

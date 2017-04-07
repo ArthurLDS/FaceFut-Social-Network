@@ -55,4 +55,23 @@ public class PesquisaAmigoRestController {
                 .filter(p -> !p.getEmail().equals(usuario.getEmail()))
                 .collect(Collectors.toList());
     }
+    
+    @RequestMapping(value="getUsuariorConvitesEnviados", method = RequestMethod.GET)
+    public List<Perfil> getConvitesEnviados(Long id){
+        Usuario usuario = usuarioService.findOne(id);
+        
+        List<Perfil> perfilConvitesEnviados = usuario.getConvitesEnviados().stream()
+                .map(c -> c.getPerfilDestinatario())
+                .collect(Collectors.toList());
+        return perfilConvitesEnviados;
+    }
+    
+    @RequestMapping(value="getAmigosUsuario", method = RequestMethod.GET)
+    public List<Perfil> getAmigosUsuario(Long id){
+        Usuario usuario = usuarioService.findOne(id);
+        
+        return usuario.getAmigos().stream()
+                .map(a -> a.getPerfil())
+                .collect(Collectors.toList());
+    }
 }
