@@ -25,9 +25,9 @@ public class SocialUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         
-        Usuario magrao = repository.findByEmail(username);
+        Usuario usuario = repository.findByEmail(username);
         
-        String senha = magrao!=null ? magrao.getSenha() : null;
+        String senha = usuario!=null ? usuario.getSenha() : null;
         
         if (username.isEmpty()) {
             throw new UsernameNotFoundException(String.format("User with username=%s was not found", username));
