@@ -12,14 +12,14 @@ angular.module("faceFutApp").controller("pesquisaCtrl", function($scope, amigoAP
         return $("#txt-pesquisa-amigo").val();
     };
     
-    var carregarConvitesEnviadosDoUsuario = function(id){
-        usuarioAPI.getConvitesEnviados(id).then(function(response){
-            $scope.usuario.emailConvitesEnviados = response.data.map(c => c.email);
-        },
-        function(response){
-            alert("Erro!");
-        });
+    var carregarConvitesEnviadosDoUsuario = async function(id){
+        const resp = await usuarioAPI.getConvitesEnviados(id);
+        $scope.usuario.emailConvitesEnviados = resp.data.map(c => c.email);
     };
+    
+    var promessa = new Promise((resolve, reject) => {
+        
+    });
     
     var carregarAmigosUsuario = function(id){
         usuarioAPI.getAmigos(id).then(function(response){
