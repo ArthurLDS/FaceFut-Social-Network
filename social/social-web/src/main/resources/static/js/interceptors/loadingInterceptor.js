@@ -12,7 +12,7 @@ angular.module("faceFutApp").factory("loadingInterceptor", function($q, $rootSco
         response: function(response){
            $timeout(function(){
               $rootScope.loading = false;
-           }, 500);
+           }, 600);
            
            return response;
         },
