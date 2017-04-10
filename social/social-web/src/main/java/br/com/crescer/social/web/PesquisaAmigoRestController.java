@@ -42,15 +42,6 @@ public class PesquisaAmigoRestController {
 
         List<Perfil> perfis = (List) perfilService.findByNomeIgnoreCaseContaining(filtro);
         
-        model.addAttribute("perfisAmigosUsuario", usuario.getAmigos().stream()
-                .map(a -> a.getPerfil())
-                .collect(Collectors.toList()));
-
-        List<String> convitesEnviados = usuario.getConvitesEnviados().stream()
-                .map(c -> c.getPerfilDestinatario().getEmail())
-                .collect(Collectors.toList());
-        model.addAttribute("convitesEnviados", convitesEnviados);
-
         return perfis.stream()
                 .filter(p -> !p.getEmail().equals(usuario.getEmail()))
                 .collect(Collectors.toList());
