@@ -17,10 +17,6 @@ angular.module("faceFutApp").controller("pesquisaCtrl", function($scope, amigoAP
         $scope.usuario.emailConvitesEnviados = resp.data.map(c => c.email);
     };
     
-    var promessa = new Promise((resolve, reject) => {
-        
-    });
-    
     var carregarAmigosUsuario = function(id){
         usuarioAPI.getAmigos(id).then(function(response){
             $scope.usuario.perfilAmigos = response.data.map(p => p.email);
@@ -34,7 +30,6 @@ angular.module("faceFutApp").controller("pesquisaCtrl", function($scope, amigoAP
         let idUsuario = getIdUsuarioLogado();
         
         amigoAPI.pesquisarAmigos(pesquisa.filtro).then(function(response){
-            console.log(response.data);
             $scope.pesquisaAmigos.resultados = response.data;
             carregarConvitesEnviadosDoUsuario(idUsuario);
             carregarAmigosUsuario(idUsuario);
@@ -49,6 +44,7 @@ angular.module("faceFutApp").controller("pesquisaCtrl", function($scope, amigoAP
         amigoAPI.enviarConviteAmizade(id).then(function(response){
             carregarConvitesEnviadosDoUsuario(idUsuario);
             carregarAmigosUsuario(idUsuario);
+            alertify.success("Convite de amizade enviado com sucesso!");
         },
         function(response){
           alert("Erro ao enviar convite.")  
@@ -60,6 +56,7 @@ angular.module("faceFutApp").controller("pesquisaCtrl", function($scope, amigoAP
         amigoAPI.desfazerAmizade(id).then(function(response){
             carregarConvitesEnviadosDoUsuario(idUsuario);
             carregarAmigosUsuario(idUsuario);
+            alerttify.success("Amigo removido com sucesso.");
         },
         function(response){
             alert("Erro ao desfazer amizade!");
