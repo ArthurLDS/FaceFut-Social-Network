@@ -1,1 +1,1 @@
-angular.module("faceFutApp", []);
+angular.module("faceFutApp", ["ngAlertify"]);

@@ -1,4 +1,4 @@
-angular.module("faceFutApp").controller("pesquisaCtrl", function($scope, amigoAPI, usuarioAPI){
+angular.module("faceFutApp").controller("pesquisaCtrl", function($scope, amigoAPI, usuarioAPI, alertify){
     $scope.pesquisaAmigos = {};
     $scope.pesquisaAmigos.resultados = [];
     $scope.usuario = {};
@@ -44,7 +44,8 @@ angular.module("faceFutApp").controller("pesquisaCtrl", function($scope, amigoAP
         amigoAPI.enviarConviteAmizade(id).then(function(response){
             carregarConvitesEnviadosDoUsuario(idUsuario);
             carregarAmigosUsuario(idUsuario);
-            alertify.success("Convite de amizade enviado com sucesso!");
+            alertify.logPosition("bottom right");
+            alertify.success("Convite de amizade enviado com SUCESSO!");
         },
         function(response){
           alert("Erro ao enviar convite.")  
@@ -56,7 +57,7 @@ angular.module("faceFutApp").controller("pesquisaCtrl", function($scope, amigoAP
         amigoAPI.desfazerAmizade(id).then(function(response){
             carregarConvitesEnviadosDoUsuario(idUsuario);
             carregarAmigosUsuario(idUsuario);
-            alerttify.success("Amigo removido com sucesso.");
+            alertify.success("Amigo removido com sucesso.");
         },
         function(response){
             alert("Erro ao desfazer amizade!");

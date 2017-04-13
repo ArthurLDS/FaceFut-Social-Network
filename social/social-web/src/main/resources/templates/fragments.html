@@ -14,11 +14,19 @@ and open the template in the editor.
         <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css" media="screen" title="no title"/>
         <link rel="stylesheet" th:href="@{/css/estilo.css}" media="screen" title="no title"/>
         <link rel="stylesheet" th:href="@{/css/loadingStyle.css}" media="screen" title="no title"/>
-        
+
         <link th:href="@{/css/themes/alertify.default.css}" rel="stylesheet" type="text/css"/>
         <link th:href="@{/css/themes/alertify.core.css}" rel="stylesheet" type="text/css"/>
         
         <script src="/lib/angular.min.js"></script>
+        <!-- standard version -->
+        <script src="https://cdn.rawgit.com/alertifyjs/alertify.js/v1.0.10/dist/js/alertify.js"></script>
+
+        <!-- angular module -->
+        <script src="https://cdn.rawgit.com/alertifyjs/alertify.js/v1.0.10/dist/js/ngAlertify.js"></script>
+
+
+        
         <script th:src="@{/js/app.js}"></script>
     </head>
 
@@ -45,7 +53,7 @@ and open the template in the editor.
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                                 <li class="active"><a th:href="@{/home}">Home<span class="sr-only">(current)</span></a></li>
-                                
+
                             </ul>
 
                             <ul class="nav navbar-nav navbar-right">
@@ -56,7 +64,7 @@ and open the template in the editor.
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        
+
                                         <li>
                                             <a href="logout">Sair</a>
                                         </li>
@@ -68,12 +76,12 @@ and open the template in the editor.
                 </section>
             </nav>
         </div>
-        
+
         <div th:fragment="footer">
-            
+
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-            
+
         </div>
 
     </body>
